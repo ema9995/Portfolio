@@ -530,6 +530,119 @@ main{ text-align:center; }
 .credMain{ text-align:left; }
 .credName{ font-weight:700; margin:0; font-size:13px; color: rgba(233,233,242,.95); }
 .credMeta{ margin:4px 0 0; font-size:12px; color: var(--muted); line-height:1.45; }
+
+/* Compétences : catégories + barres */
+.skillMatrix{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:18px;
+}
+.skillMatrix--3{
+  grid-template-columns: repeat(3, 1fr);
+}
+.skillDesignBlock{
+  margin-top:18px;
+  width:100%;
+}
+.skillDesignWrap{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:18px;
+}
+.skillDesignCol__title{
+  margin:0 0 12px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  text-align:center;
+  color: rgba(233,233,242,.62);
+}
+.skillCat{
+  text-align:left;
+}
+.skillCat__title{
+  margin:0 0 14px;
+  font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-align:center;
+  color: rgba(192,132,252,.95);
+}
+.skillMeter{
+  margin-bottom:12px;
+}
+.skillMeter:last-child{ margin-bottom:0; }
+.skillMeter__top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:6px;
+}
+.skillMeter__label{
+  font-size:12px;
+  font-weight:600;
+  color: rgba(233,233,242,.88);
+}
+.skillMeter__label--strong{
+  color: rgba(233,233,242,.98);
+}
+.skillMeter__badge{
+  margin-left:4px;
+  font-size:11px;
+  color: rgba(192,132,252,.95);
+  vertical-align:1px;
+}
+.skillMeter__pct{
+  font-size:11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.skillMeter__track{
+  height:9px;
+  border-radius:999px;
+  background: rgba(255,255,255,.07);
+  overflow:hidden;
+  border:1px solid rgba(139,92,246,.22);
+}
+.skillMeter__fill{
+  height:100%;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(139,92,246,.92), rgba(192,132,252,.88));
+  transition: width .6s ease;
+}
+.skillMeter--strong .skillMeter__fill{
+  box-shadow: 0 0 14px rgba(192,132,252,.35);
+}
+.skillMeter--strong .skillMeter__track{
+  border-color: rgba(192,132,252,.38);
+}
+.langStrip{
+  margin-top:20px;
+  padding:16px;
+  border-radius: var(--radius);
+  border:1px solid rgba(139,92,246,.22);
+  background: rgba(0,0,0,.14);
+}
+.langStrip__title{
+  margin:0 0 12px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  text-align:center;
+  color: rgba(233,233,242,.78);
+}
+.langGrid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:12px;
+}
+
 .form{padding:18px}
 .field{display:grid; gap:8px; margin-bottom:12px}
 .field__label{font-size:13px; color:rgba(233,233,242,.86)}
@@ -621,6 +734,10 @@ main{ text-align:center; }
   .blogGrid{grid-template-columns: 1fr}
   .contactGrid{grid-template-columns: 1fr}
   .credWrap{grid-template-columns: 1fr}
+  .skillMatrix{grid-template-columns: 1fr}
+  .skillMatrix--3{grid-template-columns: 1fr}
+  .skillDesignWrap{grid-template-columns: 1fr}
+  .langGrid{grid-template-columns: repeat(2, 1fr)}
   .nav__toggle{display:inline-flex}
   .nav__list{
     position:absolute;
@@ -645,7 +762,7 @@ main{ text-align:center; }
 
     <div class="intro" id="intro" aria-hidden="true">
       <div class="intro__inner">
-        <img class="intro__cat" src="./cat.jpg" alt="" />
+        <img class="intro__cat" src="./cat.png" alt="" />
         <div class="intro__title">Bienvenue</div>
       </div>
     </div>
@@ -676,7 +793,7 @@ main{ text-align:center; }
 
           <div class="hero__art" aria-hidden="true">
             <div class="glow"></div>
-            <img class="hero__img" src="./cat.jpg" alt="" loading="eager" />
+            <img class="hero__img" src="./cat.png" alt="" loading="eager" />
             <div class="sparkles">
               <span class="spark s1"></span>
               <span class="spark s2"></span>
@@ -687,181 +804,11 @@ main{ text-align:center; }
         </div>
       </section>
 
-      <section id="certifications" class="section">
-        <div class="container">
-          <h2 class="h2 center">Certifications & Diplômes</h2>
-          <div class="credWrap">
-            <section class="card credBlock" aria-label="Diplômes">
-              <h3 class="credTitle">
-                <span class="credTitle__dot" aria-hidden="true"></span>
-                Diplômes
-              </h3>
-              <ul class="credList">
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🎓</span>
-                  <div class="credMain">
-                    <p class="credName">Master Data & IA — Eugenia School</p>
-                    <p class="credMeta">2025–2026 • Projets Python/SQL, Dataiku, Power BI/Tableau.</p>
-                  </div>
-                </li>
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🎓</span>
-                  <div class="credMain">
-                    <p class="credName">Master 2 Communication Digitale — Sorbonne</p>
-                    <p class="credMeta">2022–2023 • KPI marketing, performance contenus, analyse social media.</p>
-                  </div>
-                </li>
-              </ul>
-            </section>
-
-            <section class="card credBlock" aria-label="Certifications">
-              <h3 class="credTitle">
-                <span class="credTitle__dot" aria-hidden="true"></span>
-                Certifications
-              </h3>
-              <ul class="credList">
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🧠</span>
-                  <div class="credMain">
-                    <p class="credName">Microsoft Certified: Azure AI Fundamentals</p>
-                  </div>
-                </li>
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🧠</span>
-                  <div class="credMain">
-                    <p class="credName">Microsoft Certified: Azure AI Engineer Associate</p>
-                  </div>
-                </li>
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🧠</span>
-                  <div class="credMain">
-                    <p class="credName">Principes de base d’Azure Microsoft</p>
-                  </div>
-                </li>
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🧠</span>
-                  <div class="credMain">
-                    <p class="credName">
-                      Réaliser des applications web à l’aide d’un système de gestion de contenus (CMS)
-                    </p>
-                  </div>
-                </li>
-                <li class="credItem">
-                  <span class="credIcon" aria-hidden="true">🧠</span>
-                  <div class="credMain">
-                    <p class="credName">Dataiku Core Designer Certificate</p>
-                  </div>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="section">
-        <div class="container split">
-          <div class="split__left">
-            <h2 class="h2">À propos</h2>
-            <p class="muted">
-              Mon double parcours en communication digitale et data me permet de
-              traduire efficacement les besoins métier en analyses actionnables et
-              de communiquer les résultats avec clarté auprès des équipes non
-              techniques.
-            </p>
-            <div class="stats">
-              <div class="stat">
-                <div class="stat__value">SQL</div>
-                <div class="stat__label">Requêtes & analyses</div>
-              </div>
-              <div class="stat">
-                <div class="stat__value">Python</div>
-                <div class="stat__label">Nettoyage & data prep</div>
-              </div>
-              <div class="stat">
-                <div class="stat__value">BI</div>
-                <div class="stat__label">Power BI / Tableau</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="split__right">
-            <h3 class="h3">Compétences</h3>
-            <div class="skillGrid">
-              <article class="card">
-                <h4 class="card__title">Data & Analyse</h4>
-                <div class="chips">
-                  <span class="chip">SQL</span>
-                  <span class="chip">Python</span>
-                  <span class="chip">Excel</span>
-                  <span class="chip">Data cleaning</span>
-                  <span class="chip">Exploration</span>
-                </div>
-              </article>
-              <article class="card">
-                <h4 class="card__title">Business Intelligence</h4>
-                <div class="chips">
-                  <span class="chip">Power BI</span>
-                  <span class="chip">Tableau</span>
-                  <span class="chip">Dashboards</span>
-                  <span class="chip">Reporting</span>
-                </div>
-              </article>
-              <article class="card">
-                <h4 class="card__title">Marketing Analytics</h4>
-                <div class="chips">
-                  <span class="chip">KPI</span>
-                  <span class="chip">Campaign performance</span>
-                  <span class="chip">Meta</span>
-                  <span class="chip">YouTube</span>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <h2 class="h2 center">Expériences</h2>
-          <div class="timeline">
-            <article class="timelineItem">
-              <div class="timelineItem__dot">2025–2026</div>
-              <div class="timelineItem__card">
-                <h3 class="timelineItem__title">Data Analyst (Alternance) — Decathlon</h3>
-                <p class="muted">
-                  Analyse exploratoire, data viz et aide à la décision (comportements clients).
-                  Outils : Databricks, VS Code, Tableau, Jira, SQL, Python.
-                </p>
-              </div>
-            </article>
-            <article class="timelineItem">
-              <div class="timelineItem__dot">2024–2025</div>
-              <div class="timelineItem__card">
-                <h3 class="timelineItem__title">Community Manager (CDD) — Futur Association</h3>
-                <p class="muted">
-                  Reporting & dashboards Excel, analyse de performance contenus/campagnes,
-                  recommandations d’optimisation. Outils : Meta, YouTube, Canva, Excel, Figma, Adobe.
-                </p>
-              </div>
-            </article>
-            <article class="timelineItem">
-              <div class="timelineItem__dot">2025</div>
-              <div class="timelineItem__card">
-                <h3 class="timelineItem__title">Data Analyst — Simplon</h3>
-                <p class="muted">
-                  Extraction, nettoyage et formatage des données, visualisation avec Tableau et Python.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section id="projects" class="section">
         <div class="container">
           <h2 class="h2 center">Mes Projets</h2>
           <p class="muted center">
-            Une sélection de projets data, marketing et IA.
+            Une sélection de projets data et IA.
           </p>
 
           <div class="projectGrid">
@@ -1071,6 +1018,342 @@ main{ text-align:center; }
                 </div>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" class="section">
+        <div class="container">
+          <h2 class="h2 center">Certifications & Diplômes</h2>
+          <div class="credWrap">
+            <section class="card credBlock" aria-label="Diplômes">
+              <h3 class="credTitle">
+                <span class="credTitle__dot" aria-hidden="true"></span>
+                Diplômes
+              </h3>
+              <ul class="credList">
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🎓</span>
+                  <div class="credMain">
+                    <p class="credName">Master Data & IA — Eugenia School</p>
+                    <p class="credMeta">2025–2026 • Projets Python/SQL, Dataiku, Power BI/Tableau.</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🎓</span>
+                  <div class="credMain">
+                    <p class="credName">Master 2 Communication Digitale — Sorbonne</p>
+                    <p class="credMeta">2022–2023 • KPI marketing, performance contenus, analyse social media.</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="card credBlock" aria-label="Certifications">
+              <h3 class="credTitle">
+                <span class="credTitle__dot" aria-hidden="true"></span>
+                Certifications
+              </h3>
+              <ul class="credList">
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🧠</span>
+                  <div class="credMain">
+                    <p class="credName">Microsoft Certified: Azure AI Fundamentals</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🧠</span>
+                  <div class="credMain">
+                    <p class="credName">Microsoft Certified: Azure AI Engineer Associate</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🧠</span>
+                  <div class="credMain">
+                    <p class="credName">Principes de base d’Azure Microsoft</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🧠</span>
+                  <div class="credMain">
+                    <p class="credName">
+                      Réaliser des applications web à l’aide d’un système de gestion de contenus (CMS)
+                    </p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🧠</span>
+                  <div class="credMain">
+                    <p class="credName">Dataiku Core Designer Certificate</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="container">
+          <h2 class="h2 center">Compétences</h2>
+          <p class="muted center" style="margin-top: -6px; margin-bottom: 4px">
+            <strong style="color: rgba(233,233,242,.88)">IA</strong> ·
+            <strong style="color: rgba(233,233,242,.88)">Data</strong> ·
+            <strong style="color: rgba(233,233,242,.88)">Dev</strong>
+            — puis design &amp; réseaux. Niveaux indicatifs (★ = point fort).
+          </p>
+
+          <div class="skillMatrix skillMatrix--3">
+            <section class="card credBlock skillCat" aria-label="IA">
+              <h3 class="skillCat__title">IA</h3>
+              <div class="skillMeter skillMeter--strong">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label skillMeter__label--strong">Dataiku <span class="skillMeter__badge" title="Point fort">★</span></span>
+                  <span class="skillMeter__pct">90%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:90%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Databricks</span>
+                  <span class="skillMeter__pct">82%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:82%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Dust</span>
+                  <span class="skillMeter__pct">78%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:78%"></div></div>
+              </div>
+            </section>
+
+            <section class="card credBlock skillCat" aria-label="Data">
+              <h3 class="skillCat__title">Data</h3>
+              <div class="skillMeter skillMeter--strong">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label skillMeter__label--strong">SQL <span class="skillMeter__badge" title="Point fort">★</span></span>
+                  <span class="skillMeter__pct">95%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:95%"></div></div>
+              </div>
+              <div class="skillMeter skillMeter--strong">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label skillMeter__label--strong">Tableau <span class="skillMeter__badge" title="Point fort">★</span></span>
+                  <span class="skillMeter__pct">92%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:92%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Excel</span>
+                  <span class="skillMeter__pct">90%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:90%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Google Sheets</span>
+                  <span class="skillMeter__pct">88%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:88%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Matplotlib</span>
+                  <span class="skillMeter__pct">85%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:85%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Seaborn</span>
+                  <span class="skillMeter__pct">85%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:85%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Google Analytics</span>
+                  <span class="skillMeter__pct">82%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:82%"></div></div>
+              </div>
+            </section>
+
+            <section class="card credBlock skillCat" aria-label="Dev">
+              <h3 class="skillCat__title">Dev</h3>
+              <div class="skillMeter skillMeter--strong">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label skillMeter__label--strong">Python <span class="skillMeter__badge" title="Point fort">★</span></span>
+                  <span class="skillMeter__pct">92%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:92%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Git</span>
+                  <span class="skillMeter__pct">82%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:82%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">CRM (WordPress)</span>
+                  <span class="skillMeter__pct">78%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:78%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">Make</span>
+                  <span class="skillMeter__pct">80%</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:80%"></div></div>
+              </div>
+            </section>
+          </div>
+
+          <div class="skillDesignBlock card credBlock" aria-label="Design et réseaux sociaux">
+            <h3 class="credTitle">
+              <span class="credTitle__dot" aria-hidden="true"></span>
+              Design &amp; réseaux sociaux
+            </h3>
+            <div class="skillDesignWrap">
+              <div>
+                <p class="skillDesignCol__title">Design</p>
+                <div class="skillMeter skillMeter--strong">
+                  <div class="skillMeter__top">
+                    <span class="skillMeter__label skillMeter__label--strong">Canva <span class="skillMeter__badge" title="Point fort">★</span></span>
+                    <span class="skillMeter__pct">92%</span>
+                  </div>
+                  <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:92%"></div></div>
+                </div>
+                <div class="skillMeter">
+                  <div class="skillMeter__top">
+                    <span class="skillMeter__label">Figma</span>
+                    <span class="skillMeter__pct">85%</span>
+                  </div>
+                  <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:85%"></div></div>
+                </div>
+                <div class="skillMeter">
+                  <div class="skillMeter__top">
+                    <span class="skillMeter__label">Adobe</span>
+                    <span class="skillMeter__pct">82%</span>
+                  </div>
+                  <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:82%"></div></div>
+                </div>
+              </div>
+              <div>
+                <p class="skillDesignCol__title">Réseaux sociaux</p>
+                <div class="skillMeter skillMeter--strong">
+                  <div class="skillMeter__top">
+                    <span class="skillMeter__label skillMeter__label--strong">Meta <span class="skillMeter__badge" title="Point fort">★</span></span>
+                    <span class="skillMeter__pct">88%</span>
+                  </div>
+                  <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:88%"></div></div>
+                </div>
+                <div class="skillMeter">
+                  <div class="skillMeter__top">
+                    <span class="skillMeter__label">YouTube</span>
+                    <span class="skillMeter__pct">85%</span>
+                  </div>
+                  <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:85%"></div></div>
+                </div>
+                <div class="skillMeter">
+                  <div class="skillMeter__top">
+                    <span class="skillMeter__label">LinkedIn</span>
+                    <span class="skillMeter__pct">86%</span>
+                  </div>
+                  <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:86%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="soft-skills" class="section">
+        <div class="container">
+          <h2 class="h2 center">Soft skills</h2>
+          <p class="muted center" style="margin-top: -6px; margin-bottom: 14px">
+            Points forts mis en avant (★).
+          </p>
+          <div class="card credBlock" style="max-width: 720px; margin-inline: auto">
+            <div class="skillMeter skillMeter--strong">
+              <div class="skillMeter__top">
+                <span class="skillMeter__label skillMeter__label--strong">Esprit analytique <span class="skillMeter__badge" title="Point fort">★</span></span>
+                <span class="skillMeter__pct">95%</span>
+              </div>
+              <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:95%"></div></div>
+            </div>
+            <div class="skillMeter skillMeter--strong">
+              <div class="skillMeter__top">
+                <span class="skillMeter__label skillMeter__label--strong">Rigueur &amp; sens du détail <span class="skillMeter__badge" title="Point fort">★</span></span>
+                <span class="skillMeter__pct">93%</span>
+              </div>
+              <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:93%"></div></div>
+            </div>
+            <div class="skillMeter skillMeter--strong">
+              <div class="skillMeter__top">
+                <span class="skillMeter__label skillMeter__label--strong">Vulgarisation des données <span class="skillMeter__badge" title="Point fort">★</span></span>
+                <span class="skillMeter__pct">90%</span>
+              </div>
+              <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:90%"></div></div>
+            </div>
+            <div class="skillMeter">
+              <div class="skillMeter__top">
+                <span class="skillMeter__label">Travail en équipe</span>
+                <span class="skillMeter__pct">88%</span>
+              </div>
+              <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:88%"></div></div>
+            </div>
+            <div class="skillMeter">
+              <div class="skillMeter__top">
+                <span class="skillMeter__label">Autonomie &amp; proactivité</span>
+                <span class="skillMeter__pct">88%</span>
+              </div>
+              <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:88%"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="langues" class="section">
+        <div class="container">
+          <h2 class="h2 center">Langues</h2>
+          <div class="langStrip" style="margin-top: 0">
+            <div class="langGrid">
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">FR</span>
+                  <span class="skillMeter__pct">C2</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:100%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">EN</span>
+                  <span class="skillMeter__pct">B2</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:72%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">PT</span>
+                  <span class="skillMeter__pct">C1</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:88%"></div></div>
+              </div>
+              <div class="skillMeter">
+                <div class="skillMeter__top">
+                  <span class="skillMeter__label">ES</span>
+                  <span class="skillMeter__pct">C1</span>
+                </div>
+                <div class="skillMeter__track" role="presentation"><div class="skillMeter__fill" style="width:88%"></div></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -141,17 +141,18 @@
       }
       .loader[aria-hidden="true"]{opacity:0;transform:scale(.99);pointer-events:none}
       .loader-cat{
-        width:min(520px, 82vw);
-        max-height:72vh;
+        width:min(420px, 78vw);
+        max-height:58vh;
+        height:auto;
         object-fit:contain;
         image-rendering: pixelated;
         filter: drop-shadow(0 22px 70px rgba(0,0,0,.55));
         animation: catRise 3000ms cubic-bezier(.2,.8,.2,1) forwards;
       }
       @keyframes catRise{
-        0%{transform:translateY(56px) scale(1); opacity:1}
-        88%{transform:translateY(-56px) scale(1); opacity:1}
-        100%{transform:translateY(-64px) scale(1.03); opacity:1}
+        0%{transform:translateY(80px) scale(.98); opacity:1}
+        85%{transform:translateY(-32px) scale(1); opacity:1}
+        100%{transform:translateY(-40px) scale(1.02); opacity:1}
       }
       @media (prefers-reduced-motion: reduce){
         .loader-cat{animation:none !important}
@@ -174,6 +175,48 @@
         -webkit-background-clip:text;background-clip:text;color:transparent;
       }
       .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+
+      .hero-ill{
+        border:1px solid var(--border);
+        background:
+          radial-gradient(520px 360px at 50% 20%, rgba(139,92,246,.22), transparent 60%),
+          rgba(255,255,255,.03);
+        border-radius:var(--radius);
+        padding:18px;
+        box-shadow:0 18px 60px rgba(0,0,0,.45);
+        position:relative;
+        overflow:hidden;
+        min-height:320px;
+        display:grid;
+        place-items:center;
+      }
+      .hero-ill::before{
+        content:"";
+        position:absolute;inset:-80px;
+        background:
+          radial-gradient(circle at 20% 30%, rgba(236,72,153,.20), transparent 45%),
+          radial-gradient(circle at 80% 70%, rgba(139,92,246,.18), transparent 45%);
+        filter: blur(18px);
+        opacity:.9;
+        pointer-events:none;
+      }
+      .hero-cat{
+        width:min(360px, 72vw);
+        height:auto;
+        image-rendering: pixelated;
+        filter: drop-shadow(0 30px 90px rgba(0,0,0,.6));
+        position:relative;
+        z-index:1;
+      }
+      .sparkles{
+        position:absolute;inset:0;pointer-events:none;opacity:.9;
+        background:
+          radial-gradient(2px 2px at 18% 24%, rgba(196,181,253,.9) 0 2px, transparent 3px),
+          radial-gradient(2px 2px at 26% 72%, rgba(251,113,133,.9) 0 2px, transparent 3px),
+          radial-gradient(2px 2px at 74% 30%, rgba(196,181,253,.9) 0 2px, transparent 3px),
+          radial-gradient(2px 2px at 82% 66%, rgba(251,113,133,.85) 0 2px, transparent 3px);
+        z-index:0;
+      }
 
       .quick-facts{
         display:grid;grid-template-columns:repeat(3,1fr);
@@ -278,6 +321,14 @@
           radial-gradient(420px 220px at 80% 50%, rgba(236,72,153,.16), transparent 55%),
           rgba(255,255,255,.03);
         border-bottom:1px solid rgba(255,255,255,.08);
+        background-size: cover;
+        background-position: center;
+        position:relative;
+      }
+      .project-thumb::after{
+        content:"";
+        position:absolute;inset:0;
+        background:linear-gradient(180deg, rgba(11,11,18,.15), rgba(11,11,18,.75));
       }
       .project-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
       .project-title{margin:0;font-size:16px}
@@ -513,64 +564,9 @@
             </div>
           </div>
 
-          <div class="hero-card" aria-label="Carte profil">
-            <div class="profile">
-              <div class="avatar" aria-hidden="true">
-                <img
-                  src="./assets/profile.svg"
-                  alt=""
-                  width="160"
-                  height="160"
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
-              <div class="profile-meta">
-                <div class="profile-name" data-i18n="profile.name">Ema Fernandes</div>
-                <div class="profile-role" data-i18n="profile.role">Data Analyst • Business / Marketing Analytics</div>
-                <div class="profile-location" data-i18n="profile.location">📍 Eaubonne (Permis B)</div>
-              </div>
-
-              <div class="social" aria-label="Réseaux sociaux">
-                <a
-                  class="social-link"
-                  href="https://www.linkedin.com/in/ema-fernandes/"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="LinkedIn"
-                >
-                  <span aria-hidden="true">in</span>
-                </a>
-                <a
-                  class="social-link"
-                  href="https://github.com/ema9995"
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="GitHub"
-                >
-                  <span aria-hidden="true">GH</span>
-                </a>
-                <a class="social-link" href="#" target="_blank" rel="noreferrer" aria-label="Kaggle">
-                  <span aria-hidden="true">Kg</span>
-                </a>
-                <a class="social-link" href="#" target="_blank" rel="noreferrer" aria-label="X / Twitter">
-                  <span aria-hidden="true">X</span>
-                </a>
-              </div>
-
-              <div class="profile-actions">
-                <a
-                  class="btn btn-ghost btn-block"
-                  href="mailto:fernandesema99@gmail.com?subject=Contact%20portfolio"
-                  data-i18n="cta.contactEmail"
-                >
-                  Contacter par email
-                </a>
-              </div>
-              <p class="hint" data-i18n="profile.hint">
-                Remplace `assets/profile.svg` par ta photo (ou mets un lien vers ton CV PDF).
-              </p>
-            </div>
+          <div class="hero-ill" aria-label="Illustration">
+            <div class="sparkles" aria-hidden="true"></div>
+            <img class="hero-cat" id="heroCat" alt="" aria-hidden="true" />
           </div>
         </div>
       </section>
@@ -1458,8 +1454,9 @@
         const filtered = state.filter === "all" ? projects : projects.filter((p) => p.category === state.filter);
 
         filtered.forEach((p) => {
+          const thumbStyle = window.__CAT_DATA_URL ? `background-image:url(${window.__CAT_DATA_URL});` : "";
           const card = el("article", { class: "project" }, [
-            el("div", { class: "project-thumb", role: "img", "aria-label": p.title }),
+            el("div", { class: "project-thumb", role: "img", "aria-label": p.title, style: thumbStyle }),
             el("div", { class: "project-body" }, [
               el("div", { class: "tags" }, [el("span", { class: "tag" }, [p.categoryLabel || p.category || ""]), ...(p.badges || []).map((x) => el("span", { class: "tag" }, [x]))]),
               el("h3", { class: "project-title" }, [p.title]),
@@ -1713,6 +1710,8 @@
 
         const miniCat = document.getElementById("miniCat");
         if (miniCat && window.__CAT_DATA_URL) miniCat.src = window.__CAT_DATA_URL;
+        const heroCat = document.getElementById("heroCat");
+        if (heroCat && window.__CAT_DATA_URL) heroCat.src = window.__CAT_DATA_URL;
 
         applyTranslations();
         syncLangUi();

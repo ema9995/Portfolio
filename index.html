@@ -1,62 +1,1482 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Document</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio Data | Ema Fernandes</title>
+    <meta
+      name="description"
+      content="Portfolio data bilingue (FR/EN) : projets détaillés, certifications & diplômes, compétences, contact."
+    />
+    <meta name="theme-color" content="#0b0b12" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
-            color: #333;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-        }
-        main {
-            margin-top: 20px;
-        }
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #666;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
+      :root{
+        --bg:#0b0b12;
+        --panel:#101022;
+        --panel2:#0f0f1a;
+        --text:#ececf4;
+        --muted:#b6b6cf;
+        --border:rgba(255,255,255,.10);
+        --shadow:0 20px 60px rgba(0,0,0,.55);
+        --brand:#8b5cf6;
+        --brand2:#ec4899;
+        --ok:#22c55e;
+        --warn:#f59e0b;
+        --danger:#ef4444;
+        --radius:18px;
+        --radius2:12px;
+        --container:1100px;
+      }
+
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;
+        font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        color:var(--text);
+        background:
+          radial-gradient(1000px 500px at 20% 10%, rgba(139,92,246,.25), transparent 55%),
+          radial-gradient(900px 520px at 70% 30%, rgba(236,72,153,.18), transparent 52%),
+          radial-gradient(700px 380px at 50% 90%, rgba(139,92,246,.10), transparent 60%),
+          var(--bg);
+        line-height:1.55;
+      }
+
+      a{color:inherit}
+      img{max-width:100%;display:block}
+      button,input,textarea{font:inherit;color:inherit}
+
+      .container{max-width:var(--container);margin:0 auto;padding:0 20px}
+      .muted{color:var(--muted)}
+      .dot{margin:0 10px;color:rgba(255,255,255,.35)}
+
+      .skip-link{
+        position:absolute;left:-999px;top:10px;
+        background:var(--panel);border:1px solid var(--border);
+        padding:10px 12px;border-radius:12px;z-index:9999;
+      }
+      .skip-link:focus{left:10px}
+
+      .site-header{
+        position:sticky;top:0;z-index:50;
+        backdrop-filter: blur(14px);
+        background: rgba(11,11,18,.65);
+        border-bottom:1px solid var(--border);
+      }
+      .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+
+      .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+      .brand-mark{
+        width:34px;height:34px;border-radius:12px;
+        display:grid;place-items:center;
+        background:linear-gradient(135deg, rgba(139,92,246,.8), rgba(236,72,153,.55));
+        border:1px solid rgba(255,255,255,.14);
+        box-shadow:0 12px 34px rgba(139,92,246,.18);
+      }
+      .brand-name{font-weight:700;letter-spacing:.2px}
+
+      .nav{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+      .nav-link{
+        text-decoration:none;
+        color:rgba(236,236,244,.90);
+        padding:8px 10px;border-radius:12px;
+      }
+      .nav-link:hover{background:rgba(255,255,255,.06)}
+
+      .header-actions{display:flex;gap:10px;align-items:center}
+      .pill{
+        display:inline-flex;align-items:center;justify-content:center;
+        min-width:44px;height:34px;padding:0 10px;border-radius:999px;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.04);
+        font-weight:600;
+      }
+
+      .btn{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.04);
+        color:var(--text);
+        padding:10px 14px;border-radius:999px;
+        cursor:pointer;text-decoration:none;
+        display:inline-flex;align-items:center;justify-content:center;
+        gap:8px;
+      }
+      .btn:hover{background:rgba(255,255,255,.07)}
+      .btn:active{transform:translateY(1px)}
+      .btn-primary{
+        border-color:rgba(139,92,246,.55);
+        background:linear-gradient(135deg, rgba(139,92,246,.90), rgba(236,72,153,.70));
+        box-shadow:0 18px 45px rgba(139,92,246,.20);
+      }
+      .btn-primary:hover{filter:saturate(1.05)}
+      .btn-ghost{background:rgba(255,255,255,.02)}
+      .btn-block{width:100%}
+
+      .hero{padding:56px 0 18px}
+      .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:start}
+      .eyebrow{
+        display:inline-flex;align-items:center;gap:8px;
+        color:rgba(236,236,244,.85);
+        background:rgba(255,255,255,.04);
+        border:1px solid var(--border);
+        padding:6px 10px;border-radius:999px;
+      }
+      .hero-title{font-size:44px;line-height:1.08;margin:14px 0 10px;letter-spacing:-.5px}
+      .hero-subtitle{color:rgba(236,236,244,.82);max-width:62ch;margin:0 0 18px}
+      .gradient{
+        background:linear-gradient(135deg, #c4b5fd, #fb7185);
+        -webkit-background-clip:text;background-clip:text;color:transparent;
+      }
+      .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+
+      .quick-facts{
+        display:grid;grid-template-columns:repeat(3,1fr);
+        gap:10px;margin-top:14px
+      }
+      .fact{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.03);
+        border-radius:var(--radius2);
+        padding:12px 12px;
+      }
+      .fact-k{color:rgba(236,236,244,.72);font-size:12px}
+      .fact-v{font-weight:600;margin-top:4px;font-size:13px}
+
+      .hero-card{
+        border:1px solid var(--border);
+        background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+        border-radius:var(--radius);
+        box-shadow:var(--shadow);
+        padding:18px;
+        position:relative;
+        overflow:hidden;
+      }
+      .hero-card:before{
+        content:"";
+        position:absolute;inset:-60px -80px auto auto;
+        width:220px;height:220px;border-radius:50%;
+        background:radial-gradient(circle at 30% 30%, rgba(139,92,246,.28), transparent 60%);
+        filter:blur(2px);
+      }
+
+      .profile{position:relative;z-index:1}
+      .avatar{
+        width:160px;height:160px;border-radius:999px;
+        border:1px solid rgba(255,255,255,.14);
+        background:rgba(255,255,255,.03);
+        overflow:hidden;
+        box-shadow:0 20px 60px rgba(0,0,0,.45);
+      }
+      .profile-meta{margin-top:12px}
+      .profile-name{font-weight:800;font-size:18px}
+      .profile-role{color:rgba(236,236,244,.78);margin-top:2px}
+      .profile-location{color:rgba(236,236,244,.70);margin-top:8px;font-size:13px}
+
+      .social{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+      .social-link{
+        width:38px;height:38px;border-radius:12px;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.03);
+        display:grid;place-items:center;
+        text-decoration:none;
+        color:rgba(236,236,244,.85);
+        font-weight:700;font-size:12px;
+      }
+      .social-link:hover{background:rgba(255,255,255,.07)}
+
+      .profile-actions{margin-top:14px}
+      .hint{margin:10px 0 0;color:rgba(236,236,244,.62);font-size:12px}
+
+      .section{padding:54px 0}
+      .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px;flex-wrap:wrap}
+      .section-title{margin:0;font-size:26px;letter-spacing:-.2px}
+      .section-subtitle{margin:0;color:rgba(236,236,244,.72);max-width:70ch}
+
+      .card{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.03);
+        border-radius:var(--radius);
+        padding:18px;
+      }
+      .card-title{margin:0 0 12px;font-size:16px}
+      .rich{color:rgba(236,236,244,.85)}
+
+      .filters{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+      .chip{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.02);
+        padding:8px 12px;border-radius:999px;
+        cursor:pointer;
+        color:rgba(236,236,244,.84);
+      }
+      .chip:hover{background:rgba(255,255,255,.06)}
+      .chip-active{border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.18)}
+
+      .grid{display:grid;gap:14px}
+      .projects-grid{grid-template-columns:repeat(3,1fr)}
+      .skills-grid{grid-template-columns:repeat(3,1fr)}
+      .contact-grid{grid-template-columns:1fr .9fr;align-items:start}
+
+      .project{
+        border:1px solid var(--border);
+        background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+        border-radius:var(--radius);
+        overflow:hidden;
+        display:flex;flex-direction:column;
+        min-height:260px;
+      }
+      .project-thumb{
+        height:130px;
+        background:
+          radial-gradient(600px 260px at 20% 30%, rgba(139,92,246,.26), transparent 55%),
+          radial-gradient(420px 220px at 80% 50%, rgba(236,72,153,.16), transparent 55%),
+          rgba(255,255,255,.03);
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      .project-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+      .project-title{margin:0;font-size:16px}
+      .project-desc{margin:0;color:rgba(236,236,244,.76);font-size:13px}
+      .tags{display:flex;gap:8px;flex-wrap:wrap}
+      .tag{
+        font-size:12px;color:rgba(236,236,244,.86);
+        padding:5px 8px;border-radius:999px;
+        border:1px solid rgba(255,255,255,.10);
+        background:rgba(255,255,255,.03);
+      }
+      .project-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+
+      .timeline{display:grid;gap:12px}
+      .time-item{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.03);
+        border-radius:var(--radius);
+        padding:14px;
+        display:grid;grid-template-columns:120px 1fr;gap:12px;
+      }
+      .time-when{color:rgba(236,236,244,.68);font-size:13px}
+      .time-title{font-weight:700}
+      .time-meta{color:rgba(236,236,244,.72);margin-top:2px}
+      .time-proof{margin-top:8px}
+      .time-proof a{color:#c4b5fd}
+
+      .skill-card{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.03);
+        border-radius:var(--radius);
+        padding:16px;
+      }
+      .skill-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+      .skill-title{margin:0;font-size:15px}
+      .meter{
+        height:10px;border-radius:999px;
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(255,255,255,.03);
+        overflow:hidden;
+      }
+      .meter > span{
+        display:block;height:100%;
+        background:linear-gradient(90deg, rgba(139,92,246,.88), rgba(236,72,153,.70));
+        width:50%;
+      }
+      .skill-items{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+      .form{display:grid;gap:12px}
+      .field{display:grid;gap:6px}
+      .label{color:rgba(236,236,244,.80);font-weight:600;font-size:13px}
+      .input{
+        border:1px solid rgba(255,255,255,.14);
+        background:rgba(11,11,18,.35);
+        padding:10px 12px;border-radius:14px;
+        outline:none;
+      }
+      .input:focus{border-color:rgba(139,92,246,.60);box-shadow:0 0 0 4px rgba(139,92,246,.14)}
+      .textarea{resize:vertical;min-height:120px}
+      .sep{border:0;border-top:1px solid rgba(255,255,255,.10);margin:14px 0}
+      .kv{display:grid;grid-template-columns:120px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.10)}
+      .kv:last-of-type{border-bottom:0}
+      .k{color:rgba(236,236,244,.68)}
+      .v a{color:#c4b5fd;text-decoration:none}
+      .v a:hover{text-decoration:underline}
+
+      .site-footer{border-top:1px solid var(--border);padding:20px 0;background:rgba(0,0,0,.12)}
+      .footer-inner{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+
+      .modal{
+        border:0;
+        padding:0;
+        background:transparent;
+        color:inherit;
+      }
+      .modal::backdrop{background:rgba(0,0,0,.65)}
+      .modal-inner{
+        width:min(920px, calc(100vw - 32px));
+        margin:8vh auto;
+        border:1px solid rgba(255,255,255,.14);
+        background:linear-gradient(180deg, rgba(16,16,34,.96), rgba(11,11,18,.94));
+        border-radius:22px;
+        box-shadow:var(--shadow);
+        padding:18px;
+        position:relative;
+      }
+      .icon-btn{
+        border:1px solid rgba(255,255,255,.14);
+        background:rgba(255,255,255,.04);
+        width:38px;height:38px;border-radius:14px;
+        cursor:pointer;color:rgba(236,236,244,.92);
+      }
+      .icon-btn:hover{background:rgba(255,255,255,.08)}
+
+      .modal h3{margin:8px 0 6px}
+      .modal p{margin:0 0 10px;color:rgba(236,236,244,.80)}
+      .modal ul{margin:8px 0 12px;padding-left:18px;color:rgba(236,236,244,.82)}
+      .modal .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin-top:12px}
+      .modal .mini{
+        border:1px solid rgba(255,255,255,.10);
+        background:rgba(255,255,255,.03);
+        border-radius:16px;
+        padding:12px;
+      }
+      .badge{
+        display:inline-flex;align-items:center;gap:8px;
+        padding:6px 10px;border-radius:999px;
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(255,255,255,.03);
+        color:rgba(236,236,244,.86);
+        font-size:12px;font-weight:600;
+      }
+
+      .chat{position:fixed;right:16px;bottom:16px;z-index:60}
+      .chat[aria-hidden="true"]{display:none}
+      .chat-panel{
+        width:min(420px, calc(100vw - 32px));
+        border:1px solid rgba(255,255,255,.14);
+        background:linear-gradient(180deg, rgba(16,16,34,.96), rgba(11,11,18,.94));
+        border-radius:22px;
+        box-shadow:var(--shadow);
+        overflow:hidden;
+      }
+      .chat-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:14px;border-bottom:1px solid rgba(255,255,255,.10)}
+      .chat-title{font-weight:800}
+      .chat-subtitle{color:rgba(236,236,244,.68);font-size:12px;margin-top:2px}
+      .chat-body{padding:14px;display:grid;gap:10px;max-height:52vh;overflow:auto}
+      .bubble{
+        border:1px solid rgba(255,255,255,.10);
+        background:rgba(255,255,255,.03);
+        border-radius:18px;
+        padding:10px 12px;
+        color:rgba(236,236,244,.88);
+        width:fit-content;
+        max-width:100%;
+      }
+      .bubble.me{margin-left:auto;background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.28)}
+      .bubble .small{color:rgba(236,236,244,.70);font-size:12px;margin-top:4px}
+      .chat-form{display:flex;gap:10px;align-items:center;padding:12px;border-top:1px solid rgba(255,255,255,.10)}
+      .chat-input{
+        flex:1;
+        border:1px solid rgba(255,255,255,.14);
+        background:rgba(11,11,18,.35);
+        padding:10px 12px;border-radius:14px;
+        outline:none;
+      }
+      .chat-input:focus{border-color:rgba(139,92,246,.60);box-shadow:0 0 0 4px rgba(139,92,246,.14)}
+      .chat-foot{display:flex;gap:10px;flex-wrap:wrap;padding:12px;border-top:1px solid rgba(255,255,255,.10)}
+
+      @media (max-width: 940px){
+        .hero-grid{grid-template-columns:1fr;gap:16px}
+        .quick-facts{grid-template-columns:1fr}
+        .projects-grid{grid-template-columns:repeat(2,1fr)}
+        .skills-grid{grid-template-columns:repeat(2,1fr)}
+        .contact-grid{grid-template-columns:1fr}
+        .modal .cols{grid-template-columns:1fr}
+      }
+
+      @media (max-width: 560px){
+        .nav{display:none}
+        .hero-title{font-size:36px}
+        .projects-grid{grid-template-columns:1fr}
+        .skills-grid{grid-template-columns:1fr}
+        .time-item{grid-template-columns:1fr}
+      }
     </style>
-</head>
-<body>
-    <header>
-        <h1>Bienvenue sur mon site</h1>
-        <p>Un document HTML simple et élégant</p>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Retour en haut">
+          <span class="brand-mark" aria-hidden="true">⌁</span>
+          <span class="brand-name" data-i18n="brand">Ema Fernandes</span>
+        </a>
+
+        <nav class="nav" aria-label="Navigation principale">
+          <a class="nav-link" href="#about" data-i18n="nav.about">À propos</a>
+          <a class="nav-link" href="#projects" data-i18n="nav.projects">Projets</a>
+          <a class="nav-link" href="#certs" data-i18n="nav.certs">Certifications</a>
+          <a class="nav-link" href="#skills" data-i18n="nav.skills">Compétences</a>
+          <a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="btn btn-ghost" id="langToggle" type="button" aria-label="Switch language">
+            <span class="pill" id="langPill">FR</span>
+          </button>
+          <button class="btn btn-primary" id="openChat" type="button" data-i18n="cta.chat">
+            Chat IA
+          </button>
+        </div>
+      </div>
     </header>
-    
-    <main>
-        <section>
-            <h2>À propos</h2>
-            <p>Ceci est un document HTML de base que vous pouvez personnaliser selon vos besoins.</p>
-        </section>
-        
-        <section>
-            <h2>Contenu</h2>
-            <p>Ajoutez votre contenu ici.</p>
-            <ul>
-                <li>Point 1</li>
-                <li>Point 2</li>
-                <li>Point 3</li>
-            </ul>
-        </section>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="hero.eyebrow">Portfolio Data</p>
+            <h1 class="hero-title">
+              <span data-i18n="hero.titleA">Bonjour, je suis</span>
+              <span class="gradient" data-i18n="hero.name">Votre Nom</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
+              Data Analyst (alternance) — analyse exploratoire, dashboards, aide à la décision (SQL, Python, Power BI/Tableau).
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#projects" data-i18n="cta.seeProjects">Voir mes projets</a>
+              <a class="btn btn-ghost" href="#contact" data-i18n="cta.contact">Me contacter</a>
+            </div>
+
+            <div class="quick-facts" role="list" aria-label="Points clés">
+              <div class="fact" role="listitem">
+                <div class="fact-k" data-i18n="facts.k1">Spécialités</div>
+                <div class="fact-v" data-i18n="facts.v1">BI • Python • SQL • ML</div>
+              </div>
+              <div class="fact" role="listitem">
+                <div class="fact-k" data-i18n="facts.k2">Stack</div>
+                <div class="fact-v" data-i18n="facts.v2">Power BI • Pandas • dbt • Git</div>
+              </div>
+              <div class="fact" role="listitem">
+                <div class="fact-k" data-i18n="facts.k3">Ouvert à</div>
+                <div class="fact-v" data-i18n="facts.v3">Stage • Alternance • Freelance</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card" aria-label="Carte profil">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true">
+                <img
+                  src="./assets/profile.svg"
+                  alt=""
+                  width="160"
+                  height="160"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+              <div class="profile-meta">
+                <div class="profile-name" data-i18n="profile.name">Ema Fernandes</div>
+                <div class="profile-role" data-i18n="profile.role">Data Analyst • Business / Marketing Analytics</div>
+                <div class="profile-location" data-i18n="profile.location">📍 Eaubonne (Permis B)</div>
+              </div>
+
+              <div class="social" aria-label="Réseaux sociaux">
+                <a
+                  class="social-link"
+                  href="https://www.linkedin.com/in/ema-fernandes/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                >
+                  <span aria-hidden="true">in</span>
+                </a>
+                <a
+                  class="social-link"
+                  href="https://github.com/ema9995"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                >
+                  <span aria-hidden="true">GH</span>
+                </a>
+                <a class="social-link" href="#" target="_blank" rel="noreferrer" aria-label="Kaggle">
+                  <span aria-hidden="true">Kg</span>
+                </a>
+                <a class="social-link" href="#" target="_blank" rel="noreferrer" aria-label="X / Twitter">
+                  <span aria-hidden="true">X</span>
+                </a>
+              </div>
+
+              <div class="profile-actions">
+                <a
+                  class="btn btn-ghost btn-block"
+                  href="mailto:fernandesema99@gmail.com?subject=Contact%20portfolio"
+                  data-i18n="cta.contactEmail"
+                >
+                  Contacter par email
+                </a>
+              </div>
+              <p class="hint" data-i18n="profile.hint">
+                Remplace `assets/profile.svg` par ta photo (ou mets un lien vers ton CV PDF).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="about.title">À propos</h2>
+            <p class="section-subtitle" data-i18n="about.subtitle">
+              Ce portfolio est orienté “data” : contexte, méthode, résultats, métriques.
+            </p>
+          </div>
+          <div class="card">
+            <div class="rich" data-i18n="about.body">
+              Je construis des analyses actionnables : cadrage, collecte, nettoyage, modélisation,
+              visualisation et restitution. J’aime documenter clairement les hypothèses et mesurer
+              l’impact.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="projects.title">Projets (détaillés)</h2>
+            <p class="section-subtitle" data-i18n="projects.subtitle">
+              Chaque projet inclut : objectif, données, démarche, résultats, limites, liens.
+            </p>
+          </div>
+
+          <div class="filters" aria-label="Filtres projets">
+            <button class="chip chip-active" type="button" data-filter="all" data-i18n="projects.filters.all">
+              Tous
+            </button>
+            <button class="chip" type="button" data-filter="bi">BI</button>
+            <button class="chip" type="button" data-filter="ml">ML</button>
+            <button class="chip" type="button" data-filter="dataeng">Data Eng</button>
+          </div>
+
+          <div class="grid projects-grid" id="projectsGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section" id="certs">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="certs.title">Certifications & Diplômes</h2>
+            <p class="section-subtitle" data-i18n="certs.subtitle">
+              Un aperçu rapide, avec preuves/identifiants si disponibles.
+            </p>
+          </div>
+          <div class="timeline" id="certsTimeline"></div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="skills.title">Skills & Compétences</h2>
+            <p class="section-subtitle" data-i18n="skills.subtitle">
+              Compétences techniques + pratiques (communication, rigueur, data storytelling).
+            </p>
+          </div>
+
+          <div class="grid skills-grid" id="skillsGrid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+            <p class="section-subtitle" data-i18n="contact.subtitle">
+              Dis-moi ce que tu veux mesurer, et on transforme ça en plan d’action.
+            </p>
+          </div>
+
+          <div class="grid contact-grid">
+            <form class="card form" id="contactForm">
+              <label class="field">
+                <span class="label" data-i18n="contact.form.name">Nom</span>
+                <input class="input" name="name" autocomplete="name" required />
+              </label>
+              <label class="field">
+                <span class="label" data-i18n="contact.form.email">Email</span>
+                <input class="input" name="email" type="email" autocomplete="email" required />
+              </label>
+              <label class="field">
+                <span class="label" data-i18n="contact.form.message">Message</span>
+                <textarea class="input textarea" name="message" rows="5" required></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit" data-i18n="contact.form.send">Envoyer</button>
+              <p class="hint" id="contactHint" data-i18n="contact.form.hint">
+                Le formulaire est “front-only” (il ouvre ton client mail).
+              </p>
+            </form>
+
+            <div class="card contact-aside">
+              <h3 class="card-title" data-i18n="contact.aside.title">Liens rapides</h3>
+              <div class="kv">
+                <div class="k" data-i18n="contact.aside.email">Email</div>
+                <div class="v"><a href="mailto:fernandesema99@gmail.com">fernandesema99@gmail.com</a></div>
+              </div>
+              <div class="kv">
+                <div class="k" data-i18n="contact.aside.location">Localisation</div>
+                <div class="v" data-i18n="contact.aside.locationValue">Ville, Pays</div>
+              </div>
+              <div class="kv">
+                <div class="k" data-i18n="contact.aside.socials">Réseaux</div>
+                <div class="v">
+                  <div class="social">
+                    <a
+                      class="social-link"
+                      href="https://www.linkedin.com/in/ema-fernandes/"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="LinkedIn"
+                    >
+                      <span aria-hidden="true">in</span>
+                    </a>
+                    <a
+                      class="social-link"
+                      href="https://github.com/ema9995"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="GitHub"
+                    >
+                      <span aria-hidden="true">GH</span>
+                    </a>
+                    <a class="social-link" href="#" target="_blank" rel="noreferrer" aria-label="Kaggle">
+                      <span aria-hidden="true">Kg</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <hr class="sep" />
+              <p class="hint" data-i18n="contact.aside.hint">
+                Astuce : mets des liens vers GitHub/Kaggle + une preuve (dashboard public, notebook, article).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-    
-    <footer>
-        <p>&copy; 2026 - Tous droits réservés</p>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="muted">
+          <span data-i18n="footer.made">Fait en HTML/CSS/JS</span>
+          <span class="dot" aria-hidden="true">•</span>
+          <a href="#top" data-i18n="footer.backTop">Retour en haut</a>
+        </div>
+        <div class="muted">
+          <span>© <span id="year"></span> <span data-i18n="profile.name">Votre Nom</span></span>
+        </div>
+      </div>
     </footer>
-</body>
+
+    <!-- Project details modal -->
+    <dialog class="modal" id="projectModal" aria-label="Project details">
+      <div class="modal-inner">
+        <button class="icon-btn" id="closeModal" type="button" aria-label="Close">✕</button>
+        <div id="modalBody"></div>
+      </div>
+    </dialog>
+
+    <!-- Chatbot -->
+    <section class="chat" id="chat" aria-label="Chatbot IA" aria-hidden="true">
+      <div class="chat-panel" role="dialog" aria-modal="false" aria-label="Assistant">
+        <div class="chat-head">
+          <div>
+            <div class="chat-title" data-i18n="chat.title">Assistant Portfolio</div>
+            <div class="chat-subtitle" data-i18n="chat.subtitle">
+              Pose une question sur mes projets/skills.
+            </div>
+          </div>
+          <button class="icon-btn" id="closeChat" type="button" aria-label="Close chat">✕</button>
+        </div>
+        <div class="chat-body" id="chatBody" aria-live="polite"></div>
+        <form class="chat-form" id="chatForm">
+          <input
+            class="chat-input"
+            id="chatInput"
+            name="q"
+            type="text"
+            autocomplete="off"
+            placeholder="Ex : Quel est ton meilleur projet BI ?"
+            required
+          />
+          <button class="btn btn-primary" type="submit" data-i18n="chat.send">Envoyer</button>
+        </form>
+        <div class="chat-foot">
+          <button class="chip" type="button" data-suggest="projects" data-i18n="chat.suggest.projects">
+            Projets
+          </button>
+          <button class="chip" type="button" data-suggest="skills" data-i18n="chat.suggest.skills">
+            Skills
+          </button>
+          <button class="chip" type="button" data-suggest="certs" data-i18n="chat.suggest.certs">
+            Certifs
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Single-file portfolio: i18n + data + rendering + chatbot
+      const STORAGE_KEY = "portfolio_lang";
+      const SUPPORTED = ["fr", "en"];
+
+      const content = {
+        fr: {
+          brand: "Ema Fernandes",
+          nav: { about: "À propos", projects: "Projets", certs: "Certifications", skills: "Compétences", contact: "Contact" },
+          hero: {
+            eyebrow: "Portfolio Data",
+            titleA: "Bonjour, je suis",
+            name: "Ema Fernandes",
+            subtitle:
+              "Passionnée par l'analyse de données et les problématiques business. Alternance Data Analyst (Decathlon) : EDA, dashboards et recommandations (SQL, Python, Tableau/Power BI).",
+          },
+          cta: { seeProjects: "Voir mes projets", contact: "Me contacter", chat: "Chat IA", contactEmail: "Contacter par email" },
+          facts: {
+            k1: "Spécialités",
+            v1: "Marketing analytics • BI • SQL • Python",
+            k2: "Outils",
+            v2: "Tableau • Power BI • Databricks • Excel",
+            k3: "Langues",
+            v3: "FR natif • EN B2 • PT C1 • ES C1",
+          },
+          profile: { name: "Ema Fernandes", role: "Data Analyst • Business / Marketing Analytics", location: "📍 Eaubonne (Permis B)", hint: "Remplace `assets/profile.svg` par ta photo (ou mets un lien vers ton CV PDF)." },
+          about: {
+            title: "À propos",
+            subtitle: "Orientée impact : transformer des besoins métier en analyses actionnables et compréhensibles.",
+            body:
+              "Je combine une formation en Data & IA (Master, Eugenia School) avec une expérience en analyse marketing et reporting. Mon double parcours communication digitale + data me permet de traduire les besoins métier en analyses actionnables et de communiquer les résultats avec clarté. Je maîtrise SQL, Python, Power BI et Tableau.",
+          },
+          projects: {
+            title: "Projets (détaillés)",
+            subtitle: "Structure attendue : objectif, données, démarche, résultats, limites, liens.",
+            filters: { all: "Tous" },
+            card: { details: "Voir le détail" },
+            empty: "Aucun projet pour ce filtre.",
+            modal: { context: "Contexte & objectif", data: "Données", method: "Démarche", results: "Résultats", limits: "Limites / next steps", highlights: "Highlights", links: "Liens", stack: "Stack", noLinks: "Ajoute un lien (GitHub, dashboard, article) si possible." },
+            items: [
+              {
+                id: "decathlon-eda",
+                title: "EDA & insights clients (Decathlon)",
+                subtitle: "Tendances, anomalies, recommandations",
+                summary: "Analyse exploratoire et visualisation pour comprendre les comportements clients et orienter la décision.",
+                category: "bi",
+                categoryLabel: "BI / Analytics",
+                badges: ["EDA", "Insights"],
+                tags: ["segmentation", "anomalies", "kpi"],
+                stack: ["SQL", "Python", "Tableau", "Databricks", "Jira"],
+                context: "Alternance Data Analyst : aider à la décision via analyses et dashboards.",
+                data: "Données clients & usages (extractions, manipulation de volumes importants).",
+                method: ["EDA (tendances, corrélations, anomalies)", "Construction de KPIs", "Dataviz (Tableau) + restitution claire aux équipes"],
+                results: ["Mise en évidence de comportements clients (segments) et signaux faibles", "Recommandations d’actions (hypothèses + pistes d’optimisation)"],
+                limits: ["À compléter avec un exemple chiffré/métrique d’impact", "Ajout d’un lien (demo/visuels) recommandé"],
+                highlights: ["Aide à la décision", "Storytelling", "Rigueur dans l’analyse"],
+                links: [{ label: "GitHub", href: "https://github.com/ema9995" }],
+              },
+              {
+                id: "dash-kpi",
+                title: "Dashboards KPI (Community Management)",
+                subtitle: "Suivi performance contenus & campagnes",
+                summary: "Création de rapports/dashboards Excel et suivi KPI (engagement, reach, conversion) avec recommandations.",
+                category: "bi",
+                categoryLabel: "BI / Reporting",
+                badges: ["KPI", "Reporting"],
+                tags: ["excel", "social analytics", "optimisation"],
+                stack: ["Excel", "Meta", "YouTube Analytics", "Canva", "Figma", "Adobe Suite"],
+                context: "CDD Community Manager — Futur Association (Mar 2024 → Mar 2025).",
+                data: "Données social media & campagnes (plateformes + exports).",
+                method: ["Définition des KPIs", "Dashboards de suivi", "Analyse performance + recommandations"],
+                results: ["Reporting régulier aux parties prenantes", "Optimisations proposées sur les contenus/campagnes"],
+                limits: ["Ajouter des exemples concrets (avant/après, KPI)"],
+                highlights: ["Clarté de restitution", "Approche orientée performance"],
+                links: [],
+              },
+              {
+                id: "pipelines-scraping",
+                title: "Web scraping & pipelines (Master Data & IA)",
+                subtitle: "Extraction → traitement → insights",
+                summary: "Scripts Python/SQL pour extraire des données, les nettoyer, puis produire des insights actionnables.",
+                category: "dataeng",
+                categoryLabel: "Data Eng",
+                badges: ["Pipeline", "Automation"],
+                tags: ["scraping", "data prep", "insights"],
+                stack: ["Python", "SQL", "VS Code", "Dataiku", "Airtable", "Make"],
+                context: "Projets académiques — Eugenia School (depuis Sept 2025).",
+                data: "Sources multiples (web, fichiers, bases) selon projet.",
+                method: ["Scraping", "Nettoyage (doublons, valeurs manquantes)", "Structuration + restitution (BI/no-code)"],
+                results: ["Pipelines reproductibles", "Insights marketing/actionnables"],
+                limits: ["À compléter avec liens (repo, rapport, captures)"],
+                highlights: ["Automatisation", "No-code + data", "Documentation"],
+                links: [{ label: "GitHub", href: "https://github.com/ema9995" }],
+              },
+            ],
+          },
+          certs: {
+            title: "Certifications & Diplômes",
+            subtitle: "Parcours académique + expériences structurantes.",
+            proof: "Preuve",
+            empty: "Aucun élément.",
+            items: [
+              {
+                when: "Sept. 2025 — Aujourd’hui",
+                title: "Master Data & IA",
+                org: "Eugenia School",
+                details:
+                  "Projets Data (Python & SQL), web-scraping, pipelines de traitement. Écosystème data & no-code : Dataiku, Tableau/Power BI, Airtable, Make. Intégration d’outils IA : Cursor & Dust.",
+                proof: { label: "LinkedIn", href: "https://www.linkedin.com/in/ema-fernandes/" },
+              },
+              {
+                when: "2022 — 2023",
+                title: "Master 2 Communication Digitale",
+                org: "Sorbonne",
+                details:
+                  "Analyse performance communication digitale, définition et suivi KPI (acquisition, engagement, conversion), pilotage performance contenus et plateformes.",
+                proof: null,
+              },
+            ],
+          },
+          skills: {
+            title: "Skills & Compétences",
+            subtitle: "Hard skills + soft skills orientées business.",
+            level: "Niveau",
+            empty: "Aucune compétence.",
+            groups: [
+              { title: "Data & Analyse", level: 80, items: ["SQL (requêtes, agrégations, analyses)", "Python (analyse, nettoyage)", "Excel (TCD, reporting avancé)"], note: "Extraction, nettoyage, exploration et restitution." },
+              { title: "BI & Data Viz", level: 75, items: ["Power BI (création/optimisation/maintenance)", "Tableau (reporting & visualisation)", "Dashboards KPI"], note: "Storytelling, lisibilité, prise de décision." },
+              { title: "Marketing Analytics", level: 70, items: ["Mesure performance campagnes multicanal", "Social media analytics (Meta, YouTube)", "Recommandations d’optimisation"], note: "Lien direct entre data et actions business." },
+              { title: "Outils & Environnement", level: 65, items: ["Databricks", "VS Code", "Jira", "Git/GitHub", "Figma/Canva", "Adobe Suite"], note: "Collaboration, livraison, documentation." },
+              { title: "Soft skills", level: 85, items: ["Esprit analytique & curiosité", "Rigueur & sens du détail", "Vulgarisation de données complexes", "Travail en équipe", "Autonomie & force de proposition"], note: "" },
+            ],
+          },
+          contact: {
+            title: "Contact",
+            subtitle: "Tu as un besoin data / reporting / analyse marketing ? Parlons-en.",
+            form: { name: "Nom", email: "Email", message: "Message", send: "Envoyer", hint: "Le formulaire est “front-only” (il ouvre ton client mail).", sent: "Ok — ton client mail va s’ouvrir." },
+            aside: { title: "Liens rapides", email: "Email", location: "Localisation", locationValue: "Eaubonne", socials: "Réseaux", hint: "Ajoute des liens vers des preuves : dashboards, repos, rapports, captures." },
+            mail: { subject: "Contact portfolio", from: "De" },
+          },
+          footer: { made: "Fait en HTML/CSS/JS (single file)", backTop: "Retour en haut" },
+          chat: {
+            title: "Assistant Portfolio",
+            subtitle: "Pose une question sur mes projets/skills.",
+            send: "Envoyer",
+            placeholder: "Ex : Quel projet montre le mieux ton SQL ?",
+            welcomeTitle: "Salut",
+            welcomeBody: "Je peux répondre sur tes projets, tes skills, tes expériences et tes diplômes. Exemple : “Quel est ton meilleur projet BI ?”",
+            suggest: { projects: "Projets", skills: "Skills", certs: "Diplômes" },
+            suggestAsk: { projects: "Quels sont tes projets ?", skills: "Quelles sont tes compétences ?", certs: "Quels sont tes diplômes ?" },
+            answer: { projectHint: "Tu veux le détail complet ? Clique sur “Ouvrir le détail”.", openDetails: "Ouvrir le détail", skillLevel: "Niveau :" },
+            fallback: {
+              projects: "Projets",
+              skills: "Compétences",
+              skillsBody: "Je travaille avec SQL/Python, Power BI/Tableau, et de la data viz orientée décision.",
+              certs: "Diplômes",
+              certsBody: "Master Data & IA (Eugenia School) + Master 2 Communication Digitale (Sorbonne).",
+              default: "Je peux aider",
+              defaultBody: "Essaie : “projet BI”, “skills SQL”, “diplômes”, ou un mot-clé (Tableau, Databricks…).",
+            },
+          },
+        },
+        en: {
+          brand: "Ema Fernandes",
+          nav: { about: "About", projects: "Projects", certs: "Education", skills: "Skills", contact: "Contact" },
+          hero: {
+            eyebrow: "Data Portfolio",
+            titleA: "Hi, I'm",
+            name: "Ema Fernandes",
+            subtitle:
+              "Passionate about data analysis and business challenges. Data Analyst apprentice (Decathlon): EDA, dashboards, and recommendations (SQL, Python, Tableau/Power BI).",
+          },
+          cta: { seeProjects: "See projects", contact: "Get in touch", chat: "AI Chat", contactEmail: "Email me" },
+          facts: { k1: "Focus", v1: "Marketing analytics • BI • SQL • Python", k2: "Tools", v2: "Tableau • Power BI • Databricks • Excel", k3: "Languages", v3: "FR native • EN B2 • PT C1 • ES C1" },
+          profile: { name: "Ema Fernandes", role: "Data Analyst • Business / Marketing Analytics", location: "📍 Eaubonne (Driving license)", hint: "Replace `assets/profile.svg` with your photo (or link your CV PDF)." },
+          about: {
+            title: "About",
+            subtitle: "Impact-driven: translating business needs into clear, actionable insights.",
+            body:
+              "I combine a Data & AI master’s program (Eugenia School) with hands-on experience in marketing analytics and reporting. My dual background in digital communication and data helps me turn business questions into actionable analyses and communicate results clearly to non-technical teams. I’m comfortable with SQL, Python, Power BI and Tableau.",
+          },
+          projects: {
+            title: "Projects (detailed)",
+            subtitle: "Expected structure: goal, data, approach, results, limits, links.",
+            filters: { all: "All" },
+            card: { details: "View details" },
+            empty: "No projects for this filter.",
+            modal: { context: "Context & goal", data: "Data", method: "Approach", results: "Results", limits: "Limits / next steps", highlights: "Highlights", links: "Links", stack: "Stack", noLinks: "Add a link (GitHub, dashboard, article) if possible." },
+            items: [
+              {
+                id: "decathlon-eda",
+                title: "EDA & customer insights (Decathlon)",
+                subtitle: "Trends, anomalies, recommendations",
+                summary: "Exploratory analysis and visualization to understand customer behavior and support decisions.",
+                category: "bi",
+                categoryLabel: "BI / Analytics",
+                badges: ["EDA", "Insights"],
+                tags: ["segmentation", "anomalies", "kpi"],
+                stack: ["SQL", "Python", "Tableau", "Databricks", "Jira"],
+                context: "Data Analyst apprenticeship: decision support through analyses and dashboards.",
+                data: "Customer/usage datasets (extraction and manipulation at scale).",
+                method: ["EDA (trends, correlations, anomalies)", "KPI building", "Dataviz (Tableau) + clear communication to stakeholders"],
+                results: ["Highlighted key customer patterns and weak signals", "Proposed actions (hypotheses + optimization ideas)"],
+                limits: ["Add a quantified impact example", "Add demo visuals/links if possible"],
+                highlights: ["Decision support", "Storytelling", "Analytical rigor"],
+                links: [{ label: "GitHub", href: "https://github.com/ema9995" }],
+              },
+              {
+                id: "dash-kpi",
+                title: "KPI dashboards (Community Management)",
+                subtitle: "Content & campaign performance tracking",
+                summary: "Built Excel dashboards and tracked KPIs (engagement, reach, conversion) with optimization recommendations.",
+                category: "bi",
+                categoryLabel: "Reporting",
+                badges: ["KPI", "Reporting"],
+                tags: ["excel", "social analytics", "optimization"],
+                stack: ["Excel", "Meta", "YouTube Analytics", "Canva", "Figma", "Adobe Suite"],
+                context: "Fixed-term Community Manager — Futur Association (Mar 2024 → Mar 2025).",
+                data: "Social and campaign performance data (platform analytics + exports).",
+                method: ["KPI definition", "Dashboards", "Performance analysis + recommendations"],
+                results: ["Regular reporting to stakeholders", "Optimization recommendations for content/campaigns"],
+                limits: ["Add concrete before/after KPI examples"],
+                highlights: ["Clear communication", "Performance mindset"],
+                links: [],
+              },
+              {
+                id: "pipelines-scraping",
+                title: "Web scraping & data pipelines (Master’s)",
+                subtitle: "Extraction → processing → insights",
+                summary: "Python/SQL scripts to extract data, clean it, and produce actionable insights.",
+                category: "dataeng",
+                categoryLabel: "Data Eng",
+                badges: ["Pipeline", "Automation"],
+                tags: ["scraping", "data prep", "insights"],
+                stack: ["Python", "SQL", "VS Code", "Dataiku", "Airtable", "Make"],
+                context: "Academic projects — Eugenia School (since Sep 2025).",
+                data: "Multiple sources (web, files, databases) depending on the project.",
+                method: ["Scraping", "Cleaning (duplicates, missing values)", "Structuring + delivery (BI/no-code)"],
+                results: ["Reproducible pipelines", "Actionable marketing insights"],
+                limits: ["Add links (repo/report/screenshots)"],
+                highlights: ["Automation", "No-code + data", "Documentation"],
+                links: [{ label: "GitHub", href: "https://github.com/ema9995" }],
+              },
+            ],
+          },
+          certs: {
+            title: "Education & Degrees",
+            subtitle: "Academic background and key experiences.",
+            proof: "Proof",
+            empty: "No items.",
+            items: [
+              {
+                when: "Sep 2025 — Present",
+                title: "Master’s in Data & AI",
+                org: "Eugenia School",
+                details:
+                  "Python & SQL projects, web scraping, processing pipelines. Data & no-code ecosystem: Dataiku, Tableau/Power BI, Airtable, Make. AI tools: Cursor & Dust.",
+                proof: { label: "LinkedIn", href: "https://www.linkedin.com/in/ema-fernandes/" },
+              },
+              {
+                when: "2022 — 2023",
+                title: "Master’s in Digital Communication",
+                org: "Sorbonne",
+                details: "Digital performance analysis, KPI definition and tracking (acquisition, engagement, conversion), content/platform performance monitoring.",
+                proof: null,
+              },
+            ],
+          },
+          skills: {
+            title: "Skills",
+            subtitle: "Technical skills + business-oriented soft skills.",
+            level: "Level",
+            empty: "No skills.",
+            groups: [
+              { title: "Data & Analytics", level: 80, items: ["SQL (queries, aggregations, analysis)", "Python (analysis, cleaning)", "Excel (advanced reporting)"], note: "Extraction, cleaning, exploration, delivery." },
+              { title: "BI & Data Viz", level: 75, items: ["Power BI (build/optimize/maintain)", "Tableau (reporting & visualization)", "KPI dashboards"], note: "Storytelling and decision making." },
+              { title: "Marketing Analytics", level: 70, items: ["Multichannel campaign performance", "Social media analytics (Meta, YouTube)", "Optimization recommendations"], note: "Direct bridge from data to actions." },
+              { title: "Tools", level: 65, items: ["Databricks", "VS Code", "Jira", "Git/GitHub", "Figma/Canva", "Adobe Suite"], note: "Collaboration and delivery." },
+              { title: "Soft skills", level: 85, items: ["Analytical mindset & curiosity", "Rigor & attention to detail", "Explain complex data clearly", "Teamwork", "Autonomy & initiative"], note: "" },
+            ],
+          },
+          contact: {
+            title: "Contact",
+            subtitle: "Need reporting, marketing analytics, or data analysis? Let’s talk.",
+            form: { name: "Name", email: "Email", message: "Message", send: "Send", hint: "Front-only form (opens your mail client).", sent: "OK — your mail client should open." },
+            aside: { title: "Quick links", email: "Email", location: "Location", locationValue: "Eaubonne", socials: "Socials", hint: "Add proof links: dashboards, repos, reports, screenshots." },
+            mail: { subject: "Portfolio contact", from: "From" },
+          },
+          footer: { made: "Built with HTML/CSS/JS (single file)", backTop: "Back to top" },
+          chat: {
+            title: "Portfolio Assistant",
+            subtitle: "Ask about projects/skills.",
+            send: "Send",
+            placeholder: "e.g., Which project best shows your SQL?",
+            welcomeTitle: "Hi",
+            welcomeBody: "I can answer about projects, skills, experience and education. Example: “What’s your best BI project?”",
+            suggest: { projects: "Projects", skills: "Skills", certs: "Education" },
+            suggestAsk: { projects: "What are your projects?", skills: "What are your skills?", certs: "What’s your education?" },
+            answer: { projectHint: "Want full details? Click “Open details”.", openDetails: "Open details", skillLevel: "Level:" },
+            fallback: {
+              projects: "Projects",
+              skills: "Skills",
+              skillsBody: "I work with SQL/Python, Power BI/Tableau, and decision-oriented data viz.",
+              certs: "Education",
+              certsBody: "Master’s in Data & AI (Eugenia School) + Master’s in Digital Communication (Sorbonne).",
+              default: "I can help",
+              defaultBody: "Try: “BI project”, “SQL skills”, “education”, or a keyword (Tableau, Databricks…).",
+            },
+          },
+        },
+      };
+
+      let currentLang = "fr";
+
+      function detectLang() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored && SUPPORTED.includes(stored)) return stored;
+        } catch {}
+        const nav = (navigator.language || "fr").toLowerCase();
+        return nav.startsWith("en") ? "en" : "fr";
+      }
+
+      function getLang() {
+        return SUPPORTED.includes(currentLang) ? currentLang : "fr";
+      }
+
+      function setLang(lang) {
+        currentLang = SUPPORTED.includes(lang) ? lang : "fr";
+        try {
+          localStorage.setItem(STORAGE_KEY, currentLang);
+        } catch {}
+      }
+
+      function t(key) {
+        const dict = content[getLang()];
+        const val = key.split(".").reduce((acc, part) => (acc && acc[part] != null ? acc[part] : undefined), dict);
+        return typeof val === "string" ? val : key;
+      }
+
+      function applyTranslations() {
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (!key) return;
+          const value = t(key);
+          if (value === key) return;
+          el.textContent = value;
+        });
+      }
+
+      function el(tag, attrs = {}, children = []) {
+        const node = document.createElement(tag);
+        Object.entries(attrs).forEach(([k, v]) => {
+          if (k === "class") node.className = v;
+          else if (k.startsWith("on") && typeof v === "function") node.addEventListener(k.slice(2), v);
+          else if (v != null) node.setAttribute(k, String(v));
+        });
+        children.forEach((c) => {
+          if (c == null) return;
+          node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+        });
+        return node;
+      }
+
+      function normalize(s) {
+        return String(s || "")
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9\s]/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function scoreQuery(q, text) {
+        const a = normalize(q).split(" ").filter(Boolean);
+        const b = normalize(text);
+        if (!a.length || !b) return 0;
+        let score = 0;
+        a.forEach((tok) => {
+          if (b.includes(tok)) score += 2;
+        });
+        return score;
+      }
+
+      function openModal(project) {
+        const modal = document.getElementById("projectModal");
+        const body = document.getElementById("modalBody");
+        const closeBtn = document.getElementById("closeModal");
+        if (!modal || !body || !closeBtn) return;
+
+        body.innerHTML = "";
+
+        const tags = el("div", { class: "tags" }, (project.tags || []).map((x) => el("span", { class: "tag" }, [x])));
+        const title = el("h2", { style: "margin:0 0 8px; font-size:22px; letter-spacing:-.2px" }, [project.title]);
+        const subtitle = el("p", { class: "muted", style: "margin:0 0 10px" }, [project.subtitle || ""]);
+
+        const left = el("div", {}, [
+          el("div", { class: "badge" }, [project.categoryLabel || project.category || ""]),
+          el("div", { style: "height:10px" }),
+          title,
+          subtitle,
+          tags,
+          el("div", { style: "height:14px" }),
+          el("h3", {}, [t("projects.modal.context")]),
+          el("p", {}, [project.context || ""]),
+          el("h3", {}, [t("projects.modal.data")]),
+          el("p", {}, [project.data || ""]),
+          el("h3", {}, [t("projects.modal.method")]),
+          el("ul", {}, (project.method || []).map((x) => el("li", {}, [x]))),
+          el("h3", {}, [t("projects.modal.results")]),
+          el("ul", {}, (project.results || []).map((x) => el("li", {}, [x]))),
+          el("h3", {}, [t("projects.modal.limits")]),
+          el("ul", {}, (project.limits || []).map((x) => el("li", {}, [x]))),
+        ]);
+
+        const links = (project.links || []).filter(Boolean);
+        const linkEls = links.length
+          ? el(
+              "div",
+              { class: "tags" },
+              links.map((l) => el("a", { class: "btn btn-ghost", href: l.href || "#", target: "_blank", rel: "noreferrer" }, [l.label || "Link"])),
+            )
+          : el("p", { class: "muted" }, [t("projects.modal.noLinks")]);
+
+        const right = el("div", {}, [
+          el("div", { class: "mini" }, [el("h3", {}, [t("projects.modal.highlights")]), el("ul", {}, (project.highlights || []).map((x) => el("li", {}, [x])))]),
+          el("div", { class: "mini", style: "margin-top:12px" }, [el("h3", {}, [t("projects.modal.links")]), linkEls]),
+          el("div", { class: "mini", style: "margin-top:12px" }, [el("h3", {}, [t("projects.modal.stack")]), el("div", { class: "tags" }, (project.stack || []).map((x) => el("span", { class: "tag" }, [x])))]),
+        ]);
+
+        body.appendChild(el("div", { class: "cols" }, [left, right]));
+
+        modal.showModal();
+        closeBtn.focus();
+
+        const onClose = () => {
+          modal.close();
+          modal.removeEventListener("click", clickBackdrop);
+          closeBtn.removeEventListener("click", onClose);
+          document.removeEventListener("keydown", onKey);
+        };
+        const clickBackdrop = (e) => {
+          const r = modal.getBoundingClientRect();
+          const inBox = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+          if (!inBox) onClose();
+        };
+        const onKey = (e) => {
+          if (e.key === "Escape") onClose();
+        };
+
+        closeBtn.addEventListener("click", onClose);
+        modal.addEventListener("click", clickBackdrop);
+        document.addEventListener("keydown", onKey);
+      }
+
+      const state = { filter: "all" };
+
+      function renderProjects() {
+        const grid = document.getElementById("projectsGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        const projects = content[getLang()].projects.items || [];
+        const filtered = state.filter === "all" ? projects : projects.filter((p) => p.category === state.filter);
+
+        filtered.forEach((p) => {
+          const card = el("article", { class: "project" }, [
+            el("div", { class: "project-thumb", role: "img", "aria-label": p.title }),
+            el("div", { class: "project-body" }, [
+              el("div", { class: "tags" }, [el("span", { class: "tag" }, [p.categoryLabel || p.category || ""]), ...(p.badges || []).map((x) => el("span", { class: "tag" }, [x]))]),
+              el("h3", { class: "project-title" }, [p.title]),
+              el("p", { class: "project-desc" }, [p.summary]),
+              el("div", { class: "tags" }, (p.stack || []).slice(0, 5).map((x) => el("span", { class: "tag" }, [x]))),
+              el("div", { class: "project-actions" }, [
+                el("button", { class: "btn btn-primary", type: "button", onClick: () => openModal(p) }, [t("projects.card.details")]),
+                ...(p.links || []).slice(0, 1).map((l) => el("a", { class: "btn btn-ghost", href: l.href || "#", target: "_blank", rel: "noreferrer" }, [l.label || "Link"])),
+              ]),
+            ]),
+          ]);
+          grid.appendChild(card);
+        });
+
+        if (!filtered.length) grid.appendChild(el("div", { class: "card" }, [t("projects.empty")]));
+      }
+
+      function initFilters() {
+        document.querySelectorAll("[data-filter]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const filter = btn.getAttribute("data-filter") || "all";
+            state.filter = filter;
+            document.querySelectorAll("[data-filter]").forEach((b) => b.classList.remove("chip-active"));
+            btn.classList.add("chip-active");
+            renderProjects();
+          });
+        });
+      }
+
+      function renderCerts() {
+        const root = document.getElementById("certsTimeline");
+        if (!root) return;
+        root.innerHTML = "";
+        const items = content[getLang()].certs.items || [];
+
+        items.forEach((it) => {
+          const proof = it.proof && it.proof.href ? el("div", { class: "time-proof" }, [el("a", { href: it.proof.href, target: "_blank", rel: "noreferrer" }, [it.proof.label || t("certs.proof")])]) : null;
+          root.appendChild(
+            el("div", { class: "time-item" }, [
+              el("div", { class: "time-when" }, [it.when]),
+              el("div", {}, [
+                el("div", { class: "time-title" }, [it.title]),
+                el("div", { class: "time-meta" }, [it.org]),
+                it.details ? el("p", { style: "margin:10px 0 0; color: rgba(236,236,244,.80)" }, [it.details]) : el("span", {}, [""]),
+                proof || el("span", {}, [""]),
+              ]),
+            ]),
+          );
+        });
+        if (!items.length) root.appendChild(el("div", { class: "card" }, [t("certs.empty")]));
+      }
+
+      function renderSkills() {
+        const root = document.getElementById("skillsGrid");
+        if (!root) return;
+        root.innerHTML = "";
+
+        const groups = content[getLang()].skills.groups || [];
+        groups.forEach((g) => {
+          const pct = Math.max(10, Math.min(100, Number(g.level || 50)));
+          const card = el("div", { class: "skill-card" }, [
+            el("div", { class: "skill-head" }, [el("h3", { class: "skill-title" }, [g.title]), el("span", { class: "badge" }, [`${pct}%`])]),
+            el("div", { class: "meter", role: "img", "aria-label": t("skills.level") }, [el("span", { style: `width:${pct}%` }, [])]),
+            el("div", { class: "skill-items" }, (g.items || []).map((x) => el("span", { class: "tag" }, [x]))),
+            g.note ? el("p", { class: "hint", style: "margin-top:10px" }, [g.note]) : el("span", {}, [""]),
+          ]);
+          root.appendChild(card);
+        });
+        if (!groups.length) root.appendChild(el("div", { class: "card" }, [t("skills.empty")]));
+      }
+
+      function initContact() {
+        const form = document.getElementById("contactForm");
+        const hint = document.getElementById("contactHint");
+        if (!form) return;
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const fd = new FormData(form);
+          const name = String(fd.get("name") || "").trim();
+          const email = String(fd.get("email") || "").trim();
+          const message = String(fd.get("message") || "").trim();
+          const subject = encodeURIComponent(`${content[getLang()].contact.mail.subject} — ${name}`);
+          const body = encodeURIComponent(`${content[getLang()].contact.mail.from}: ${name}\nEmail: ${email}\n\n${message}`);
+          window.location.href = `mailto:fernandesema99@gmail.com?subject=${subject}&body=${body}`;
+          if (hint) hint.textContent = content[getLang()].contact.form.sent;
+          form.reset();
+        });
+      }
+
+      function buildKnowledge() {
+        const data = content[getLang()];
+        const projects = (data.projects && data.projects.items) || [];
+        const certs = (data.certs && data.certs.items) || [];
+        const skills = (data.skills && data.skills.groups) || [];
+
+        const chunks = [];
+        projects.forEach((p) => {
+          const text = [p.title, p.subtitle, p.summary, p.categoryLabel, (p.tags || []).join(" "), (p.stack || []).join(" "), p.context, p.data, (p.method || []).join(" "), (p.results || []).join(" "), (p.highlights || []).join(" ")].filter(Boolean).join(" | ");
+          chunks.push({
+            kind: "project",
+            title: p.title,
+            text,
+            answer: () => ({
+              heading: p.title,
+              body: `${p.summary}\n\n${content[getLang()].chat.answer.projectHint}`,
+              actions: [{ label: content[getLang()].chat.answer.openDetails, type: "openProject", payload: p }],
+            }),
+          });
+        });
+
+        certs.forEach((c) => {
+          const text = [c.title, c.org, c.when, c.details].filter(Boolean).join(" | ");
+          chunks.push({
+            kind: "cert",
+            title: c.title,
+            text,
+            answer: () => ({ heading: c.title, body: `${c.when} — ${c.org}\n${c.details || ""}`.trim(), actions: [] }),
+          });
+        });
+
+        skills.forEach((s) => {
+          const text = [s.title, String(s.level), (s.items || []).join(" "), s.note].filter(Boolean).join(" | ");
+          chunks.push({
+            kind: "skill",
+            title: s.title,
+            text,
+            answer: () => ({ heading: s.title, body: `${content[getLang()].chat.answer.skillLevel} ${s.level}%\n${(s.items || []).slice(0, 10).join(", ")}`, actions: [] }),
+          });
+        });
+
+        return chunks;
+      }
+
+      function fallbackAnswer(q) {
+        const data = content[getLang()];
+        const projects = (data.projects && data.projects.items) || [];
+        const bestBi = projects.find((p) => p.category === "bi");
+        const bestEng = projects.find((p) => p.category === "dataeng");
+
+        const qn = normalize(q);
+        const isProject = /(projet|project|portfolio)/.test(qn);
+        const isSkills = /(skill|competence|competen|stack|outil|tool|sql|python|tableau|power)/.test(qn);
+        const isCerts = /(certif|certification|diplom|degree|education)/.test(qn);
+
+        if (isProject && bestBi) return { heading: data.chat.fallback.projects, body: `${bestBi.title}`, actions: [{ label: data.chat.answer.openDetails, type: "openProject", payload: bestBi }] };
+        if (isProject && bestEng) return { heading: data.chat.fallback.projects, body: `${bestEng.title}`, actions: [{ label: data.chat.answer.openDetails, type: "openProject", payload: bestEng }] };
+        if (isSkills) return { heading: data.chat.fallback.skills, body: data.chat.fallback.skillsBody, actions: [] };
+        if (isCerts) return { heading: data.chat.fallback.certs, body: data.chat.fallback.certsBody, actions: [] };
+        return { heading: data.chat.fallback.default, body: data.chat.fallback.defaultBody, actions: [] };
+      }
+
+      function addBubble(chatBody, who, heading, body, actions = []) {
+        const b = el("div", { class: `bubble ${who === "me" ? "me" : ""}` }, [heading ? el("div", { style: "font-weight:800; margin-bottom:4px" }, [heading]) : null, el("div", {}, [body])]);
+        if (actions.length) {
+          const row = el("div", { style: "display:flex; gap:10px; flex-wrap:wrap; margin-top:10px" }, actions.map((a) => el("button", { class: "btn btn-ghost", type: "button", onClick: () => a.onClick && a.onClick() }, [a.label])));
+          b.appendChild(row);
+        }
+        chatBody.appendChild(b);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      function initChat() {
+        const openChat = document.getElementById("openChat");
+        const closeChat = document.getElementById("closeChat");
+        const chat = document.getElementById("chat");
+        const chatBody = document.getElementById("chatBody");
+        const form = document.getElementById("chatForm");
+        const input = document.getElementById("chatInput");
+        if (!chat || !chatBody || !form || !input) return;
+
+        const show = () => {
+          chat.setAttribute("aria-hidden", "false");
+          input.focus();
+        };
+        const hide = () => chat.setAttribute("aria-hidden", "true");
+
+        openChat?.addEventListener("click", show);
+        closeChat?.addEventListener("click", hide);
+
+        chatBody.innerHTML = "";
+        addBubble(chatBody, "bot", content[getLang()].chat.welcomeTitle, content[getLang()].chat.welcomeBody);
+
+        function openProjectDetails(project) {
+          openModal(project);
+        }
+
+        const knowledge = buildKnowledge();
+
+        function answer(q) {
+          const scored = knowledge.map((k) => ({ k, s: scoreQuery(q, k.text) })).sort((a, b) => b.s - a.s);
+          const top = scored[0];
+          if (top && top.s >= 4) {
+            const ans = top.k.answer();
+            const actions = (ans.actions || []).map((a) => ({
+              label: a.label,
+              onClick: () => {
+                if (a.type === "openProject") openProjectDetails(a.payload);
+              },
+            }));
+            addBubble(chatBody, "bot", ans.heading, ans.body, actions);
+            return;
+          }
+          const fb = fallbackAnswer(q);
+          const actions = (fb.actions || []).map((a) => ({
+            label: a.label,
+            onClick: () => {
+              if (a.type === "openProject") openProjectDetails(a.payload);
+            },
+          }));
+          addBubble(chatBody, "bot", fb.heading, fb.body, actions);
+        }
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const q = input.value.trim();
+          if (!q) return;
+          addBubble(chatBody, "me", "", q);
+          input.value = "";
+          answer(q);
+        });
+
+        chat.querySelectorAll("[data-suggest]").forEach((b) => {
+          b.addEventListener("click", () => {
+            const s = b.getAttribute("data-suggest");
+            const ask = content[getLang()].chat.suggestAsk;
+            if (s === "projects") answer(ask.projects);
+            if (s === "skills") answer(ask.skills);
+            if (s === "certs") answer(ask.certs);
+          });
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && chat.getAttribute("aria-hidden") === "false") hide();
+        });
+      }
+
+      function syncLangUi() {
+        const lang = getLang();
+        document.documentElement.lang = lang;
+        const langPill = document.getElementById("langPill");
+        const langToggle = document.getElementById("langToggle");
+        if (langPill) langPill.textContent = lang.toUpperCase();
+        if (langToggle) langToggle.setAttribute("aria-label", lang === "fr" ? "Switch to English" : "Passer en Français");
+        const chatInput = document.getElementById("chatInput");
+        if (chatInput) chatInput.setAttribute("placeholder", content[getLang()].chat.placeholder);
+      }
+
+      function boot() {
+        const yearEl = document.getElementById("year");
+        if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+        applyTranslations();
+        syncLangUi();
+
+        initFilters();
+        renderProjects();
+        renderCerts();
+        renderSkills();
+        initContact();
+        initChat();
+      }
+
+      currentLang = detectLang();
+
+      document.getElementById("langToggle")?.addEventListener("click", () => {
+        const next = getLang() === "fr" ? "en" : "fr";
+        setLang(next);
+        applyTranslations();
+        syncLangUi();
+        renderProjects();
+        renderCerts();
+        renderSkills();
+        initChat(); // re-init to refresh welcome + suggestions language
+      });
+
+      boot();
+    </script>
+  </body>
 </html>

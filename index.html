@@ -89,21 +89,6 @@ body:not(.is-ready) footer.footer{visibility:hidden}
   color: rgba(233,233,242,.92);
 }
 
-.mouseCat{
-  position:fixed;
-  left:0; top:0;
-  width:44px; height:44px;
-  z-index:9997;
-  pointer-events:none;
-  opacity:.92;
-  transform: translate(-999px, -999px);
-  filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
-  transition: opacity .25s ease;
-}
-@media (pointer: coarse){
-  .mouseCat{display:none}
-}
-
 main{ text-align:center; }
 .hero__lead{ margin-left:auto; margin-right:auto; }
 .stats{ justify-items:center; }
@@ -565,8 +550,6 @@ main{ text-align:center; }
       </div>
     </div>
 
-    <img class="mouseCat" id="mouseCat" src="./cat.png" alt="" aria-hidden="true" />
-
     <header class="topbar">
       <div class="container topbar__inner">
         <a class="brand" href="#home" aria-label="Retour en haut">
@@ -594,17 +577,19 @@ main{ text-align:center; }
       <section id="home" class="section hero">
         <div class="container hero__grid">
           <div class="hero__copy">
-            <span class="pill">Available for new opportunities</span>
+            <span class="pill">Disponible pour de nouvelles opportunités</span>
             <h1 class="hero__title">
-              Hey!, I am <span class="accent">Ema</span>
+              Bonjour, moi c'est <span class="accent">Ema</span>
             </h1>
-            <p class="hero__subtitle">Business Analyst / Data Analyst</p>
+            <p class="hero__subtitle">Data / Marketing</p>
             <p class="hero__lead">
-              Passionnée par l'analyse de données et les problématiques business,
-              je combine une formation en Data & IA (Master, Eugenia School) avec
-              une expérience concrète en analyse marketing et reporting. Curieuse,
-              rigoureuse et orientée impact, je maîtrise SQL, Python, Power BI et
-              Tableau.
+              Passionnée par l’analyse de données et les problématiques business,
+              je combine une formation en Data & IA avec une expérience concrète
+              en communication et marketing digital. J’accompagne la compréhension
+              des performances et des usages grâce à l’analyse, la structuration
+              et la valorisation de la donnée afin d’éclairer la prise de décision.
+              Curieuse, rigoureuse et orientée résultats, j’évolue avec aisance à
+              l’interface entre enjeux data, marketing et stratégie.
             </p>
             <div class="hero__cta">
               <a class="btn btn--primary" href="#projects">Voir mes projets</a>
@@ -939,43 +924,15 @@ function setupIntro() {
   window.setTimeout(() => {
     intro.classList.add("is-hide");
     document.body.classList.add("is-ready");
+    // Arrival effect: start at bottom then scroll to top
+    try {
+      window.scrollTo({ top: document.documentElement.scrollHeight, left: 0, behavior: "auto" });
+      window.setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }, 120);
+    } catch {}
     window.setTimeout(() => intro.remove(), 650);
   }, DURATION_MS);
-}
-
-function setupMouseCat() {
-  const el = $("#mouseCat");
-  if (!el) return;
-
-  let hasMoved = false;
-  let tx = 0;
-  let ty = 0;
-  let x = -999;
-  let y = -999;
-
-  const step = () => {
-    x += (tx - x) * 0.12;
-    y += (ty - y) * 0.12;
-    el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
-    requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-
-  window.addEventListener(
-    "mousemove",
-    (e) => {
-      const size = 44;
-      const offset = 10;
-      tx = e.clientX + offset;
-      ty = e.clientY + offset;
-
-      if (!hasMoved) {
-        hasMoved = true;
-        el.style.opacity = "0.92";
-      }
-    },
-    { passive: true },
-  );
 }
 
 function setActiveNavLink() {
@@ -1070,7 +1027,6 @@ setupSmoothScroll();
 setupForm();
 setupYear();
 setupIntro();
-setupMouseCat();
 setActiveNavLink();
 window.addEventListener("scroll", setActiveNavLink, { passive: true });
 window.addEventListener("resize", setActiveNavLink);

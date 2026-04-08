@@ -494,7 +494,7 @@ button.social:focus-visible{
   overflow:hidden;
   background: transparent;
   border-bottom:1px solid var(--border);
-  padding: 20px 24px;
+  padding: 22px 20px;
   min-height: 0;
   display:grid;
   place-items:center;
@@ -512,9 +512,10 @@ button.social:focus-visible{
   filter: drop-shadow(0 16px 24px rgba(0,0,0,.35));
 }
 .projectCard__img{
-  width: auto;
-  max-width: min(300px, 88%);
-  max-height: 120px;
+  display:block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 200px;
   height: auto;
   object-fit: contain;
   object-position: center;
@@ -1115,15 +1116,15 @@ button.social:focus-visible{
                 <img
                   class="projectCard__img"
                   src="./checky.jpg"
-                  alt="Aperçu du projet Checky : ne rien oublier en partant"
+                  alt=""
+                  data-i18n-alt="proj5_alt"
                   loading="lazy"
                 />
               </div>
               <div class="projectCard__body">
                 <h3 class="projectCard__title">Checky</h3>
-                <p class="muted">
-                  App pour ne rien oublier en partant de chez soi : checklists personnalisables, rappels,
-                  et fonctionnalités utiles au quotidien.
+                <p class="muted" data-i18n="proj5_desc">
+                  An app so you don’t forget anything when leaving home: customizable checklists, reminders, and useful features for everyday life.
                 </p>
                 <div class="projectCard__chips">
                   <span class="chip">Expo</span>
@@ -1574,7 +1575,7 @@ const STRINGS = {
       "Mobile companion app for people with breast cancer: onboarding, wellbeing, navigation, and Supabase backend.",
     proj5_alt: "Project preview: Checky leave-home checklist",
     proj5_desc:
-      "An app so you don’t forget anything when leaving home: custom checklists, reminders, and handy everyday features.",
+      "An app so you don’t forget anything when leaving home: customizable checklists, reminders, and useful features for everyday life.",
     proj6_alt: "Project preview: Battleship game",
     proj6_title: "Game — Battleship",
     proj6_desc: "Mini battleship game in Python.",

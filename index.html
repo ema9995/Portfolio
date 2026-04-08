@@ -513,15 +513,16 @@ button.social:focus-visible{
 }
 .projectCard__img{
   display:block;
-  width: 100%;
-  max-width: 100%;
-  max-height: 200px;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 10px;
-  border: none;
-  box-shadow: none;
+  width:auto;
+  max-width:min(260px, 86%);
+  max-height:118px;
+  height:auto;
+  margin-inline:auto;
+  object-fit:contain;
+  object-position:center;
+  border-radius:var(--radius);
+  border:none;
+  box-shadow:none;
 }
 .projectCard__body{padding:16px}
 .projectCard__title{margin:0 0 8px; font-size:16px}

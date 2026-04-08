@@ -154,6 +154,8 @@
         will-change: transform;
         animation: catRise 3000ms cubic-bezier(.2,.8,.2,1) forwards;
       }
+      /* Safety: never let loader image clip */
+      #loaderCat{display:block}
       @keyframes catRise{
         0%{transform:translateY(28px) scale(.98); opacity:1}
         88%{transform:translateY(-28px) scale(1); opacity:1}
@@ -281,10 +283,17 @@
       .profile-actions{margin-top:14px}
       .hint{margin:10px 0 0;color:rgba(236,236,244,.62);font-size:12px}
 
-      .section{padding:54px 0}
-      .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:16px;flex-wrap:wrap}
+      .section{padding:52px 0}
+      .section-head{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:10px;
+        margin-bottom:18px;
+      }
       .section-title{margin:0;font-size:26px;letter-spacing:-.2px}
-      .section-subtitle{margin:0;color:rgba(236,236,244,.72);max-width:70ch}
+      .section-subtitle{margin:0;color:rgba(236,236,244,.72);max-width:72ch}
 
       .card{
         border:1px solid var(--border);
@@ -307,9 +316,20 @@
       .chip-active{border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.18)}
 
       .grid{display:grid;gap:14px}
-      .projects-grid{grid-template-columns:repeat(3,1fr)}
+      .projects-grid{grid-template-columns:repeat(2,1fr)}
       .skills-grid{grid-template-columns:repeat(3,1fr)}
       .contact-grid{grid-template-columns:1fr .9fr;align-items:start}
+
+      .exp-grid{display:grid;gap:12px}
+      .exp-item{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.03);
+        border-radius:var(--radius);
+        padding:16px;
+      }
+      .exp-title{font-weight:800;margin:0}
+      .exp-meta{color:rgba(236,236,244,.70);margin-top:6px;font-size:13px}
+      .exp-body{color:rgba(236,236,244,.80);margin:10px 0 0}
 
       .project{
         border:1px solid var(--border);
@@ -594,24 +614,38 @@
         </div>
       </section>
 
+      <section class="section" id="skills">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="skills.title">Skills & Compétences</h2>
+            <p class="section-subtitle" data-i18n="skills.subtitle">Compétences techniques + pratiques.</p>
+          </div>
+          <div class="grid skills-grid" id="skillsGrid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" data-i18n="exp.title">Experience</h2>
+            <p class="section-subtitle" data-i18n="exp.subtitle">A quick look at key roles & missions.</p>
+          </div>
+          <div class="exp-grid" id="expGrid" aria-live="polite"></div>
+        </div>
+      </section>
+
       <section class="section" id="projects">
         <div class="container">
           <div class="section-head">
-            <h2 class="section-title" data-i18n="projects.title">Projets (détaillés)</h2>
-            <p class="section-subtitle" data-i18n="projects.subtitle">
-              Chaque projet inclut : objectif, données, démarche, résultats, limites, liens.
-            </p>
+            <h2 class="section-title" data-i18n="projects.title">My Projects</h2>
+            <p class="section-subtitle" data-i18n="projects.subtitle">A collection of projects I’ve worked on.</p>
           </div>
-
           <div class="filters" aria-label="Filtres projets">
-            <button class="chip chip-active" type="button" data-filter="all" data-i18n="projects.filters.all">
-              Tous
-            </button>
-            <button class="chip" type="button" data-filter="bi">BI</button>
+            <button class="chip chip-active" type="button" data-filter="all" data-i18n="projects.filters.all">Tous</button>
+            <button class="chip" type="button" data-filter="data" data-i18n="projects.filters.data">Data</button>
             <button class="chip" type="button" data-filter="ml">ML</button>
-            <button class="chip" type="button" data-filter="dataeng">Data Eng</button>
+            <button class="chip" type="button" data-filter="dev" data-i18n="projects.filters.dev">Dev</button>
           </div>
-
           <div class="grid projects-grid" id="projectsGrid" aria-live="polite"></div>
         </div>
       </section>
@@ -619,25 +653,10 @@
       <section class="section" id="certs">
         <div class="container">
           <div class="section-head">
-            <h2 class="section-title" data-i18n="certs.title">Certifications & Diplômes</h2>
-            <p class="section-subtitle" data-i18n="certs.subtitle">
-              Un aperçu rapide, avec preuves/identifiants si disponibles.
-            </p>
+            <h2 class="section-title" data-i18n="certs.title">Certifications</h2>
+            <p class="section-subtitle" data-i18n="certs.subtitle">A quick overview.</p>
           </div>
           <div class="timeline" id="certsTimeline"></div>
-        </div>
-      </section>
-
-      <section class="section" id="skills">
-        <div class="container">
-          <div class="section-head">
-            <h2 class="section-title" data-i18n="skills.title">Skills & Compétences</h2>
-            <p class="section-subtitle" data-i18n="skills.subtitle">
-              Compétences techniques + pratiques (communication, rigueur, data storytelling).
-            </p>
-          </div>
-
-          <div class="grid skills-grid" id="skillsGrid"></div>
         </div>
       </section>
 
@@ -813,7 +832,7 @@
           projects: {
             title: "Projets (détaillés)",
             subtitle: "Structure attendue : objectif, données, démarche, résultats, limites, liens.",
-            filters: { all: "Tous" },
+            filters: { all: "Tous", data: "Data", dev: "Dev" },
             card: { details: "Voir le détail" },
             empty: "Aucun projet pour ce filtre.",
             modal: { context: "Contexte & objectif", data: "Données", method: "Démarche", results: "Résultats", limits: "Limites / next steps", highlights: "Highlights", links: "Liens", stack: "Stack", noLinks: "Ajoute un lien (GitHub, dashboard, article) si possible." },
@@ -946,6 +965,15 @@
               },
             ],
           },
+          exp: {
+            title: "Expérience",
+            subtitle: "Quelques expériences clés (rôles & missions).",
+            empty: "Aucune expérience.",
+            items: [
+              { when: "2024 — 2025", title: "Community Manager (CDD)", org: "Futur Association", body: "Reporting KPI, suivi performance contenus/campagnes, recommandations d’optimisation." },
+              { when: "2025 — Aujourd’hui", title: "Data Analyst (alternance)", org: "Decathlon", body: "EDA, KPIs, dashboards, analyses ad-hoc et restitution aux parties prenantes." },
+            ],
+          },
           certs: {
             title: "Certifications & Diplômes",
             subtitle: "Parcours académique + expériences structurantes.",
@@ -1069,7 +1097,7 @@
           projects: {
             title: "Projects (detailed)",
             subtitle: "Expected structure: goal, data, approach, results, limits, links.",
-            filters: { all: "All" },
+            filters: { all: "All", data: "Data", dev: "Dev" },
             card: { details: "View details" },
             empty: "No projects for this filter.",
             modal: { context: "Context & goal", data: "Data", method: "Approach", results: "Results", limits: "Limits / next steps", highlights: "Highlights", links: "Links", stack: "Stack", noLinks: "Add a link (GitHub, dashboard, article) if possible." },
@@ -1200,6 +1228,15 @@
                 highlights: ["Logic"],
                 links: [{ label: "GitHub", href: "https://github.com/ema9995/Bataille-navale.git" }],
               },
+            ],
+          },
+          exp: {
+            title: "Experience",
+            subtitle: "A few key roles & missions.",
+            empty: "No experience yet.",
+            items: [
+              { when: "2024 — 2025", title: "Community Manager (Fixed-term)", org: "Futur Association", body: "KPI reporting, content/campaign performance tracking, optimization recommendations." },
+              { when: "2025 — Present", title: "Data Analyst (apprenticeship)", org: "Decathlon", body: "EDA, KPIs, dashboards, ad-hoc analysis, and stakeholder reporting." },
             ],
           },
           certs: {
@@ -1533,6 +1570,23 @@
         if (!groups.length) root.appendChild(el("div", { class: "card" }, [t("skills.empty")]));
       }
 
+      function renderExperience() {
+        const root = document.getElementById("expGrid");
+        if (!root) return;
+        root.innerHTML = "";
+        const items = (content[getLang()].exp && content[getLang()].exp.items) || [];
+        items.forEach((it) => {
+          root.appendChild(
+            el("div", { class: "exp-item" }, [
+              el("h3", { class: "exp-title" }, [it.title]),
+              el("div", { class: "exp-meta" }, [`${it.when}${it.org ? ` • ${it.org}` : ""}`]),
+              it.body ? el("p", { class: "exp-body" }, [it.body]) : el("span", {}, [""]),
+            ]),
+          );
+        });
+        if (!items.length) root.appendChild(el("div", { class: "card" }, [t("exp.empty")]));
+      }
+
       function initContact() {
         const form = document.getElementById("contactForm");
         const hint = document.getElementById("contactHint");
@@ -1725,6 +1779,7 @@
         renderProjects();
         renderCerts();
         renderSkills();
+        renderExperience();
         initContact();
         initChat();
       }
@@ -1739,6 +1794,7 @@
         renderProjects();
         renderCerts();
         renderSkills();
+        renderExperience();
         initChat(); // re-init to refresh welcome + suggestions language
       });
 
@@ -1905,6 +1961,11 @@
         if (b64) {
           window.__CAT_DATA_URL = `data:image/png;base64,${b64}`;
           img.src = window.__CAT_DATA_URL;
+          // Reuse the same asset across the page.
+          const miniCat = document.getElementById("miniCat");
+          if (miniCat) miniCat.src = window.__CAT_DATA_URL;
+          const heroCat = document.getElementById("heroCat");
+          if (heroCat) heroCat.src = window.__CAT_DATA_URL;
         }
 
         // Ensure loader paints first, then wait 3 seconds.

@@ -177,7 +177,7 @@ main{ text-align:center; }
   display:grid;
   grid-template-columns: 1.2fr .8fr;
   align-items:center;
-  gap:28px;
+  gap:44px;
 }
 .pill{
   display:inline-flex;
@@ -187,6 +187,7 @@ main{ text-align:center; }
   background: rgba(139,92,246,.12);
   color: rgba(233,233,242,.92);
   font-size:12px;
+  margin-bottom:6px;
 }
 .hero__title{
   margin:14px 0 8px;
@@ -201,8 +202,13 @@ main{ text-align:center; }
   background-clip:text;
   color:transparent;
 }
-.hero__subtitle{margin:0 0 12px; color:rgba(233,233,242,.86); font-weight:600}
-.hero__lead{margin:0 0 18px; color:var(--muted); max-width:56ch}
+.hero__subtitle{margin:0 0 16px; color:rgba(233,233,242,.86); font-weight:600}
+.hero__lead{
+  margin:0 0 24px;
+  color:var(--muted);
+  max-width:60ch;
+  line-height:1.65;
+}
 .hero__cta{display:flex; gap:12px; flex-wrap:wrap}
 
 .btn{
@@ -301,7 +307,7 @@ main{ text-align:center; }
 .split{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
-  gap:24px;
+  gap:34px;
   align-items:start;
 }
 
@@ -343,7 +349,7 @@ main{ text-align:center; }
 .timeline{
   margin-top:18px;
   display:grid;
-  gap:14px;
+  gap:18px;
 }
 .timelineItem{
   display:grid;
@@ -374,7 +380,7 @@ main{ text-align:center; }
   margin-top:22px;
   display:grid;
   grid-template-columns: repeat(2, 1fr);
-  gap:14px;
+  gap:18px;
 }
 .projectCard{
   border:1px solid var(--border);
@@ -413,7 +419,7 @@ main{ text-align:center; }
   margin-top:18px;
   display:grid;
   grid-template-columns: repeat(3, 1fr);
-  gap:14px;
+  gap:18px;
 }
 .textLink{
   display:inline-flex;
@@ -428,7 +434,7 @@ main{ text-align:center; }
   margin-top:18px;
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:14px;
+  gap:18px;
   align-items:start;
 }
 .form{padding:18px}
@@ -901,13 +907,6 @@ function setupIntro() {
   window.setTimeout(() => {
     intro.classList.add("is-hide");
     document.body.classList.add("is-ready");
-    // Arrival effect: start at bottom then scroll to top
-    try {
-      window.scrollTo({ top: document.documentElement.scrollHeight, left: 0, behavior: "auto" });
-      window.setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      }, 120);
-    } catch {}
     window.setTimeout(() => intro.remove(), 650);
   }, DURATION_MS);
 }

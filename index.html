@@ -134,25 +134,30 @@
           radial-gradient(900px 520px at 30% 25%, rgba(139,92,246,.28), transparent 55%),
           radial-gradient(820px 520px at 70% 50%, rgba(236,72,153,.16), transparent 55%),
           var(--bg);
-        display:grid;
-        place-items:center;
+        display:flex;
+        align-items:center;
+        justify-content:center;
         padding:22px;
+        overflow:hidden;
         transition: opacity 380ms ease, transform 380ms ease;
       }
       .loader[aria-hidden="true"]{opacity:0;transform:scale(.99);pointer-events:none}
       .loader-cat{
-        width:min(360px, 76vw);
-        max-height:min(360px, 56vh);
+        width:min(360px, 78vw);
+        max-width:100%;
+        max-height:min(380px, 62vh);
         height:auto;
         object-fit:contain;
         image-rendering: pixelated;
         filter: drop-shadow(0 22px 70px rgba(0,0,0,.55));
+        transform-origin:center;
+        will-change: transform;
         animation: catRise 3000ms cubic-bezier(.2,.8,.2,1) forwards;
       }
       @keyframes catRise{
-        0%{transform:translateY(0) scale(.98); opacity:1}
-        88%{transform:translateY(-56px) scale(1); opacity:1}
-        100%{transform:translateY(-64px) scale(1.02); opacity:1}
+        0%{transform:translateY(28px) scale(.98); opacity:1}
+        88%{transform:translateY(-28px) scale(1); opacity:1}
+        100%{transform:translateY(-34px) scale(1.02); opacity:1}
       }
       @media (prefers-reduced-motion: reduce){
         .loader-cat{animation:none !important}

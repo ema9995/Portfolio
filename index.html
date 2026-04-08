@@ -46,6 +46,69 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .container{width:min(1100px, calc(100% - 40px)); margin-inline:auto}
 
+/* Intro + global centering */
+body:not(.is-ready) main,
+body:not(.is-ready) header.topbar,
+body:not(.is-ready) footer.footer{visibility:hidden}
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:9998;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(900px 450px at 30% -10%, rgba(139,92,246,.22), transparent 60%),
+    radial-gradient(900px 450px at 80% 10%, rgba(192,132,252,.16), transparent 60%),
+    linear-gradient(180deg, #07070b 0%, #06060a 100%);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.intro.is-hide{
+  opacity:0;
+  transform: translateY(-6px);
+  pointer-events:none;
+}
+.intro__inner{
+  text-align:center;
+  padding:26px 20px;
+  border-radius:22px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  box-shadow: var(--shadow);
+}
+.intro__cat{
+  width:min(340px, 78vw);
+  animation: bob 3.4s ease-in-out infinite;
+  filter: drop-shadow(0 18px 32px rgba(0,0,0,.55));
+}
+.intro__title{
+  margin:14px 0 0;
+  font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+  letter-spacing:-.03em;
+  font-size: clamp(18px, 2.2vw, 22px);
+  color: rgba(233,233,242,.92);
+}
+
+.mouseCat{
+  position:fixed;
+  left:0; top:0;
+  width:44px; height:44px;
+  z-index:9997;
+  pointer-events:none;
+  opacity:.92;
+  transform: translate(-999px, -999px);
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
+  transition: opacity .25s ease;
+}
+@media (pointer: coarse){
+  .mouseCat{display:none}
+}
+
+main{ text-align:center; }
+.hero__lead{ margin-left:auto; margin-right:auto; }
+.stats{ justify-items:center; }
+.contactList__item{ text-align:left; }
+
 .sr-only{
   position:absolute;
   width:1px;height:1px;
@@ -202,6 +265,7 @@ a{color:inherit;text-decoration:none}
   width:min(320px, 100%);
   filter: drop-shadow(0 16px 24px rgba(0,0,0,.5));
   transform: translateY(6px);
+  animation: bob 3.4s ease-in-out infinite;
 }
 .glow{
   position:absolute; inset:-40%;
@@ -232,6 +296,11 @@ a{color:inherit;text-decoration:none}
 @keyframes sparkle{
   0%,100%{transform:translateY(0) scale(1); opacity:.55}
   50%{transform:translateY(-10px) scale(1.08); opacity:1}
+}
+
+@keyframes bob{
+  0%,100%{transform:translateY(6px)}
+  50%{transform:translateY(-10px)}
 }
 
 .h2{
@@ -488,6 +557,15 @@ a{color:inherit;text-decoration:none}
   </head>
   <body>
     <a class="skip-link" href="#home">Aller au contenu</a>
+
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="intro__inner">
+        <img class="intro__cat" src="./cat.png" alt="" />
+        <div class="intro__title">Bienvenue</div>
+      </div>
+    </div>
+
+    <img class="mouseCat" id="mouseCat" src="./cat.png" alt="" aria-hidden="true" />
 
     <header class="topbar">
       <div class="container topbar__inner">
@@ -849,6 +927,57 @@ a{color:inherit;text-decoration:none}
 const $ = (sel, parent = document) => parent.querySelector(sel);
 const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
 
+function setupIntro() {
+  const intro = $("#intro");
+  if (!intro) {
+    document.body.classList.add("is-ready");
+    return;
+  }
+  intro.removeAttribute("aria-hidden");
+
+  const DURATION_MS = 2600;
+  window.setTimeout(() => {
+    intro.classList.add("is-hide");
+    document.body.classList.add("is-ready");
+    window.setTimeout(() => intro.remove(), 650);
+  }, DURATION_MS);
+}
+
+function setupMouseCat() {
+  const el = $("#mouseCat");
+  if (!el) return;
+
+  let hasMoved = false;
+  let tx = 0;
+  let ty = 0;
+  let x = -999;
+  let y = -999;
+
+  const step = () => {
+    x += (tx - x) * 0.12;
+    y += (ty - y) * 0.12;
+    el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+
+  window.addEventListener(
+    "mousemove",
+    (e) => {
+      const size = 44;
+      const offset = 10;
+      tx = e.clientX + offset;
+      ty = e.clientY + offset;
+
+      if (!hasMoved) {
+        hasMoved = true;
+        el.style.opacity = "0.92";
+      }
+    },
+    { passive: true },
+  );
+}
+
 function setActiveNavLink() {
   const links = $$(".nav__link");
   const sections = links
@@ -940,6 +1069,8 @@ setupNav();
 setupSmoothScroll();
 setupForm();
 setupYear();
+setupIntro();
+setupMouseCat();
 setActiveNavLink();
 window.addEventListener("scroll", setActiveNavLink, { passive: true });
 window.addEventListener("resize", setActiveNavLink);

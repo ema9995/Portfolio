@@ -36,7 +36,7 @@
       }
 
       *{box-sizing:border-box}
-      html,body{height:100%}
+      html,body{height:100%; overflow-x:hidden}
       body{
         margin:0;
         font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -141,8 +141,8 @@
       }
       .loader[aria-hidden="true"]{opacity:0;transform:scale(.99);pointer-events:none}
       .loader-cat{
-        width:min(420px, 78vw);
-        max-height:58vh;
+        width:min(360px, 76vw);
+        max-height:min(360px, 56vh);
         height:auto;
         object-fit:contain;
         image-rendering: pixelated;
@@ -150,9 +150,9 @@
         animation: catRise 3000ms cubic-bezier(.2,.8,.2,1) forwards;
       }
       @keyframes catRise{
-        0%{transform:translateY(80px) scale(.98); opacity:1}
-        85%{transform:translateY(-32px) scale(1); opacity:1}
-        100%{transform:translateY(-40px) scale(1.02); opacity:1}
+        0%{transform:translateY(0) scale(.98); opacity:1}
+        88%{transform:translateY(-56px) scale(1); opacity:1}
+        100%{transform:translateY(-64px) scale(1.02); opacity:1}
       }
       @media (prefers-reduced-motion: reduce){
         .loader-cat{animation:none !important}

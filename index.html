@@ -48,7 +48,6 @@ a{color:inherit;text-decoration:none}
 
 /* Intro + global centering */
 body:not(.is-ready) main,
-body:not(.is-ready) header.topbar,
 body:not(.is-ready) footer.footer{visibility:hidden}
 
 .intro{
@@ -91,6 +90,7 @@ body:not(.is-ready) footer.footer{visibility:hidden}
 
 main{ text-align:center; }
 .hero__lead{ margin-left:auto; margin-right:auto; }
+.hero__cta{ justify-content:center; }
 .stats{ justify-items:center; }
 .contactList__item{ text-align:left; }
 
@@ -549,29 +549,6 @@ main{ text-align:center; }
         <div class="intro__title">Bienvenue</div>
       </div>
     </div>
-
-    <header class="topbar">
-      <div class="container topbar__inner">
-        <a class="brand" href="#home" aria-label="Retour en haut">
-          <span class="brand__mark">Ema</span>
-          <span class="brand__dot" aria-hidden="true">.</span>
-        </a>
-
-        <nav class="nav" aria-label="Navigation principale">
-          <button class="nav__toggle" type="button" aria-expanded="false">
-            <span class="nav__toggleBars" aria-hidden="true"></span>
-            <span class="sr-only">Ouvrir le menu</span>
-          </button>
-          <ul class="nav__list">
-            <li><a class="nav__link" href="#home">Home</a></li>
-            <li><a class="nav__link" href="#about">About</a></li>
-            <li><a class="nav__link" href="#projects">Projects</a></li>
-            <li><a class="nav__link" href="#blog">Blog</a></li>
-            <li><a class="nav__link" href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
 
     <main>
       <section id="home" class="section hero">

@@ -182,10 +182,11 @@ main{
 .contactSimple__icons{
   display:flex;
   gap:12px;
-  justify-content:flex-start;
+  justify-content:center;
   align-items:center;
   flex-wrap:nowrap;
   width:100%;
+  margin-inline: auto;
 }
 button.social{
   font:inherit;
@@ -459,8 +460,8 @@ button.social:focus-visible{
   overflow:hidden;
   background: transparent;
   border-bottom:1px solid var(--border);
-  padding:0 18px 18px;
-  min-height: 160px;
+  padding: 20px 24px;
+  min-height: 0;
   display:grid;
   place-items:center;
   align-content:center;
@@ -477,10 +478,13 @@ button.social:focus-visible{
   filter: drop-shadow(0 16px 24px rgba(0,0,0,.35));
 }
 .projectCard__img{
-  width:min(420px, 100%);
-  max-height: 160px;
-  object-fit: cover;
-  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  width: auto;
+  max-width: min(300px, 88%);
+  max-height: 120px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
   border: none;
   box-shadow: none;
 }

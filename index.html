@@ -451,14 +451,19 @@ main{ text-align:center; }
 .credBlock{
   position:relative;
   overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(600px 220px at 30% 40%, rgba(139,92,246,.22), transparent 55%),
+    radial-gradient(520px 220px at 80% 10%, rgba(192,132,252,.16), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
 }
 .credBlock::before{
   content:"";
   position:absolute;
   inset:-40%;
   background:
-    radial-gradient(closest-side, rgba(139,92,246,.22), transparent 60%),
-    radial-gradient(closest-side, rgba(192,132,252,.16), transparent 60%);
+    radial-gradient(closest-side, rgba(139,92,246,.30), transparent 60%),
+    radial-gradient(closest-side, rgba(192,132,252,.22), transparent 60%);
   filter: blur(18px);
   opacity:.9;
   pointer-events:none;
@@ -493,8 +498,8 @@ main{ text-align:center; }
   align-items:flex-start;
   padding:12px 12px;
   border-radius:14px;
-  border:1px solid rgba(139,92,246,.22);
-  background: rgba(0,0,0,.16);
+  border:1px solid rgba(139,92,246,.25);
+  background: rgba(10, 7, 18, .28);
 }
 .credIcon{
   flex:0 0 auto;

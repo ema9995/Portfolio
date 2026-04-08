@@ -439,6 +439,79 @@ main{ text-align:center; }
   gap:18px;
   align-items:start;
 }
+
+/* Certifications & diplômes (less "fade") */
+.credWrap{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:18px;
+  align-items:stretch;
+}
+.credBlock{
+  position:relative;
+  overflow:hidden;
+}
+.credBlock::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    radial-gradient(closest-side, rgba(139,92,246,.22), transparent 60%),
+    radial-gradient(closest-side, rgba(192,132,252,.16), transparent 60%);
+  filter: blur(18px);
+  opacity:.9;
+  pointer-events:none;
+  transform: translate3d(-2%, -2%, 0);
+}
+.credBlock > *{position:relative}
+.credTitle{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:0 0 14px;
+  font-size:16px;
+  letter-spacing:-.01em;
+}
+.credTitle__dot{
+  width:10px;height:10px;
+  border-radius:4px;
+  background: rgba(192,132,252,.85);
+  box-shadow: 0 0 0 7px rgba(192,132,252,.12);
+}
+.credList{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.credItem{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(139,92,246,.22);
+  background: rgba(0,0,0,.16);
+}
+.credIcon{
+  flex:0 0 auto;
+  width:28px;height:28px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(139,92,246,.30);
+  background: rgba(139,92,246,.10);
+  color: rgba(233,233,242,.92);
+  font-weight:800;
+  font-size:12px;
+  margin-top:1px;
+}
+.credMain{ text-align:left; }
+.credName{ font-weight:700; margin:0; font-size:13px; color: rgba(233,233,242,.95); }
+.credMeta{ margin:4px 0 0; font-size:12px; color: var(--muted); line-height:1.45; }
 .form{padding:18px}
 .field{display:grid; gap:8px; margin-bottom:12px}
 .field__label{font-size:13px; color:rgba(233,233,242,.86)}
@@ -529,6 +602,7 @@ main{ text-align:center; }
   .projectGrid{grid-template-columns: 1fr}
   .blogGrid{grid-template-columns: 1fr}
   .contactGrid{grid-template-columns: 1fr}
+  .credWrap{grid-template-columns: 1fr}
   .nav__toggle{display:inline-flex}
   .nav__list{
     position:absolute;
@@ -598,29 +672,70 @@ main{ text-align:center; }
       <section id="certifications" class="section">
         <div class="container">
           <h2 class="h2 center">Certifications & Diplômes</h2>
-          <div class="blogGrid">
-            <article class="card">
-              <h3 class="card__title">Microsoft Certified: Azure AI Fundamentals</h3>
-              <p class="muted">Certification Azure — fondamentaux IA.</p>
-            </article>
-            <article class="card">
-              <h3 class="card__title">Microsoft Certified: Azure AI Engineer Associate</h3>
-              <p class="muted">Certification Azure — implémentation de solutions IA.</p>
-            </article>
-            <article class="card">
-              <h3 class="card__title">Principes de base d’Azure Microsoft</h3>
-              <p class="muted">Fondations cloud Azure et services essentiels.</p>
-            </article>
-            <article class="card">
-              <h3 class="card__title">
-                Réaliser des applications web à l’aide d’un système de gestion de contenus (CMS)
+          <div class="credWrap">
+            <section class="card credBlock" aria-label="Diplômes">
+              <h3 class="credTitle">
+                <span class="credTitle__dot" aria-hidden="true"></span>
+                Diplômes
               </h3>
-              <p class="muted">Création et mise en production de sites via CMS.</p>
-            </article>
-            <article class="card">
-              <h3 class="card__title">Dataiku Core Designer Certificate</h3>
-              <p class="muted">Conception de workflows data & préparation dans Dataiku.</p>
-            </article>
+              <ul class="credList">
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🎓</span>
+                  <div class="credMain">
+                    <p class="credName">Master Data & IA — Eugenia School</p>
+                    <p class="credMeta">2025–2026 • Projets Python/SQL, Dataiku, Power BI/Tableau.</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">🎓</span>
+                  <div class="credMain">
+                    <p class="credName">Master 2 Communication Digitale — Sorbonne</p>
+                    <p class="credMeta">2022–2023 • KPI marketing, performance contenus, analyse social media.</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="card credBlock" aria-label="Certifications">
+              <h3 class="credTitle">
+                <span class="credTitle__dot" aria-hidden="true"></span>
+                Certifications
+              </h3>
+              <ul class="credList">
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">AZ</span>
+                  <div class="credMain">
+                    <p class="credName">Microsoft Certified: Azure AI Fundamentals</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">AZ</span>
+                  <div class="credMain">
+                    <p class="credName">Microsoft Certified: Azure AI Engineer Associate</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">AZ</span>
+                  <div class="credMain">
+                    <p class="credName">Principes de base d’Azure Microsoft</p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">CMS</span>
+                  <div class="credMain">
+                    <p class="credName">
+                      Réaliser des applications web à l’aide d’un système de gestion de contenus (CMS)
+                    </p>
+                  </div>
+                </li>
+                <li class="credItem">
+                  <span class="credIcon" aria-hidden="true">DKU</span>
+                  <div class="credMain">
+                    <p class="credName">Dataiku Core Designer Certificate</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
           </div>
         </div>
       </section>

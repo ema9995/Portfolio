@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio | Ema Fernandes</title>
     <meta
       name="description"
-      content="Portfolio en une page — développeuse full‑stack."
+      content="Single-page portfolio — data & marketing professional."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -142,6 +142,40 @@ main{
   align-items:center;
   gap:12px 16px;
   padding:18px 0 26px;
+}
+.topbar__lang{
+  grid-column: 1;
+  justify-self: start;
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+}
+.langSwitch{
+  display:inline-flex;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background: rgba(255,255,255,.04);
+}
+.langSwitch__btn{
+  font:inherit;
+  font-size:12px;
+  font-weight:600;
+  padding:8px 11px;
+  border:none;
+  background:transparent;
+  color: var(--muted);
+  cursor:pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.langSwitch__btn:hover{ color: rgba(233,233,242,.92); }
+.langSwitch__btn.is-active{
+  background: rgba(139,92,246,.22);
+  color: rgba(233,233,242,.95);
+}
+.langSwitch__btn:focus-visible{
+  outline:2px solid var(--ring);
+  outline-offset:2px;
 }
 .nav{
   grid-column: 2;
@@ -866,42 +900,48 @@ button.social:focus-visible{
     </style>
   </head>
   <body>
-    <a class="skip-link" href="#home">Aller au contenu</a>
+    <a class="skip-link" href="#home" data-i18n="skip_content">Skip to content</a>
 
     <div class="intro" id="intro" aria-hidden="true">
       <div class="intro__inner">
         <img class="intro__cat" src="./cat.png" alt="" />
-        <div class="intro__title">Bienvenue</div>
+        <div class="intro__title" data-i18n="intro_title">Welcome</div>
       </div>
     </div>
 
     <header class="topbar">
       <div class="container topbar__inner">
-        <nav class="nav" aria-label="Navigation principale">
-          <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Ouvrir le menu">
+        <div class="topbar__lang" role="group" data-i18n-aria="lang_group_aria" aria-label="Language">
+          <div class="langSwitch">
+            <button type="button" class="langSwitch__btn is-active" data-set-lang="en" aria-pressed="true">EN</button>
+            <button type="button" class="langSwitch__btn" data-set-lang="fr" aria-pressed="false">FR</button>
+          </div>
+        </div>
+        <nav class="nav" data-i18n-aria="nav_aria" aria-label="Main navigation">
+          <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" data-i18n-aria="nav_toggle_open" aria-label="Open menu">
             <span class="nav__toggleBars" aria-hidden="true"></span>
           </button>
           <ul id="nav-menu" class="nav__list">
-            <li><a class="nav__link" href="#home">Accueil</a></li>
-            <li><a class="nav__link" href="#projects">Projets</a></li>
-            <li><a class="nav__link" href="#certifications">Certifications</a></li>
-            <li><a class="nav__link" href="#skills">Compétences</a></li>
-            <li><a class="nav__link" href="#soft-skills">Soft skills</a></li>
-            <li><a class="nav__link" href="#langues">Langues</a></li>
-            <li><a class="nav__link" href="#contact">Contact</a></li>
+            <li><a class="nav__link" href="#home" data-i18n="nav_home">Home</a></li>
+            <li><a class="nav__link" href="#projects" data-i18n="nav_projects">Projects</a></li>
+            <li><a class="nav__link" href="#certifications" data-i18n="nav_certs">Certifications</a></li>
+            <li><a class="nav__link" href="#skills" data-i18n="nav_skills">Skills</a></li>
+            <li><a class="nav__link" href="#soft-skills" data-i18n="nav_soft">Soft skills</a></li>
+            <li><a class="nav__link" href="#langues" data-i18n="nav_langs">Languages</a></li>
+            <li><a class="nav__link" href="#contact" data-i18n="nav_contact">Contact</a></li>
           </ul>
         </nav>
-        <div class="topbar__socials" aria-label="GitHub, LinkedIn et e-mail">
+        <div class="topbar__socials" data-i18n-aria="socials_aria" aria-label="GitHub, LinkedIn, and email">
           <a class="social" href="https://github.com/ema9995" target="_blank" rel="noreferrer" aria-label="GitHub — ema9995">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           </a>
           <a class="social" href="https://www.linkedin.com/in/ema-fernandes/" target="_blank" rel="noreferrer" aria-label="LinkedIn — Ema Fernandes">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-          <a class="social" href="mailto:fernandesema99@gmail.com" aria-label="E-mail — fernandesema99@gmail.com" title="Ouvrir le client mail">
+          <a class="social" href="mailto:fernandesema99@gmail.com" data-i18n-aria="mail_header_aria" aria-label="Email — fernandesema99@gmail.com" data-i18n-title="mail_open_title" title="Open mail app">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 3.6V8l-8 5-8-5V7.6l8 4.4 8-4.4z"/></svg>
           </a>
-          <button type="button" class="social" data-copy-email="fernandesema99@gmail.com" aria-label="Copier l’adresse e-mail" title="Copier l’adresse">
+          <button type="button" class="social" data-copy-email="fernandesema99@gmail.com" data-i18n-aria="copy_aria" data-i18n-title="copy_title" aria-label="Copy email address" title="Copy address">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
           </button>
         </div>
@@ -912,23 +952,17 @@ button.social:focus-visible{
       <section id="home" class="section hero">
         <div class="container hero__grid">
           <div class="hero__copy">
-            <span class="pill">Disponible pour de nouvelles opportunités</span>
-            <h1 class="hero__title">
-              Bonjour, moi c'est <span class="accent">Ema</span>
+            <span class="pill" data-i18n="hero_pill">Open to new opportunities</span>
+            <h1 class="hero__title" data-i18n-html="hero_title">
+              Hi, I’m <span class="accent">Ema</span>
             </h1>
             <p class="hero__subtitle">Data / Marketing</p>
-            <p class="hero__lead">
-              Passionnée par l’analyse de données et les problématiques business,
-              je combine une formation en Data & IA avec une expérience concrète
-              en communication et marketing digital. J’accompagne la compréhension
-              des performances et des usages grâce à l’analyse, la structuration
-              et la valorisation de la donnée afin d’éclairer la prise de décision.
-              Curieuse, rigoureuse et orientée résultats, j’évolue avec aisance à
-              l’interface entre enjeux data, marketing et stratégie.
+            <p class="hero__lead" data-i18n="hero_lead">
+              I’m passionate about data analysis and business challenges. I combine training in Data &amp; AI with hands-on experience in communications and digital marketing. I help teams understand performance and user behaviour through analysis, structuring, and making data actionable to support decision-making. Curious, rigorous, and results-driven, I work comfortably at the intersection of data, marketing, and strategy.
             </p>
             <div class="hero__cta">
-              <a class="btn btn--primary" href="#projects">Voir mes projets</a>
-              <a class="btn btn--ghost" href="#contact">Me contacter</a>
+              <a class="btn btn--primary" href="#projects" data-i18n="hero_cta_projects">View my projects</a>
+              <a class="btn btn--ghost" href="#contact" data-i18n="hero_cta_contact">Contact me</a>
             </div>
           </div>
 
@@ -946,9 +980,9 @@ button.social:focus-visible{
 
       <section id="projects" class="section">
         <div class="container container--sectionFrame">
-          <h2 class="h2 center">Mes Projets</h2>
-          <p class="muted center">
-            Une sélection de projets data et IA.
+          <h2 class="h2 center" data-i18n="projects_title">My projects</h2>
+          <p class="muted center" data-i18n="projects_sub">
+            A selection of data and AI projects.
           </p>
 
           <div class="projectGrid">
@@ -957,20 +991,20 @@ button.social:focus-visible{
                 <img
                   class="projectCard__img"
                   src="./spa-animaux.jpg"
-                  alt="Aperçu du projet : animaux SPA"
+                  alt=""
+                  data-i18n-alt="proj1_alt"
                   loading="lazy"
                 />
               </div>
               <div class="projectCard__body">
-                <h3 class="projectCard__title">Scraping & analyse SPA</h3>
-                <p class="muted">
-                  Scraping du site de la SPA, nettoyage puis analyse pour comprendre les causes majoritaires
-                  des abandons et guider vers une adoption plus responsable.
+                <h3 class="projectCard__title" data-i18n="proj1_title">Scraping &amp; SPA analysis</h3>
+                <p class="muted" data-i18n="proj1_desc">
+                  Scraping the French animal shelter (SPA) website, cleaning and analysing data to understand the main reasons pets are surrendered and support more responsible adoption.
                 </p>
                 <div class="projectCard__chips">
                   <span class="chip">Python</span>
                   <span class="chip">Scraping</span>
-                  <span class="chip">Analyse</span>
+                  <span class="chip" data-i18n="chip_analysis">Analysis</span>
                 </div>
                 <div class="projectCard__actions">
                   <a
@@ -988,14 +1022,15 @@ button.social:focus-visible{
                 <img
                   class="projectCard__img"
                   src="./sign-language.jpg"
-                  alt="Aperçu du projet : détection langage des signes"
+                  alt=""
+                  data-i18n-alt="proj2_alt"
                   loading="lazy"
                 />
               </div>
               <div class="projectCard__body">
-                <h3 class="projectCard__title">Détection langage des signes</h3>
-                <p class="muted">
-                  Projet de détection / classification en vision par ordinateur autour du langage des signes.
+                <h3 class="projectCard__title" data-i18n="proj2_title">Sign language detection</h3>
+                <p class="muted" data-i18n="proj2_desc">
+                  Computer vision detection / classification project focused on sign language.
                 </p>
                 <div class="projectCard__chips">
                   <span class="chip">Python</span>
@@ -1048,15 +1083,15 @@ button.social:focus-visible{
                 <img
                   class="projectCard__img"
                   src="./breastwise.jpg"
-                  alt="Aperçu du projet Breastwise : accompagnement cancer du sein"
+                  alt=""
+                  data-i18n-alt="proj4_alt"
                   loading="lazy"
                 />
               </div>
               <div class="projectCard__body">
                 <h3 class="projectCard__title">Breastwise</h3>
-                <p class="muted">
-                  Application mobile d’accompagnement pour les femmes atteintes d’un cancer du sein :
-                  onboarding, bien‑être, navigation et backend (Supabase).
+                <p class="muted" data-i18n="proj4_desc">
+                  Mobile companion app for people with breast cancer: onboarding, wellbeing, navigation, and Supabase backend.
                 </p>
                 <div class="projectCard__chips">
                   <span class="chip">React Native</span>
@@ -1110,16 +1145,17 @@ button.social:focus-visible{
                 <img
                   class="projectCard__img"
                   src="./bataille-navale.jpg"
-                  alt="Aperçu du jeu bataille navale"
+                  alt=""
+                  data-i18n-alt="proj6_alt"
                   loading="lazy"
                 />
               </div>
               <div class="projectCard__body">
-                <h3 class="projectCard__title">Jeu — Bataille navale</h3>
-                <p class="muted">Mini jeu de bataille navale en Python.</p>
+                <h3 class="projectCard__title" data-i18n="proj6_title">Game — Battleship</h3>
+                <p class="muted" data-i18n="proj6_desc">Mini battleship game in Python.</p>
                 <div class="projectCard__chips">
                   <span class="chip">Python</span>
-                  <span class="chip">Jeu</span>
+                  <span class="chip" data-i18n="chip_game">Game</span>
                 </div>
                 <div class="projectCard__actions">
                   <a
@@ -1137,13 +1173,14 @@ button.social:focus-visible{
                 <img
                   class="projectCard__img"
                   src="./pierre-papier-ciseaux.jpg"
-                  alt="Aperçu du jeu pierre, papier, ciseaux"
+                  alt=""
+                  data-i18n-alt="proj7_alt"
                   loading="lazy"
                 />
               </div>
               <div class="projectCard__body">
-                <h3 class="projectCard__title">Jeu — Pierre / feuille / ciseaux</h3>
-                <p class="muted">Mini jeu Streamlit “pierre, papier, ciseaux”.</p>
+                <h3 class="projectCard__title" data-i18n="proj7_title">Game — Rock / paper / scissors</h3>
+                <p class="muted" data-i18n="proj7_desc">Mini Streamlit rock, paper, scissors game.</p>
                 <div class="projectCard__chips">
                   <span class="chip">Python</span>
                   <span class="chip">Streamlit</span>
@@ -1164,42 +1201,42 @@ button.social:focus-visible{
 
       <section id="certifications" class="section">
         <div class="container">
-          <h2 class="h2 center">Certifications & Diplômes</h2>
+          <h2 class="h2 center" data-i18n="cert_page_title">Certifications &amp; degrees</h2>
           <div class="credWrap">
-            <section class="card credBlock" aria-label="Diplômes">
+            <section class="card credBlock" data-i18n-aria="dip_block_aria" aria-label="Degrees">
               <h3 class="credTitle">
                 <span class="credTitle__dot" aria-hidden="true"></span>
-                Diplômes
+                <span data-i18n="dip_heading">Degrees</span>
               </h3>
               <ul class="credList">
                 <li class="credItem">
                   <span class="credIcon" aria-hidden="true">🎓</span>
                   <div class="credMain">
-                    <p class="credName">Master Data &amp; IA — Eugenia School</p>
-                    <p class="credMeta">2025–2026 • Projets Python/SQL, Dataiku, Power BI/Tableau.</p>
+                    <p class="credName" data-i18n="dip1_name">Master Data &amp; AI — Eugenia School</p>
+                    <p class="credMeta" data-i18n="dip1_meta">2025–2026 • Python/SQL projects, Dataiku, Power BI/Tableau.</p>
                   </div>
                 </li>
                 <li class="credItem">
                   <span class="credIcon" aria-hidden="true">🎓</span>
                   <div class="credMain">
-                    <p class="credName">Réaliser des applications web à l’aide d’un système de gestion de contenus (CMS) — Simplon</p>
-                    <p class="credMeta">Mars 2025 – mai 2025 • Wordpress/ SQL/ Python</p>
+                    <p class="credName" data-i18n="dip2_name">Building web apps with a content management system (CMS) — Simplon</p>
+                    <p class="credMeta" data-i18n="dip2_meta">Mar 2025 – May 2025 • WordPress / SQL / Python</p>
                   </div>
                 </li>
                 <li class="credItem">
                   <span class="credIcon" aria-hidden="true">🎓</span>
                   <div class="credMain">
-                    <p class="credName">Master 2 Communication Digitale — Sorbonne</p>
-                    <p class="credMeta">2022–2023 • KPI marketing, performance contenus, analyse social media.</p>
+                    <p class="credName" data-i18n="dip3_name">Master 2 Digital Communication — Sorbonne</p>
+                    <p class="credMeta" data-i18n="dip3_meta">2022–2023 • Marketing KPIs, content performance, social media analysis.</p>
                   </div>
                 </li>
               </ul>
             </section>
 
-            <section class="card credBlock" aria-label="Certifications">
+            <section class="card credBlock" data-i18n-aria="cert_block_aria" aria-label="Certifications">
               <h3 class="credTitle">
                 <span class="credTitle__dot" aria-hidden="true"></span>
-                Certifications
+                <span data-i18n="cert_heading">Certifications</span>
               </h3>
               <ul class="credList">
                 <li class="credItem">
@@ -1217,7 +1254,7 @@ button.social:focus-visible{
                 <li class="credItem">
                   <span class="credIcon" aria-hidden="true">🧠</span>
                   <div class="credMain">
-                    <p class="credName">Principes de base d’Azure Microsoft</p>
+                    <p class="credName" data-i18n="cert_azure_fund">Microsoft Azure Fundamentals</p>
                   </div>
                 </li>
                 <li class="credItem">
@@ -1234,11 +1271,11 @@ button.social:focus-visible{
 
       <section id="skills" class="section">
         <div class="container container--sectionFrame">
-          <h2 class="h2 center">Compétences</h2>
+          <h2 class="h2 center" data-i18n="skills_title">Skills</h2>
 
           <div class="skillMatrix skillMatrix--3">
-            <section class="card credBlock skillCat" aria-label="IA">
-              <h3 class="skillCat__title">IA</h3>
+            <section class="card credBlock skillCat" data-i18n-aria="skill_ai_aria" aria-label="AI">
+              <h3 class="skillCat__title" data-i18n="skill_ai_title">AI</h3>
               <div class="skillMeter">
                 <div class="skillMeter__top">
                   <span class="skillMeter__label">Dust</span>
@@ -1315,7 +1352,7 @@ button.social:focus-visible{
               </div>
             </section>
 
-            <section class="card credBlock skillCat" aria-label="Dev">
+            <section class="card credBlock skillCat" data-i18n-aria="skill_dev_aria" aria-label="Development">
               <h3 class="skillCat__title">Dev</h3>
               <div class="skillMeter">
                 <div class="skillMeter__top">
@@ -1368,7 +1405,7 @@ button.social:focus-visible{
                 </div>
               </div>
               <div class="skillCat">
-                <h3 class="skillCat__title">Réseaux sociaux</h3>
+                <h3 class="skillCat__title" data-i18n="social_heading">Social media</h3>
                 <div class="skillMeter">
                   <div class="skillMeter__top">
                     <span class="skillMeter__label">Meta</span>
@@ -1411,22 +1448,22 @@ button.social:focus-visible{
 
       <section id="langues" class="section">
         <div class="container container--sectionFrame">
-          <h2 class="h2 center">Langues</h2>
+          <h2 class="h2 center" data-i18n="langs_title">Languages</h2>
           <div class="langList" role="list">
             <div class="langItem" role="listitem">
-              <p class="langItem__name">Français</p>
+              <p class="langItem__name" data-i18n="lang_fr">French</p>
               <span class="langItem__cefr">C2</span>
             </div>
             <div class="langItem" role="listitem">
-              <p class="langItem__name">Anglais</p>
+              <p class="langItem__name" data-i18n="lang_en">English</p>
               <span class="langItem__cefr">B2</span>
             </div>
             <div class="langItem" role="listitem">
-              <p class="langItem__name">Portugais</p>
+              <p class="langItem__name" data-i18n="lang_pt">Portuguese</p>
               <span class="langItem__cefr">C1</span>
             </div>
             <div class="langItem" role="listitem">
-              <p class="langItem__name">Espagnol</p>
+              <p class="langItem__name" data-i18n="lang_es">Spanish</p>
               <span class="langItem__cefr">C1</span>
             </div>
           </div>
@@ -1474,7 +1511,7 @@ button.social:focus-visible{
     <footer class="footer">
       <div class="container footer__inner">
         <span class="muted">© <span id="year"></span> Ema Fernandes. All rights reserved.</span>
-        <a class="textLink" href="#home">Back to top</a>
+        <a class="textLink" href="#home" data-i18n="footer_top">Back to top</a>
       </div>
     </footer>
 
@@ -1482,6 +1519,287 @@ button.social:focus-visible{
     <script>
 const $ = (sel, parent = document) => parent.querySelector(sel);
 const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
+
+const LANG_KEY = "portfolioLang";
+let currentLang = "en";
+
+const STRINGS = {
+  en: {
+    page_title: "Portfolio | Ema Fernandes",
+    meta_description:
+      "Single-page portfolio — data & marketing professional.",
+    skip_content: "Skip to content",
+    intro_title: "Welcome",
+    lang_group_aria: "Language",
+    nav_aria: "Main navigation",
+    nav_toggle_open: "Open menu",
+    nav_toggle_close: "Close menu",
+    nav_home: "Home",
+    nav_projects: "Projects",
+    nav_certs: "Certifications",
+    nav_skills: "Skills",
+    nav_soft: "Soft skills",
+    nav_langs: "Languages",
+    nav_contact: "Contact",
+    socials_aria: "GitHub, LinkedIn, and email",
+    mail_header_aria: "Email — fernandesema99@gmail.com",
+    mail_open_title: "Open mail app",
+    copy_aria: "Copy email address",
+    copy_title: "Copy address",
+    hero_pill: "Open to new opportunities",
+    hero_title: "Hi, I’m <span class=\"accent\">Ema</span>",
+    hero_lead:
+      "I’m passionate about data analysis and business challenges. I combine training in Data & AI with hands-on experience in communications and digital marketing. I help teams understand performance and user behaviour through analysis, structuring, and making data actionable to support decision-making. Curious, rigorous, and results-driven, I work comfortably at the intersection of data, marketing, and strategy.",
+    hero_cta_projects: "View my projects",
+    hero_cta_contact: "Contact me",
+    projects_title: "My projects",
+    projects_sub: "A selection of data and AI projects.",
+    proj1_alt: "Project preview: SPA animal shelter",
+    proj1_title: "Scraping & SPA analysis",
+    proj1_desc:
+      "Scraping the French animal shelter (SPA) website, cleaning and analysing data to understand the main reasons pets are surrendered and support more responsible adoption.",
+    chip_analysis: "Analysis",
+    proj2_alt: "Project preview: sign language detection",
+    proj2_title: "Sign language detection",
+    proj2_desc:
+      "Computer vision detection / classification project focused on sign language.",
+    proj3_alt: "Project preview: WWE scraping and analysis",
+    proj3_title: "WWE — scraping & analysis",
+    proj3_desc:
+      "Collecting and analysing WWE match data (scraping, dataset, and analysis).",
+    proj4_alt: "Project preview: Breastwise companion app",
+    proj4_desc:
+      "Mobile companion app for people with breast cancer: onboarding, wellbeing, navigation, and Supabase backend.",
+    proj5_alt: "Project preview: Checky leave-home checklist",
+    proj5_desc:
+      "App to remember everything before you leave home: custom checklists, reminders, and everyday helpers.",
+    proj6_alt: "Project preview: Battleship game",
+    proj6_title: "Game — Battleship",
+    proj6_desc: "Mini battleship game in Python.",
+    chip_game: "Game",
+    proj7_alt: "Project preview: rock paper scissors",
+    proj7_title: "Game — Rock / paper / scissors",
+    proj7_desc: "Mini Streamlit rock, paper, scissors game.",
+    cert_page_title: "Certifications & degrees",
+    dip_block_aria: "Degrees",
+    dip_heading: "Degrees",
+    dip1_name: "Master Data & AI — Eugenia School",
+    dip1_meta:
+      "2025–2026 • Python/SQL projects, Dataiku, Power BI/Tableau.",
+    dip2_name:
+      "Building web apps with a content management system (CMS) — Simplon",
+    dip2_meta: "Mar 2025 – May 2025 • WordPress / SQL / Python",
+    dip3_name: "Master 2 Digital Communication — Sorbonne",
+    dip3_meta:
+      "2022–2023 • Marketing KPIs, content performance, social media analysis.",
+    cert_block_aria: "Certifications",
+    cert_heading: "Certifications",
+    cert_azure_fund: "Microsoft Azure Fundamentals",
+    skills_title: "Skills",
+    skill_ai_aria: "AI",
+    skill_ai_title: "AI",
+    skill_data_aria: "Data",
+    skill_dev_aria: "Development",
+    skill_design_block_aria: "Design and social media",
+    design_heading: "Design",
+    social_heading: "Social media",
+    soft_title: "Soft skills",
+    soft1: "Analytical mindset",
+    soft2: "Rigour & attention to detail",
+    soft3: "Making data accessible",
+    soft4: "Teamwork",
+    soft5: "Autonomy & proactivity",
+    langs_title: "Languages",
+    lang_fr: "French",
+    lang_en: "English",
+    lang_pt: "Portuguese",
+    lang_es: "Spanish",
+    contact_title: "Contact",
+    contact_photo_alt: "Portrait of Ema Fernandes",
+    contact_outro: "Thanks for browsing my portfolio. I’d love to connect.",
+    contact_icons_aria: "LinkedIn, GitHub, email, and copy",
+    mail_send_aria: "Send an email to fernandesema99@gmail.com",
+    footer_top: "Back to top",
+    toast_copied: "Email address copied.",
+    toast_copy_fail: "Could not copy. Please copy the address manually.",
+    form_copied:
+      "Message copied to clipboard. Paste it into your email client.",
+    form_copy_fail: "Could not copy. Please copy manually.",
+  },
+  fr: {
+    page_title: "Portfolio | Ema Fernandes",
+    meta_description:
+      "Portfolio sur une page — data & marketing.",
+    skip_content: "Aller au contenu",
+    intro_title: "Bienvenue",
+    lang_group_aria: "Langue",
+    nav_aria: "Navigation principale",
+    nav_toggle_open: "Ouvrir le menu",
+    nav_toggle_close: "Fermer le menu",
+    nav_home: "Accueil",
+    nav_projects: "Projets",
+    nav_certs: "Certifications",
+    nav_skills: "Compétences",
+    nav_soft: "Soft skills",
+    nav_langs: "Langues",
+    nav_contact: "Contact",
+    socials_aria: "GitHub, LinkedIn et e-mail",
+    mail_header_aria: "E-mail — fernandesema99@gmail.com",
+    mail_open_title: "Ouvrir le client mail",
+    copy_aria: "Copier l’adresse e-mail",
+    copy_title: "Copier l’adresse",
+    hero_pill: "Disponible pour de nouvelles opportunités",
+    hero_title: "Bonjour, moi c’est <span class=\"accent\">Ema</span>",
+    hero_lead:
+      "Passionnée par l’analyse de données et les problématiques business, je combine une formation en Data & IA avec une expérience concrète en communication et marketing digital. J’accompagne la compréhension des performances et des usages grâce à l’analyse, la structuration et la valorisation de la donnée afin d’éclairer la prise de décision. Curieuse, rigoureuse et orientée résultats, j’évolue avec aisance à l’interface entre enjeux data, marketing et stratégie.",
+    hero_cta_projects: "Voir mes projets",
+    hero_cta_contact: "Me contacter",
+    projects_title: "Mes projets",
+    projects_sub: "Une sélection de projets data et IA.",
+    proj1_alt: "Aperçu du projet : animaux SPA",
+    proj1_title: "Scraping & analyse SPA",
+    proj1_desc:
+      "Scraping du site de la SPA, nettoyage puis analyse pour comprendre les causes majoritaires des abandons et guider vers une adoption plus responsable.",
+    chip_analysis: "Analyse",
+    proj2_alt: "Aperçu du projet : détection langage des signes",
+    proj2_title: "Détection langage des signes",
+    proj2_desc:
+      "Projet de détection / classification en vision par ordinateur autour du langage des signes.",
+    proj3_alt: "Aperçu du projet WWE : scraping et analyse",
+    proj3_title: "WWE — scraping & analyse",
+    proj3_desc:
+      "Collecte et analyse de données de matchs WWE (scraping + dataset + analyse).",
+    proj4_alt: "Aperçu du projet Breastwise : accompagnement cancer du sein",
+    proj4_desc:
+      "Application mobile d’accompagnement pour les femmes atteintes d’un cancer du sein : onboarding, bien-être, navigation et backend (Supabase).",
+    proj5_alt: "Aperçu du projet Checky : ne rien oublier en partant",
+    proj5_desc:
+      "App pour ne rien oublier en partant de chez soi : checklists personnalisables, rappels, et fonctionnalités utiles au quotidien.",
+    proj6_alt: "Aperçu du jeu bataille navale",
+    proj6_title: "Jeu — Bataille navale",
+    proj6_desc: "Mini jeu de bataille navale en Python.",
+    chip_game: "Jeu",
+    proj7_alt: "Aperçu du jeu pierre, papier, ciseaux",
+    proj7_title: "Jeu — Pierre / feuille / ciseaux",
+    proj7_desc: "Mini jeu Streamlit « pierre, papier, ciseaux ».",
+    cert_page_title: "Certifications & diplômes",
+    dip_block_aria: "Diplômes",
+    dip_heading: "Diplômes",
+    dip1_name: "Master Data & IA — Eugenia School",
+    dip1_meta:
+      "2025–2026 • Projets Python/SQL, Dataiku, Power BI/Tableau.",
+    dip2_name:
+      "Réaliser des applications web à l’aide d’un système de gestion de contenus (CMS) — Simplon",
+    dip2_meta: "Mars 2025 – mai 2025 • Wordpress/ SQL/ Python",
+    dip3_name: "Master 2 Communication Digitale — Sorbonne",
+    dip3_meta:
+      "2022–2023 • KPI marketing, performance contenus, analyse social media.",
+    cert_block_aria: "Certifications",
+    cert_heading: "Certifications",
+    cert_azure_fund: "Principes de base d’Azure Microsoft",
+    skills_title: "Compétences",
+    skill_ai_aria: "IA",
+    skill_ai_title: "IA",
+    skill_data_aria: "Data",
+    skill_dev_aria: "Développement",
+    skill_design_block_aria: "Design et réseaux sociaux",
+    design_heading: "Design",
+    social_heading: "Réseaux sociaux",
+    soft_title: "Soft skills",
+    soft1: "Esprit analytique",
+    soft2: "Rigueur & sens du détail",
+    soft3: "Vulgarisation des données",
+    soft4: "Travail en équipe",
+    soft5: "Autonomie & proactivité",
+    langs_title: "Langues",
+    lang_fr: "Français",
+    lang_en: "Anglais",
+    lang_pt: "Portugais",
+    lang_es: "Espagnol",
+    contact_title: "Contact",
+    contact_photo_alt: "Portrait d’Ema Fernandes",
+    contact_outro:
+      "Merci d’avoir parcouru mon portfolio. Au plaisir d’échanger.",
+    contact_icons_aria: "LinkedIn, GitHub, e-mail et copie",
+    mail_send_aria: "Envoyer un e-mail à fernandesema99@gmail.com",
+    footer_top: "Retour en haut",
+    toast_copied: "Adresse e-mail copiée.",
+    toast_copy_fail: "Copie impossible. Copiez l’adresse manuellement.",
+    form_copied:
+      "Message copié dans le presse-papiers. Collez-le dans votre client mail.",
+    form_copy_fail: "Impossible de copier. Copiez manuellement.",
+  },
+};
+
+function t(key) {
+  const pack = STRINGS[currentLang] || STRINGS.en;
+  return pack[key] ?? STRINGS.en[key] ?? "";
+}
+
+function applyI18n(lang) {
+  if (lang !== "en" && lang !== "fr") lang = "en";
+  currentLang = lang;
+  try {
+    localStorage.setItem(LANG_KEY, lang);
+  } catch (_) {}
+
+  document.documentElement.lang = lang === "fr" ? "fr" : "en";
+
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.setAttribute("content", t("meta_description"));
+  document.title = t("page_title");
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (key && t(key)) el.textContent = t(key);
+  });
+
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-html");
+    if (key && t(key)) el.innerHTML = t(key);
+  });
+
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (key && t(key)) el.setAttribute("aria-label", t(key));
+  });
+
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-title");
+    if (key && t(key)) el.setAttribute("title", t(key));
+  });
+
+  document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-alt");
+    if (key && t(key)) el.setAttribute("alt", t(key));
+  });
+
+  document.querySelectorAll("[data-set-lang]").forEach((btn) => {
+    const l = btn.getAttribute("data-set-lang");
+    const on = l === lang;
+    btn.classList.toggle("is-active", on);
+    btn.setAttribute("aria-pressed", String(on));
+  });
+
+  const toggle = $(".nav__toggle");
+  const list = $(".nav__list");
+  if (toggle && list) {
+    const open = list.classList.contains("is-open");
+    toggle.setAttribute(
+      "aria-label",
+      t(open ? "nav_toggle_close" : "nav_toggle_open")
+    );
+  }
+}
+
+function setupLangSwitch() {
+  $$("[data-set-lang]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const lang = btn.getAttribute("data-set-lang");
+      applyI18n(lang === "fr" ? "fr" : "en");
+    });
+  });
+}
 
 function setupIntro() {
   const intro = $("#intro");
@@ -1533,12 +1851,17 @@ function setupNav() {
   toggle.addEventListener("click", () => {
     const open = list.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute(
+      "aria-label",
+      t(open ? "nav_toggle_close" : "nav_toggle_open")
+    );
   });
 
   $$(".nav__link").forEach((a) => {
     a.addEventListener("click", () => {
       list.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", t("nav_toggle_open"));
     });
   });
 }
@@ -1573,10 +1896,10 @@ function setupForm() {
 
     try {
       await navigator.clipboard.writeText(payload);
-      toast("Message copied to clipboard. Paste it into your email.");
+      toast(t("form_copied"));
       form.reset();
     } catch {
-      toast("Could not copy. Please copy manually.");
+      toast(t("form_copy_fail"));
     }
   });
 }
@@ -1593,14 +1916,23 @@ function setupCopyEmail() {
       if (!text) return;
       try {
         await navigator.clipboard.writeText(text);
-        toast("Adresse e-mail copiée.");
+        toast(t("toast_copied"));
       } catch {
-        toast("Copie impossible. Copiez l’adresse manuellement.");
+        toast(t("toast_copy_fail"));
       }
     });
   });
 }
 
+(function initI18n() {
+  let stored = "en";
+  try {
+    stored = localStorage.getItem(LANG_KEY) || "en";
+  } catch (_) {}
+  applyI18n(stored === "fr" ? "fr" : "en");
+})();
+
+setupLangSwitch();
 setupNav();
 setupSmoothScroll();
 setupForm();

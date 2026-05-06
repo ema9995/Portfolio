@@ -476,6 +476,15 @@ button.social:focus-visible{
   grid-template-columns: repeat(2, 1fr);
   gap:18px;
 }
+.projectCard__tap{
+  display:block;
+  color:inherit;
+}
+.projectCard__tap:focus-visible{
+  outline:2px solid var(--ring);
+  outline-offset:4px;
+  border-radius: calc(var(--radius) - 2px);
+}
 .projectCard{
   border:1px solid var(--border);
   background: rgba(255,255,255,.02);
@@ -514,8 +523,8 @@ button.social:focus-visible{
 .projectCard__img{
   display:block;
   width:auto;
-  max-width:min(320px, 92%);
-  max-height:140px;
+  max-width:min(420px, 96%);
+  max-height:170px;
   height:auto;
   margin-inline:auto;
   object-fit:contain;
@@ -528,6 +537,82 @@ button.social:focus-visible{
 .projectCard__title{margin:0 0 8px; font-size:16px}
 .projectCard__chips{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
 .projectCard__actions{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+
+.projectModal{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  padding:18px;
+}
+.projectModal.is-open{display:grid; place-items:center}
+.projectModal__backdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(6px);
+}
+.projectModal__panel{
+  position:relative;
+  width:min(980px, 100%);
+  max-height:min(86vh, 900px);
+  overflow:auto;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(15,16,22,.96);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+  padding: 18px 18px 22px;
+}
+.projectModal__top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 12px;
+}
+.projectModal__close{
+  width:40px;height:40px;
+  display:grid; place-items:center;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: rgba(233,233,242,.92);
+  cursor:pointer;
+}
+.projectModal__close:hover{background: rgba(255,255,255,.06)}
+.projectModal__close:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
+.projectDetail{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.projectDetail__hero{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.projectDetail__img{
+  width:100%;
+  max-width: 920px;
+  max-height: 360px;
+  height:auto;
+  object-fit: contain;
+  border-radius: var(--radius);
+  filter: drop-shadow(0 16px 24px rgba(0,0,0,.55));
+}
+.projectDetail__title{
+  margin: 0;
+  font-family:"Space Grotesk", Inter, system-ui, sans-serif;
+  letter-spacing:-.02em;
+  font-size: clamp(22px, 2.6vw, 30px);
+}
+.projectDetail__meta{margin:0; color: rgba(233,233,242,.74); line-height:1.7}
+.projectDetail__chips{display:flex; gap:8px; flex-wrap:wrap}
+.projectDetail__actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:4px}
 
 .textLink{
   display:inline-flex;
@@ -989,15 +1074,17 @@ button.social:focus-visible{
 
           <div class="projectGrid">
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./spa-animaux.jpg"
-                  alt=""
-                  data-i18n-alt="proj1_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-spa" aria-label="Open project: SPA">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./spa-animaux.jpg"
+                    alt=""
+                    data-i18n-alt="proj1_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title" data-i18n="proj1_title">Scraping &amp; SPA analysis</h3>
                 <p class="muted" data-i18n="proj1_desc">
@@ -1020,15 +1107,17 @@ button.social:focus-visible{
             </article>
 
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./sign-language.jpg"
-                  alt=""
-                  data-i18n-alt="proj2_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-sign" aria-label="Open project: Sign language">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./sign-language.jpg"
+                    alt=""
+                    data-i18n-alt="proj2_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title" data-i18n="proj2_title">Sign language detection</h3>
                 <p class="muted" data-i18n="proj2_desc">
@@ -1051,15 +1140,17 @@ button.social:focus-visible{
             </article>
 
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./wwe-analyse.jpg"
-                  alt=""
-                  data-i18n-alt="proj3_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-wwe" aria-label="Open project: WWE">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./wwe-analyse.jpg"
+                    alt=""
+                    data-i18n-alt="proj3_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title" data-i18n="proj3_title">WWE — scraping &amp; analysis</h3>
                 <p class="muted" data-i18n="proj3_desc">
@@ -1082,15 +1173,17 @@ button.social:focus-visible{
             </article>
 
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./breastwise.jpg"
-                  alt=""
-                  data-i18n-alt="proj4_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-breastwise" aria-label="Open project: Breastwise">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./breastwise.jpg"
+                    alt=""
+                    data-i18n-alt="proj4_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title">Breastwise</h3>
                 <p class="muted" data-i18n="proj4_desc">
@@ -1113,15 +1206,17 @@ button.social:focus-visible{
             </article>
 
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./checky.jpg"
-                  alt=""
-                  data-i18n-alt="proj5_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-checky" aria-label="Open project: Checky">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./checky.jpg"
+                    alt=""
+                    data-i18n-alt="proj5_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title">Checky</h3>
                 <p class="muted" data-i18n="proj5_desc">
@@ -1144,15 +1239,17 @@ button.social:focus-visible{
             </article>
 
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./bataille-navale.jpg"
-                  alt=""
-                  data-i18n-alt="proj6_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-battleship" aria-label="Open project: Battleship">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./bataille-navale.jpg"
+                    alt=""
+                    data-i18n-alt="proj6_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title" data-i18n="proj6_title">Game — Battleship</h3>
                 <p class="muted" data-i18n="proj6_desc">Mini battleship game in Python.</p>
@@ -1172,15 +1269,17 @@ button.social:focus-visible{
             </article>
 
             <article class="projectCard">
-              <div class="projectCard__media">
-                <img
-                  class="projectCard__img"
-                  src="./pierre-papier-ciseaux.jpg"
-                  alt=""
-                  data-i18n-alt="proj7_alt"
-                  loading="lazy"
-                />
-              </div>
+              <a class="projectCard__tap" href="#project-rps" aria-label="Open project: Rock paper scissors">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./pierre-papier-ciseaux.jpg"
+                    alt=""
+                    data-i18n-alt="proj7_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
               <div class="projectCard__body">
                 <h3 class="projectCard__title" data-i18n="proj7_title">Game — Rock / paper / scissors</h3>
                 <p class="muted" data-i18n="proj7_desc">Mini Streamlit rock, paper, scissors game.</p>
@@ -1517,6 +1616,28 @@ button.social:focus-visible{
           </div>
         </div>
       </section>
+
+      <div class="projectModal" id="projectModal" aria-hidden="true">
+        <div class="projectModal__backdrop" data-close-project></div>
+        <div class="projectModal__panel" role="dialog" aria-modal="true" aria-labelledby="projectTitle">
+          <div class="projectModal__top">
+            <a class="textLink" href="#projects" data-close-project data-i18n="back_to_projects">Back to projects</a>
+            <button type="button" class="projectModal__close" data-close-project data-i18n-aria="project_close_aria" aria-label="Close project details">
+              <span aria-hidden="true">✕</span>
+            </button>
+          </div>
+
+          <div class="projectDetail">
+            <div class="projectDetail__hero">
+              <img class="projectDetail__img" id="projectImg" alt="" />
+            </div>
+            <h3 class="projectDetail__title" id="projectTitle"></h3>
+            <p class="projectDetail__meta" id="projectDesc"></p>
+            <div class="projectDetail__chips" id="projectChips" aria-label="Technologies"></div>
+            <div class="projectDetail__actions" id="projectActions"></div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="footer">
@@ -1634,6 +1755,8 @@ const STRINGS = {
       "Thank you for browsing my portfolio. I’d be glad to connect.",
     contact_icons_aria: "LinkedIn, GitHub, email, and copy",
     mail_send_aria: "Send an email to fernandesema99@gmail.com",
+    back_to_projects: "Back to projects",
+    project_close_aria: "Close project details",
     footer_top: "Back to top",
     toast_copied: "Email address copied.",
     toast_copy_fail: "Could not copy. Please copy the address manually.",
@@ -1740,6 +1863,8 @@ const STRINGS = {
       "Merci d’avoir parcouru mon portfolio. Au plaisir d’échanger.",
     contact_icons_aria: "LinkedIn, GitHub, e-mail et copie",
     mail_send_aria: "Envoyer un e-mail à fernandesema99@gmail.com",
+    back_to_projects: "Retour aux projets",
+    project_close_aria: "Fermer le détail du projet",
     footer_top: "Retour en haut",
     toast_copied: "Adresse e-mail copiée.",
     toast_copy_fail: "Copie impossible. Copiez l’adresse manuellement.",
@@ -1808,6 +1933,156 @@ function applyI18n(lang) {
       t(open ? "nav_toggle_close" : "nav_toggle_open")
     );
   }
+}
+
+const PROJECTS = {
+  spa: {
+    img: "./spa-animaux.jpg",
+    github: "https://github.com/ema9995/Scraping-SPA.git",
+    titleKey: "proj1_title",
+    descKey: "proj1_desc",
+    altKey: "proj1_alt",
+    chips: ["Python", "Scraping", { key: "chip_analysis" }],
+  },
+  sign: {
+    img: "./sign-language.jpg",
+    github: "https://github.com/ema9995/Sign_language_detection.git",
+    titleKey: "proj2_title",
+    descKey: "proj2_desc",
+    altKey: "proj2_alt",
+    chips: ["Python", "IA", "Notebook"],
+  },
+  wwe: {
+    img: "./wwe-analyse.jpg",
+    github: "https://github.com/ema9995/WWE_data_analysis.git",
+    titleKey: "proj3_title",
+    descKey: "proj3_desc",
+    altKey: "proj3_alt",
+    chips: ["Python", "Scraping", "Data viz"],
+  },
+  breastwise: {
+    img: "./breastwise.jpg",
+    github: "https://github.com/ema9995/Breastwise.git",
+    titleKey: "Breastwise",
+    descKey: "proj4_desc",
+    altKey: "proj4_alt",
+    chips: ["React Native", "Expo", "Supabase"],
+  },
+  checky: {
+    img: "./checky.jpg",
+    github: "https://github.com/ema9995/Checky.git",
+    titleKey: "Checky",
+    descKey: "proj5_desc",
+    altKey: "proj5_alt",
+    chips: ["Expo", "TypeScript", "Mobile"],
+  },
+  battleship: {
+    img: "./bataille-navale.jpg",
+    github: "https://github.com/ema9995/Bataille-navale.git",
+    titleKey: "proj6_title",
+    descKey: "proj6_desc",
+    altKey: "proj6_alt",
+    chips: ["Python", { key: "chip_game" }],
+  },
+  rps: {
+    img: "./pierre-papier-ciseaux.jpg",
+    github: "https://github.com/ema9995/pierre-papier-ciseaux.git",
+    titleKey: "proj7_title",
+    descKey: "proj7_desc",
+    altKey: "proj7_alt",
+    chips: ["Python", "Streamlit"],
+  },
+};
+
+function getProjectIdFromHash() {
+  const hash = (location.hash || "").trim();
+  const m = hash.match(/^#project-([a-z0-9_-]+)$/i);
+  return m ? m[1] : null;
+}
+
+function openProjectModal() {
+  const modal = $("#projectModal");
+  if (!modal) return;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeProjectModal() {
+  const modal = $("#projectModal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function renderProject(id) {
+  const p = PROJECTS[id] || PROJECTS.spa;
+  const img = $("#projectImg");
+  const title = $("#projectTitle");
+  const desc = $("#projectDesc");
+  const chips = $("#projectChips");
+  const actions = $("#projectActions");
+
+  const titleText = p.titleKey in (STRINGS[currentLang] || {}) ? t(p.titleKey) : p.titleKey;
+  const descText = t(p.descKey);
+
+  if (img) {
+    img.src = p.img;
+    img.alt = t(p.altKey) || titleText || "";
+  }
+  if (title) title.textContent = titleText || "";
+  if (desc) desc.textContent = descText || "";
+
+  if (chips) {
+    chips.innerHTML = "";
+    for (const c of p.chips) {
+      const el = document.createElement("span");
+      el.className = "chip";
+      if (typeof c === "string") el.textContent = c;
+      else el.textContent = t(c.key);
+      chips.appendChild(el);
+    }
+  }
+
+  if (actions) {
+    actions.innerHTML = "";
+    const a = document.createElement("a");
+    a.className = "btn btn--small btn--primary";
+    a.href = p.github;
+    a.target = "_blank";
+    a.rel = "noreferrer";
+    a.textContent = "GitHub";
+    actions.appendChild(a);
+  }
+}
+
+function syncProjectModalWithHash() {
+  const id = getProjectIdFromHash();
+  if (!id) {
+    closeProjectModal();
+    return;
+  }
+  renderProject(id);
+  openProjectModal();
+}
+
+function setupProjectModal() {
+  $$("[data-close-project]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      history.pushState(null, "", "#projects");
+      syncProjectModalWithHash();
+    });
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && getProjectIdFromHash()) {
+      history.pushState(null, "", "#projects");
+      syncProjectModalWithHash();
+    }
+  });
+  window.addEventListener("hashchange", syncProjectModalWithHash);
+  syncProjectModalWithHash();
 }
 
 function setupLangSwitch() {
@@ -1889,6 +2164,7 @@ function setupSmoothScroll() {
     a.addEventListener("click", (e) => {
       const href = a.getAttribute("href");
       if (!href || !href.startsWith("#")) return;
+      if (href.startsWith("#project-")) return;
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
@@ -1960,6 +2236,7 @@ setupIntro();
 setActiveNavLink();
 window.addEventListener("scroll", setActiveNavLink, { passive: true });
 window.addEventListener("resize", setActiveNavLink);
+setupProjectModal();
     </script>
   </body>
 </html>

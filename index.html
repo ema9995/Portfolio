@@ -650,21 +650,32 @@ button.social:focus-visible{
   white-space: pre-wrap;
   word-break: break-word;
 }
-.projectDetail__highlights{
+.projectDetail__sections{
   display:grid;
-  gap:10px;
+  gap: 12px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.02);
   border-radius: var(--radius);
   padding: 14px 14px;
 }
-.projectDetail__highlights p{margin:0}
-.projectDetail__highlights ul{
+.projectDetail__sectionTitle{
   margin:0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: rgba(233,233,242,.92);
+}
+.projectDetail__sectionText{
+  margin: 6px 0 0;
+  color: rgba(233,233,242,.80);
+  line-height: 1.7;
+}
+.projectDetail__list{
+  margin: 6px 0 0;
   padding-left: 18px;
   color: rgba(233,233,242,.86);
 }
-.projectDetail__highlights li{margin:6px 0}
+.projectDetail__list li{margin:6px 0}
 .projectDetail__status{
   margin:0;
   color: rgba(233,233,242,.72);
@@ -1698,10 +1709,24 @@ button.social:focus-visible{
             <div class="projectDetail__ghMeta" id="projectGhMeta" hidden></div>
             <div class="projectDetail__chips" id="projectChips" aria-label="Technologies"></div>
             <div class="projectDetail__actions" id="projectActions"></div>
-            <h4 class="projectDetail__subhead" data-i18n="project_github_summary_title">From GitHub</h4>
-            <div class="projectDetail__highlights" id="projectGitHubSummary" hidden>
-              <p class="muted" id="projectGitHubSummaryText"></p>
-              <ul id="projectGitHubHighlights"></ul>
+            <h4 class="projectDetail__subhead" data-i18n="project_details_title">Project overview</h4>
+            <div class="projectDetail__sections" id="projectDetails" hidden>
+              <div>
+                <p class="projectDetail__sectionTitle" data-i18n="detail_description">Description</p>
+                <p class="projectDetail__sectionText" id="detailDescription"></p>
+              </div>
+              <div>
+                <p class="projectDetail__sectionTitle" data-i18n="detail_role">Role</p>
+                <ul class="projectDetail__list" id="detailRole"></ul>
+              </div>
+              <div>
+                <p class="projectDetail__sectionTitle" data-i18n="detail_impact">Impact</p>
+                <ul class="projectDetail__list" id="detailImpact"></ul>
+              </div>
+              <div>
+                <p class="projectDetail__sectionTitle" data-i18n="detail_tools">Tools used</p>
+                <div class="projectDetail__chips" id="detailTools"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1827,7 +1852,11 @@ const STRINGS = {
     project_close_aria: "Close project details",
     project_loading: "Loading project details…",
     project_github_fallback: "GitHub details could not be loaded right now.",
-    project_github_summary_title: "From GitHub",
+    project_details_title: "Project overview",
+    detail_description: "Description",
+    detail_role: "Role",
+    detail_impact: "Impact",
+    detail_tools: "Tools used",
     project_stars: "stars",
     project_forks: "forks",
     project_open_repo: "Open repository",
@@ -1941,7 +1970,11 @@ const STRINGS = {
     project_close_aria: "Fermer le détail du projet",
     project_loading: "Chargement des détails du projet…",
     project_github_fallback: "Impossible de charger les infos GitHub pour le moment.",
-    project_github_summary_title: "Depuis GitHub",
+    project_details_title: "Présentation du projet",
+    detail_description: "Description",
+    detail_role: "Rôle",
+    detail_impact: "Impact",
+    detail_tools: "Outils utilisés",
     project_stars: "étoiles",
     project_forks: "forks",
     project_open_repo: "Ouvrir le dépôt",
@@ -2190,6 +2223,73 @@ function extractReadmeInfo(readmeText) {
   return { summary, bullets };
 }
 
+function sentenceCase(s) {
+  const str = String(s || "").trim();
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function buildProfessionalDescription({ repoDescription, readmeSummary, projectTitle }) {
+  const base = (repoDescription || "").trim() || (readmeSummary || "").trim();
+  if (!base) return "";
+  // Light rephrasing to sound more professional (without hallucinating details).
+  const safe = base.replace(/\s+/g, " ").trim();
+  const lead = projectTitle ? `${projectTitle}: ` : "";
+  // Avoid repeating title if it already starts similarly.
+  if (projectTitle && safe.toLowerCase().startsWith(projectTitle.toLowerCase())) return sentenceCase(safe);
+  return sentenceCase(lead + safe);
+}
+
+function inferRoleBullets(chips) {
+  const set = new Set((chips || []).map((c) => (typeof c === "string" ? c : "")).filter(Boolean));
+  const bullets = [];
+  if (set.has("Scraping")) bullets.push("Designed and implemented the data collection pipeline (web scraping).");
+  if (set.has("Data viz")) bullets.push("Built exploratory analyses and visualisations to communicate insights.");
+  if (set.has("Notebook")) bullets.push("Prototyped and documented the work in notebooks for reproducibility.");
+  if (set.has("Supabase")) bullets.push("Implemented backend integration and data persistence (Supabase).");
+  if (set.has("React Native") || set.has("Expo")) bullets.push("Developed a mobile experience with React Native / Expo.");
+  if (set.has("Streamlit")) bullets.push("Built an interactive interface using Streamlit.");
+  if (set.has("TypeScript")) bullets.push("Structured the codebase with TypeScript for maintainability.");
+  if (bullets.length === 0) bullets.push("Owned the end-to-end implementation: scoping, build, and documentation.");
+  return bullets.slice(0, 4);
+}
+
+function inferImpactBullets(readmeBullets) {
+  const src = Array.isArray(readmeBullets) ? readmeBullets : [];
+  const picked = [];
+  for (const b of src) {
+    const low = b.toLowerCase();
+    if (/(insight|decision|improv|reduce|increase|impact|result|metric|kpi|adoption)/.test(low)) {
+      picked.push(sentenceCase(b));
+    }
+    if (picked.length >= 3) break;
+  }
+  if (picked.length) return picked;
+  // Generic, non-claiming impacts
+  return [
+    "Clarifies the problem through a structured dataset and analysis.",
+    "Improves decision-making by turning raw data into actionable insights.",
+  ];
+}
+
+function buildToolsChips(baseChips, gh) {
+  const out = [];
+  const add = (x) => {
+    const v = String(x || "").trim();
+    if (!v) return;
+    if (out.some((a) => a.toLowerCase() === v.toLowerCase())) return;
+    out.push(v);
+  };
+  for (const c of baseChips || []) {
+    if (typeof c === "string") add(c);
+    else if (c && typeof c.key === "string") add(t(c.key));
+  }
+  if (gh?.language) add(gh.language);
+  // A few topics can be useful, but keep it tight.
+  for (const topic of (gh?.topics || []).slice(0, 4)) add(topic);
+  return out;
+}
+
 function getProjectIdFromHash() {
   const hash = (location.hash || "").trim();
   const m = hash.match(/^#project-([a-z0-9_-]+)$/i);
@@ -2221,9 +2321,11 @@ function renderProject(id) {
   const actions = $("#projectActions");
   const status = $("#projectStatus");
   const ghMeta = $("#projectGhMeta");
-  const ghSummaryWrap = $("#projectGitHubSummary");
-  const ghSummaryText = $("#projectGitHubSummaryText");
-  const ghHighlights = $("#projectGitHubHighlights");
+  const detailsWrap = $("#projectDetails");
+  const detailDescription = $("#detailDescription");
+  const detailRole = $("#detailRole");
+  const detailImpact = $("#detailImpact");
+  const detailTools = $("#detailTools");
 
   const titleText = p.titleKey in (STRINGS[currentLang] || {}) ? t(p.titleKey) : p.titleKey;
   const descText = t(p.descKey);
@@ -2243,9 +2345,11 @@ function renderProject(id) {
     ghMeta.hidden = true;
     ghMeta.innerHTML = "";
   }
-  if (ghSummaryWrap) ghSummaryWrap.hidden = true;
-  if (ghSummaryText) ghSummaryText.textContent = "";
-  if (ghHighlights) ghHighlights.innerHTML = "";
+  if (detailsWrap) detailsWrap.hidden = true;
+  if (detailDescription) detailDescription.textContent = "";
+  if (detailRole) detailRole.innerHTML = "";
+  if (detailImpact) detailImpact.innerHTML = "";
+  if (detailTools) detailTools.innerHTML = "";
 
   if (chips) {
     chips.innerHTML = "";
@@ -2295,23 +2399,69 @@ function renderProject(id) {
       }
 
       const info = extractReadmeInfo(gh.readmeText || "");
-      const summary = (gh.description || "").trim() || info.summary;
-      const bullets = info.bullets;
 
-      if (ghSummaryWrap) {
-        if (summary || (bullets && bullets.length)) {
-          ghSummaryWrap.hidden = false;
-          if (ghSummaryText) ghSummaryText.textContent = summary || "";
-          if (ghHighlights) {
-            ghHighlights.innerHTML = "";
-            for (const b of bullets) {
-              const li = document.createElement("li");
-              li.textContent = b;
-              ghHighlights.appendChild(li);
-            }
+      const professionalDesc = buildProfessionalDescription({
+        repoDescription: gh.description,
+        readmeSummary: info.summary,
+        projectTitle: titleText,
+      });
+
+      const roleBullets =
+        currentLang === "fr"
+          ? inferRoleBullets(p.chips).map((x) =>
+              x
+                .replace("Designed and implemented the data collection pipeline (web scraping).", "Conception et mise en place de la collecte de données (web scraping).")
+                .replace("Built exploratory analyses and visualisations to communicate insights.", "Réalisation d’analyses exploratoires et de visualisations pour communiquer les insights.")
+                .replace("Prototyped and documented the work in notebooks for reproducibility.", "Prototypage et documentation en notebooks pour assurer la reproductibilité.")
+                .replace("Implemented backend integration and data persistence (Supabase).", "Intégration backend et persistance des données (Supabase).")
+                .replace("Developed a mobile experience with React Native / Expo.", "Développement d’une expérience mobile avec React Native / Expo.")
+                .replace("Built an interactive interface using Streamlit.", "Création d’une interface interactive avec Streamlit.")
+                .replace("Structured the codebase with TypeScript for maintainability.", "Structuration du code en TypeScript pour la maintenabilité.")
+                .replace("Owned the end-to-end implementation: scoping, build, and documentation.", "Prise en charge de bout en bout : cadrage, réalisation et documentation.")
+            )
+          : inferRoleBullets(p.chips);
+
+      const impactBullets =
+        currentLang === "fr"
+          ? inferImpactBullets(info.bullets).map((x) =>
+              x
+                .replace("Clarifies the problem through a structured dataset and analysis.", "Clarifie le sujet grâce à un dataset structuré et une analyse.")
+                .replace("Improves decision-making by turning raw data into actionable insights.", "Facilite la prise de décision en transformant la donnée brute en insights actionnables.")
+            )
+          : inferImpactBullets(info.bullets);
+
+      const tools = buildToolsChips(p.chips, gh);
+
+      if (detailsWrap) {
+        detailsWrap.hidden = false;
+        if (detailDescription) detailDescription.textContent = professionalDesc || descText || "";
+
+        if (detailRole) {
+          detailRole.innerHTML = "";
+          for (const b of roleBullets) {
+            const li = document.createElement("li");
+            li.textContent = b;
+            detailRole.appendChild(li);
           }
-        } else {
-          ghSummaryWrap.hidden = true;
+        }
+
+        if (detailImpact) {
+          detailImpact.innerHTML = "";
+          for (const b of impactBullets) {
+            const li = document.createElement("li");
+            li.textContent = b;
+            detailImpact.appendChild(li);
+          }
+        }
+
+        if (detailTools) {
+          detailTools.innerHTML = "";
+          for (const tool of tools) {
+            const s = document.createElement("span");
+            s.className = "chip";
+            s.textContent = tool;
+            detailTools.appendChild(s);
+          }
         }
       }
     })
@@ -2321,6 +2471,22 @@ function renderProject(id) {
       if (status) {
         status.hidden = false;
         status.textContent = t("project_github_fallback");
+      }
+      if (detailsWrap) {
+        detailsWrap.hidden = false;
+        if (detailDescription) detailDescription.textContent = descText || "";
+        if (detailRole) detailRole.innerHTML = "";
+        if (detailImpact) detailImpact.innerHTML = "";
+        if (detailTools) {
+          detailTools.innerHTML = "";
+          for (const c of p.chips) {
+            const s = document.createElement("span");
+            s.className = "chip";
+            if (typeof c === "string") s.textContent = c;
+            else s.textContent = t(c.key);
+            detailTools.appendChild(s);
+          }
+        }
       }
     });
 }

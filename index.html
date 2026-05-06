@@ -1724,6 +1724,14 @@ button.social:focus-visible{
                 <ul class="projectDetail__list" id="detailImpact"></ul>
               </div>
               <div>
+                <p class="projectDetail__sectionTitle" data-i18n="detail_objective">Objective</p>
+                <p class="projectDetail__sectionText" id="detailObjective"></p>
+              </div>
+              <div>
+                <p class="projectDetail__sectionTitle" data-i18n="detail_features">Key features</p>
+                <ul class="projectDetail__list" id="detailFeatures"></ul>
+              </div>
+              <div>
                 <p class="projectDetail__sectionTitle" data-i18n="detail_tools">Tools used</p>
                 <div class="projectDetail__chips" id="detailTools"></div>
               </div>
@@ -1856,6 +1864,8 @@ const STRINGS = {
     detail_description: "Description",
     detail_role: "Role",
     detail_impact: "Impact",
+    detail_objective: "Objective",
+    detail_features: "Key features",
     detail_tools: "Tools used",
     project_stars: "stars",
     project_forks: "forks",
@@ -1974,6 +1984,8 @@ const STRINGS = {
     detail_description: "Description",
     detail_role: "Rôle",
     detail_impact: "Impact",
+    detail_objective: "Objectif",
+    detail_features: "Fonctionnalités",
     detail_tools: "Outils utilisés",
     project_stars: "étoiles",
     project_forks: "forks",
@@ -2057,6 +2069,56 @@ const PROJECTS = {
     descKey: "proj1_desc",
     altKey: "proj1_alt",
     chips: ["Python", "Scraping", { key: "chip_analysis" }],
+    details: {
+      fr: {
+        description:
+          "Ce projet part d’un constat simple : beaucoup d’abandons viennent d’un mauvais “matching” entre le quotidien de l’adoptant et les besoins réels de l’animal. J’ai donc analysé les causes d’abandon (temps, budget, contraintes, comportements, imprévus), puis structuré ces informations en un parcours digital qui transforme la donnée en décision. Le résultat : une expérience guidée, compréhensible et orientée action, qui aide à choisir un animal adapté et à anticiper les points de vigilance avant l’adoption.",
+        role: [
+          "Analyse et structuration des données",
+          "Conception du parcours utilisateur",
+          "Rédaction des contenus",
+        ],
+        impact: [
+          "Réduit le risque de mauvais matching via une recommandation plus pertinente",
+          "Transforme une analyse complexe en décision simple (UX orientée action)",
+          "Renforce la responsabilité de l’adoption grâce à une préparation guidée",
+        ],
+        objective:
+          "Réduire les adoptions inadaptées et limiter le risque d’abandon via une recommandation plus pertinente et une meilleure préparation de l’adoptant.",
+        features: [
+          "Collecte et consolidation de données",
+          "Catégorisation des causes d’abandon",
+          "Questionnaire orienté “mode de vie”",
+          "Logique de recommandation",
+          "Restitution claire avec conseils",
+          "Approche UX centrée sur la prévention et la prise de décision",
+        ],
+      },
+      en: {
+        description:
+          "This project starts from a simple observation: many pet surrenders stem from a poor “match” between an adopter’s day‑to‑day life and an animal’s real needs. I analysed the main drivers behind surrenders (time, budget, constraints, behaviours, unexpected events), then structured them into a guided digital journey that turns data into decision-making. The result is a clear, action-oriented experience that helps adopters choose an animal that fits their lifestyle and anticipate key watch‑outs before adoption.",
+        role: [
+          "Data analysis and structuring",
+          "User journey (UX) design",
+          "Content writing",
+        ],
+        impact: [
+          "Reduces the risk of poor matching through more relevant recommendations",
+          "Turns complex analysis into simple, action-oriented decisions",
+          "Promotes responsible adoption through guided preparation",
+        ],
+        objective:
+          "Reduce unsuitable adoptions and lower the risk of surrender by improving recommendation relevance and adopter preparation.",
+        features: [
+          "Data collection and consolidation",
+          "Categorisation of surrender reasons",
+          "Lifestyle-oriented questionnaire",
+          "Recommendation logic",
+          "Clear results with tailored advice",
+          "UX focused on prevention and decision-making",
+        ],
+      },
+    },
   },
   sign: {
     img: "./sign-language.jpg",
@@ -2326,6 +2388,8 @@ function renderProject(id) {
   const detailRole = $("#detailRole");
   const detailImpact = $("#detailImpact");
   const detailTools = $("#detailTools");
+  const detailObjective = $("#detailObjective");
+  const detailFeatures = $("#detailFeatures");
 
   const titleText = p.titleKey in (STRINGS[currentLang] || {}) ? t(p.titleKey) : p.titleKey;
   const descText = t(p.descKey);
@@ -2350,6 +2414,8 @@ function renderProject(id) {
   if (detailRole) detailRole.innerHTML = "";
   if (detailImpact) detailImpact.innerHTML = "";
   if (detailTools) detailTools.innerHTML = "";
+  if (detailObjective) detailObjective.textContent = "";
+  if (detailFeatures) detailFeatures.innerHTML = "";
 
   if (chips) {
     chips.innerHTML = "";
@@ -2400,14 +2466,18 @@ function renderProject(id) {
 
       const info = extractReadmeInfo(gh.readmeText || "");
 
-      const professionalDesc = buildProfessionalDescription({
-        repoDescription: gh.description,
-        readmeSummary: info.summary,
-        projectTitle: titleText,
-      });
+      const curated = p.details?.[currentLang];
+      const professionalDesc =
+        curated?.description ||
+        buildProfessionalDescription({
+          repoDescription: gh.description,
+          readmeSummary: info.summary,
+          projectTitle: titleText,
+        });
 
-      const roleBullets =
-        currentLang === "fr"
+      const roleBullets = curated?.role?.length
+        ? curated.role
+        : currentLang === "fr"
           ? inferRoleBullets(p.chips).map((x) =>
               x
                 .replace("Designed and implemented the data collection pipeline (web scraping).", "Conception et mise en place de la collecte de données (web scraping).")
@@ -2421,8 +2491,9 @@ function renderProject(id) {
             )
           : inferRoleBullets(p.chips);
 
-      const impactBullets =
-        currentLang === "fr"
+      const impactBullets = curated?.impact?.length
+        ? curated.impact
+        : currentLang === "fr"
           ? inferImpactBullets(info.bullets).map((x) =>
               x
                 .replace("Clarifies the problem through a structured dataset and analysis.", "Clarifie le sujet grâce à un dataset structuré et une analyse.")
@@ -2431,6 +2502,8 @@ function renderProject(id) {
           : inferImpactBullets(info.bullets);
 
       const tools = buildToolsChips(p.chips, gh);
+      const objectiveText = curated?.objective || "";
+      const featuresList = curated?.features || [];
 
       if (detailsWrap) {
         detailsWrap.hidden = false;
@@ -2451,6 +2524,17 @@ function renderProject(id) {
             const li = document.createElement("li");
             li.textContent = b;
             detailImpact.appendChild(li);
+          }
+        }
+
+        if (detailObjective) detailObjective.textContent = objectiveText;
+
+        if (detailFeatures) {
+          detailFeatures.innerHTML = "";
+          for (const f of featuresList) {
+            const li = document.createElement("li");
+            li.textContent = f;
+            detailFeatures.appendChild(li);
           }
         }
 

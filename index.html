@@ -650,6 +650,21 @@ button.social:focus-visible{
   white-space: pre-wrap;
   word-break: break-word;
 }
+.projectDetail__highlights{
+  display:grid;
+  gap:10px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  border-radius: var(--radius);
+  padding: 14px 14px;
+}
+.projectDetail__highlights p{margin:0}
+.projectDetail__highlights ul{
+  margin:0;
+  padding-left: 18px;
+  color: rgba(233,233,242,.86);
+}
+.projectDetail__highlights li{margin:6px 0}
 .projectDetail__status{
   margin:0;
   color: rgba(233,233,242,.72);
@@ -1683,9 +1698,10 @@ button.social:focus-visible{
             <div class="projectDetail__ghMeta" id="projectGhMeta" hidden></div>
             <div class="projectDetail__chips" id="projectChips" aria-label="Technologies"></div>
             <div class="projectDetail__actions" id="projectActions"></div>
-            <h4 class="projectDetail__subhead" data-i18n="project_readme_title">README</h4>
-            <div class="projectDetail__readme" id="projectReadme" hidden>
-              <pre id="projectReadmeText"></pre>
+            <h4 class="projectDetail__subhead" data-i18n="project_github_summary_title">From GitHub</h4>
+            <div class="projectDetail__highlights" id="projectGitHubSummary" hidden>
+              <p class="muted" id="projectGitHubSummaryText"></p>
+              <ul id="projectGitHubHighlights"></ul>
             </div>
           </div>
         </div>
@@ -1811,7 +1827,7 @@ const STRINGS = {
     project_close_aria: "Close project details",
     project_loading: "Loading project details…",
     project_github_fallback: "GitHub details could not be loaded right now.",
-    project_readme_title: "README",
+    project_github_summary_title: "From GitHub",
     project_stars: "stars",
     project_forks: "forks",
     project_open_repo: "Open repository",
@@ -1925,7 +1941,7 @@ const STRINGS = {
     project_close_aria: "Fermer le détail du projet",
     project_loading: "Chargement des détails du projet…",
     project_github_fallback: "Impossible de charger les infos GitHub pour le moment.",
-    project_readme_title: "README",
+    project_github_summary_title: "Depuis GitHub",
     project_stars: "étoiles",
     project_forks: "forks",
     project_open_repo: "Ouvrir le dépôt",
@@ -2125,6 +2141,55 @@ async function loadGitHubProject(repoFullName) {
   return promise;
 }
 
+function extractReadmeInfo(readmeText) {
+  const raw = String(readmeText || "");
+  if (!raw.trim()) return { summary: "", bullets: [] };
+
+  // Remove code blocks to avoid noisy content.
+  const withoutCode = raw.replace(/```[\s\S]*?```/g, "").trim();
+  const lines = withoutCode.split(/\r?\n/);
+
+  // Find first meaningful paragraph.
+  const cleaned = [];
+  for (const line of lines) {
+    const l = line.trim();
+    if (!l) {
+      cleaned.push("");
+      continue;
+    }
+    // Ignore common badge/image-only lines.
+    if (/^\[!\[.*\]\(.*\)\]\(.*\)$/.test(l) || /^!\[.*\]\(.*\)$/.test(l)) continue;
+    cleaned.push(l);
+  }
+
+  // Build a short summary from the first paragraph after an optional title.
+  let startIdx = 0;
+  if (cleaned[0]?.startsWith("#")) startIdx = 1;
+  while (cleaned[startIdx] === "") startIdx++;
+
+  const para = [];
+  for (let i = startIdx; i < cleaned.length; i++) {
+    if (cleaned[i] === "") break;
+    if (cleaned[i].startsWith("#")) break;
+    para.push(cleaned[i]);
+  }
+  const summary = para.join(" ").slice(0, 360).trim();
+
+  // Grab up to 4 bullet points from anywhere (usually under Features/Usage).
+  const bullets = [];
+  for (const l of cleaned) {
+    const m = l.match(/^[-*]\s+(.*)$/);
+    if (!m) continue;
+    const item = m[1].trim();
+    if (!item) continue;
+    if (item.length > 140) continue;
+    bullets.push(item);
+    if (bullets.length >= 4) break;
+  }
+
+  return { summary, bullets };
+}
+
 function getProjectIdFromHash() {
   const hash = (location.hash || "").trim();
   const m = hash.match(/^#project-([a-z0-9_-]+)$/i);
@@ -2156,8 +2221,9 @@ function renderProject(id) {
   const actions = $("#projectActions");
   const status = $("#projectStatus");
   const ghMeta = $("#projectGhMeta");
-  const readmeWrap = $("#projectReadme");
-  const readmeText = $("#projectReadmeText");
+  const ghSummaryWrap = $("#projectGitHubSummary");
+  const ghSummaryText = $("#projectGitHubSummaryText");
+  const ghHighlights = $("#projectGitHubHighlights");
 
   const titleText = p.titleKey in (STRINGS[currentLang] || {}) ? t(p.titleKey) : p.titleKey;
   const descText = t(p.descKey);
@@ -2177,8 +2243,9 @@ function renderProject(id) {
     ghMeta.hidden = true;
     ghMeta.innerHTML = "";
   }
-  if (readmeWrap) readmeWrap.hidden = true;
-  if (readmeText) readmeText.textContent = "";
+  if (ghSummaryWrap) ghSummaryWrap.hidden = true;
+  if (ghSummaryText) ghSummaryText.textContent = "";
+  if (ghHighlights) ghHighlights.innerHTML = "";
 
   if (chips) {
     chips.innerHTML = "";
@@ -2227,12 +2294,24 @@ function renderProject(id) {
         `;
       }
 
-      if (readmeWrap && readmeText) {
-        const txt = (gh.readmeText || "").trim();
-        if (txt) {
-          readmeWrap.hidden = false;
-          // Simple: show README as text (safe + readable). Can upgrade to markdown later.
-          readmeText.textContent = txt;
+      const info = extractReadmeInfo(gh.readmeText || "");
+      const summary = (gh.description || "").trim() || info.summary;
+      const bullets = info.bullets;
+
+      if (ghSummaryWrap) {
+        if (summary || (bullets && bullets.length)) {
+          ghSummaryWrap.hidden = false;
+          if (ghSummaryText) ghSummaryText.textContent = summary || "";
+          if (ghHighlights) {
+            ghHighlights.innerHTML = "";
+            for (const b of bullets) {
+              const li = document.createElement("li");
+              li.textContent = b;
+              ghHighlights.appendChild(li);
+            }
+          }
+        } else {
+          ghSummaryWrap.hidden = true;
         }
       }
     })

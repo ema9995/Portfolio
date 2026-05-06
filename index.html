@@ -611,6 +611,50 @@ button.social:focus-visible{
   font-size: clamp(22px, 2.6vw, 30px);
 }
 .projectDetail__meta{margin:0; color: rgba(233,233,242,.74); line-height:1.7}
+.projectDetail__subhead{
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.projectDetail__ghMeta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-top: 4px;
+}
+.projectDetail__ghLink{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.03);
+}
+.projectDetail__ghLink:hover{background: rgba(255,255,255,.05)}
+.projectDetail__readme{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  border-radius: var(--radius);
+  padding: 14px 14px;
+  overflow:auto;
+}
+.projectDetail__readme pre{
+  margin:0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(233,233,242,.90);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.projectDetail__status{
+  margin:0;
+  color: rgba(233,233,242,.72);
+  font-size: 13px;
+}
 .projectDetail__chips{display:flex; gap:8px; flex-wrap:wrap}
 .projectDetail__actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:4px}
 
@@ -1633,8 +1677,16 @@ button.social:focus-visible{
             </div>
             <h3 class="projectDetail__title" id="projectTitle"></h3>
             <p class="projectDetail__meta" id="projectDesc"></p>
+            <p class="projectDetail__status" id="projectStatus" data-i18n="project_loading">
+              Loading project details…
+            </p>
+            <div class="projectDetail__ghMeta" id="projectGhMeta" hidden></div>
             <div class="projectDetail__chips" id="projectChips" aria-label="Technologies"></div>
             <div class="projectDetail__actions" id="projectActions"></div>
+            <h4 class="projectDetail__subhead" data-i18n="project_readme_title">README</h4>
+            <div class="projectDetail__readme" id="projectReadme" hidden>
+              <pre id="projectReadmeText"></pre>
+            </div>
           </div>
         </div>
       </div>
@@ -1757,6 +1809,12 @@ const STRINGS = {
     mail_send_aria: "Send an email to fernandesema99@gmail.com",
     back_to_projects: "Back to projects",
     project_close_aria: "Close project details",
+    project_loading: "Loading project details…",
+    project_github_fallback: "GitHub details could not be loaded right now.",
+    project_readme_title: "README",
+    project_stars: "stars",
+    project_forks: "forks",
+    project_open_repo: "Open repository",
     footer_top: "Back to top",
     toast_copied: "Email address copied.",
     toast_copy_fail: "Could not copy. Please copy the address manually.",
@@ -1865,6 +1923,12 @@ const STRINGS = {
     mail_send_aria: "Envoyer un e-mail à fernandesema99@gmail.com",
     back_to_projects: "Retour aux projets",
     project_close_aria: "Fermer le détail du projet",
+    project_loading: "Chargement des détails du projet…",
+    project_github_fallback: "Impossible de charger les infos GitHub pour le moment.",
+    project_readme_title: "README",
+    project_stars: "étoiles",
+    project_forks: "forks",
+    project_open_repo: "Ouvrir le dépôt",
     footer_top: "Retour en haut",
     toast_copied: "Adresse e-mail copiée.",
     toast_copy_fail: "Copie impossible. Copiez l’adresse manuellement.",
@@ -1939,6 +2003,7 @@ const PROJECTS = {
   spa: {
     img: "./spa-animaux.jpg",
     github: "https://github.com/ema9995/Scraping-SPA.git",
+    repo: "ema9995/Scraping-SPA",
     titleKey: "proj1_title",
     descKey: "proj1_desc",
     altKey: "proj1_alt",
@@ -1947,6 +2012,7 @@ const PROJECTS = {
   sign: {
     img: "./sign-language.jpg",
     github: "https://github.com/ema9995/Sign_language_detection.git",
+    repo: "ema9995/Sign_language_detection",
     titleKey: "proj2_title",
     descKey: "proj2_desc",
     altKey: "proj2_alt",
@@ -1955,6 +2021,7 @@ const PROJECTS = {
   wwe: {
     img: "./wwe-analyse.jpg",
     github: "https://github.com/ema9995/WWE_data_analysis.git",
+    repo: "ema9995/WWE_data_analysis",
     titleKey: "proj3_title",
     descKey: "proj3_desc",
     altKey: "proj3_alt",
@@ -1963,6 +2030,7 @@ const PROJECTS = {
   breastwise: {
     img: "./breastwise.jpg",
     github: "https://github.com/ema9995/Breastwise.git",
+    repo: "ema9995/Breastwise",
     titleKey: "Breastwise",
     descKey: "proj4_desc",
     altKey: "proj4_alt",
@@ -1971,6 +2039,7 @@ const PROJECTS = {
   checky: {
     img: "./checky.jpg",
     github: "https://github.com/ema9995/Checky.git",
+    repo: "ema9995/Checky",
     titleKey: "Checky",
     descKey: "proj5_desc",
     altKey: "proj5_alt",
@@ -1979,6 +2048,7 @@ const PROJECTS = {
   battleship: {
     img: "./bataille-navale.jpg",
     github: "https://github.com/ema9995/Bataille-navale.git",
+    repo: "ema9995/Bataille-navale",
     titleKey: "proj6_title",
     descKey: "proj6_desc",
     altKey: "proj6_alt",
@@ -1987,12 +2057,73 @@ const PROJECTS = {
   rps: {
     img: "./pierre-papier-ciseaux.jpg",
     github: "https://github.com/ema9995/pierre-papier-ciseaux.git",
+    repo: "ema9995/pierre-papier-ciseaux",
     titleKey: "proj7_title",
     descKey: "proj7_desc",
     altKey: "proj7_alt",
     chips: ["Python", "Streamlit"],
   },
 };
+
+const githubCache = new Map();
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("\"", "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+async function fetchGitHubJson(url) {
+  const res = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github+json",
+    },
+  });
+  if (!res.ok) throw new Error(`GitHub request failed: ${res.status}`);
+  return await res.json();
+}
+
+async function fetchGitHubReadmeRaw(repoFullName) {
+  const url = `https://api.github.com/repos/${repoFullName}/readme`;
+  const res = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github.raw+json",
+    },
+  });
+  if (!res.ok) throw new Error(`README request failed: ${res.status}`);
+  return await res.text();
+}
+
+async function loadGitHubProject(repoFullName) {
+  if (!repoFullName) return null;
+  if (githubCache.has(repoFullName)) return githubCache.get(repoFullName);
+
+  const promise = (async () => {
+    const repo = await fetchGitHubJson(`https://api.github.com/repos/${repoFullName}`);
+    let readmeText = "";
+    try {
+      readmeText = await fetchGitHubReadmeRaw(repoFullName);
+    } catch {
+      readmeText = "";
+    }
+    return {
+      full_name: repo.full_name,
+      html_url: repo.html_url,
+      description: repo.description || "",
+      stargazers_count: repo.stargazers_count ?? 0,
+      forks_count: repo.forks_count ?? 0,
+      language: repo.language || "",
+      topics: Array.isArray(repo.topics) ? repo.topics : [],
+      readmeText,
+    };
+  })();
+
+  githubCache.set(repoFullName, promise);
+  return promise;
+}
 
 function getProjectIdFromHash() {
   const hash = (location.hash || "").trim();
@@ -2023,6 +2154,10 @@ function renderProject(id) {
   const desc = $("#projectDesc");
   const chips = $("#projectChips");
   const actions = $("#projectActions");
+  const status = $("#projectStatus");
+  const ghMeta = $("#projectGhMeta");
+  const readmeWrap = $("#projectReadme");
+  const readmeText = $("#projectReadmeText");
 
   const titleText = p.titleKey in (STRINGS[currentLang] || {}) ? t(p.titleKey) : p.titleKey;
   const descText = t(p.descKey);
@@ -2033,6 +2168,17 @@ function renderProject(id) {
   }
   if (title) title.textContent = titleText || "";
   if (desc) desc.textContent = descText || "";
+
+  if (status) {
+    status.hidden = false;
+    status.textContent = t("project_loading");
+  }
+  if (ghMeta) {
+    ghMeta.hidden = true;
+    ghMeta.innerHTML = "";
+  }
+  if (readmeWrap) readmeWrap.hidden = true;
+  if (readmeText) readmeText.textContent = "";
 
   if (chips) {
     chips.innerHTML = "";
@@ -2055,6 +2201,49 @@ function renderProject(id) {
     a.textContent = "GitHub";
     actions.appendChild(a);
   }
+
+  // Enrich with GitHub data (repo + README). Non-blocking; falls back silently.
+  loadGitHubProject(p.repo)
+    .then((gh) => {
+      if (!gh) throw new Error("No repo");
+      const stillOpen = getProjectIdFromHash() === id;
+      if (!stillOpen) return;
+
+      if (status) status.hidden = true;
+
+      if (ghMeta) {
+        const parts = [];
+        if (gh.language) parts.push(escapeHtml(gh.language));
+        parts.push(`${escapeHtml(String(gh.stargazers_count))} ${escapeHtml(t("project_stars"))}`);
+        parts.push(`${escapeHtml(String(gh.forks_count))} ${escapeHtml(t("project_forks"))}`);
+
+        ghMeta.hidden = false;
+        ghMeta.innerHTML = `
+          <a class="projectDetail__ghLink" href="${escapeHtml(gh.html_url)}" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <span class="muted">${escapeHtml(t("project_open_repo"))}</span>
+          </a>
+          <span class="muted">${parts.join(" • ")}</span>
+        `;
+      }
+
+      if (readmeWrap && readmeText) {
+        const txt = (gh.readmeText || "").trim();
+        if (txt) {
+          readmeWrap.hidden = false;
+          // Simple: show README as text (safe + readable). Can upgrade to markdown later.
+          readmeText.textContent = txt;
+        }
+      }
+    })
+    .catch(() => {
+      const stillOpen = getProjectIdFromHash() === id;
+      if (!stillOpen) return;
+      if (status) {
+        status.hidden = false;
+        status.textContent = t("project_github_fallback");
+      }
+    });
 }
 
 function syncProjectModalWithHash() {

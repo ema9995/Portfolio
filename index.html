@@ -537,6 +537,8 @@ button.social:focus-visible{
 .projectCard__title{margin:0 0 8px; font-size:16px}
 .projectCard__chips{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
 .projectCard__actions{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+.projectCard__titleLink{color:inherit;text-decoration:none}
+.projectCard__titleLink:hover{color:var(--accent2);text-decoration:underline;text-decoration-color:rgba(192,132,252,.45)}
 
 .projectModal{
   position:fixed;
@@ -1156,7 +1158,7 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title" data-i18n="proj1_title">Scraping &amp; SPA analysis</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-spa" data-i18n="proj1_title">Scraping &amp; SPA analysis</a></h3>
                 <p class="muted" data-i18n="proj1_desc">
                   Scraping the French animal shelter (SPA) website, cleaning and analysing data to understand the main reasons pets are surrendered and support more responsible adoption.
                 </p>
@@ -1166,6 +1168,7 @@ button.social:focus-visible{
                   <span class="chip" data-i18n="chip_analysis">Analysis</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-spa" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/Scraping-SPA.git"
@@ -1189,7 +1192,7 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title" data-i18n="proj2_title">Sign language detection</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-sign" data-i18n="proj2_title">Sign language detection</a></h3>
                 <p class="muted" data-i18n="proj2_desc">
                   Computer vision detection / classification project focused on sign language.
                 </p>
@@ -1199,6 +1202,7 @@ button.social:focus-visible{
                   <span class="chip">Notebook</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-sign" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/Sign_language_detection.git"
@@ -1222,7 +1226,7 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title" data-i18n="proj3_title">WWE — scraping &amp; analysis</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-wwe" data-i18n="proj3_title">WWE — scraping &amp; analysis</a></h3>
                 <p class="muted" data-i18n="proj3_desc">
                   Collection and analysis of WWE match data (scraping + dataset + analysis).
                 </p>
@@ -1232,6 +1236,7 @@ button.social:focus-visible{
                   <span class="chip">Data viz</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-wwe" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/WWE_data_analysis.git"
@@ -1255,7 +1260,7 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title">Breastwise</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-breastwise">Breastwise</a></h3>
                 <p class="muted" data-i18n="proj4_desc">
                   Mobile companion app for people with breast cancer: onboarding, wellbeing, navigation, and Supabase backend.
                 </p>
@@ -1265,6 +1270,7 @@ button.social:focus-visible{
                   <span class="chip">Supabase</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-breastwise" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/Breastwise.git"
@@ -1288,7 +1294,7 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title">Checky</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-checky">Checky</a></h3>
                 <p class="muted" data-i18n="proj5_desc">
                   An app so you don’t forget anything when leaving home: customizable checklists, reminders, and useful features for everyday life.
                 </p>
@@ -1298,6 +1304,7 @@ button.social:focus-visible{
                   <span class="chip">Mobile</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-checky" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/Checky.git"
@@ -1321,13 +1328,14 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title" data-i18n="proj6_title">Game — Battleship</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-battleship" data-i18n="proj6_title">Game — Battleship</a></h3>
                 <p class="muted" data-i18n="proj6_desc">Mini battleship game in Python.</p>
                 <div class="projectCard__chips">
                   <span class="chip">Python</span>
                   <span class="chip" data-i18n="chip_game">Game</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-battleship" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/Bataille-navale.git"
@@ -1351,13 +1359,14 @@ button.social:focus-visible{
                 </div>
               </a>
               <div class="projectCard__body">
-                <h3 class="projectCard__title" data-i18n="proj7_title">Game — Rock / paper / scissors</h3>
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-rps" data-i18n="proj7_title">Game — Rock / paper / scissors</a></h3>
                 <p class="muted" data-i18n="proj7_desc">Mini Streamlit rock, paper, scissors game.</p>
                 <div class="projectCard__chips">
                   <span class="chip">Python</span>
                   <span class="chip">Streamlit</span>
                 </div>
                 <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-rps" data-i18n="btn_details">Details</a>
                   <a
                     class="btn btn--small btn--primary"
                     href="https://github.com/ema9995/pierre-papier-ciseaux.git"
@@ -1876,6 +1885,7 @@ const STRINGS = {
     form_copied:
       "Message copied to clipboard. Paste it into your email client.",
     form_copy_fail: "Could not copy. Please copy manually.",
+    btn_details: "Details",
   },
   fr: {
     page_title: "Portfolio | Ema Fernandes",
@@ -1996,6 +2006,7 @@ const STRINGS = {
     form_copied:
       "Message copié dans le presse-papiers. Collez-le dans votre client mail.",
     form_copy_fail: "Impossible de copier. Copiez manuellement.",
+    btn_details: "Détails",
   },
 };
 
@@ -2128,6 +2139,48 @@ const PROJECTS = {
     descKey: "proj2_desc",
     altKey: "proj2_alt",
     chips: ["Python", "IA", "Notebook"],
+    details: {
+      fr: {
+        description: "Projet de vision par ordinateur pour la détection et la classification de gestes de la langue des signes. Le modèle est entraîné sur des données images par deep learning et documenté dans un notebook Jupyter.",
+        role: [
+          "Collecte et prétraitement des données images",
+          "Conception et entraînement d'un modèle de classification deep learning",
+          "Évaluation des performances du modèle et documentation",
+        ],
+        impact: [
+          "Démontre une application concrète de l'IA pour l'accessibilité et la communication",
+          "Pose les bases d'un outil de reconnaissance de la langue des signes en temps réel",
+        ],
+        objective: "Construire un modèle capable de reconnaître avec précision les gestes de la langue des signes afin de faciliter la communication.",
+        features: [
+          "Prétraitement des données images",
+          "Entraînement d'un modèle de deep learning",
+          "Classification multi-classes des gestes",
+          "Évaluation des performances",
+          "Workflow documenté en notebook Jupyter",
+        ],
+      },
+      en: {
+        description: "A computer vision project that detects and classifies hand gestures corresponding to sign language letters. The model is trained on image data using deep learning techniques and documented in a Jupyter notebook.",
+        role: [
+          "Collected and preprocessed sign language image data",
+          "Designed and trained a deep learning classification model",
+          "Evaluated model accuracy and documented results in notebooks",
+        ],
+        impact: [
+          "Demonstrates a practical AI application for accessibility and communication",
+          "Provides a foundation for real-time sign language recognition",
+        ],
+        objective: "Build a model capable of accurately recognizing sign language gestures to facilitate communication.",
+        features: [
+          "Image data preprocessing",
+          "Deep learning model training",
+          "Multi-class gesture classification",
+          "Model performance evaluation",
+          "Documented workflow in Jupyter notebooks",
+        ],
+      },
+    },
   },
   wwe: {
     img: "./wwe-analyse.jpg",
@@ -2137,6 +2190,48 @@ const PROJECTS = {
     descKey: "proj3_desc",
     altKey: "proj3_alt",
     chips: ["Python", "Scraping", "Data viz"],
+    details: {
+      fr: {
+        description: "Projet de collecte et d'analyse de données autour des matchs de catch professionnel WWE. Le scraping web a permis de construire un dataset sur mesure, suivi d'une analyse exploratoire et de visualisations pour mettre en lumière des tendances.",
+        role: [
+          "Construction d'un pipeline de scraping pour collecter les données de matchs",
+          "Nettoyage et structuration du dataset brut",
+          "Création de visualisations pour analyser les tendances et les patterns",
+        ],
+        impact: [
+          "Création d'un dataset WWE unique et structuré à partir de zéro",
+          "Mise en évidence de tendances sur la fréquence des matchs, les résultats et les lutteurs",
+        ],
+        objective: "Explorer les tendances dans l'historique des matchs WWE grâce aux données, en transformant des données web brutes en insights pertinents.",
+        features: [
+          "Pipeline de scraping web",
+          "Nettoyage et structuration des données",
+          "Analyse exploratoire",
+          "Visualisations de données",
+          "Analyse des tendances et des performances",
+        ],
+      },
+      en: {
+        description: "A data collection and analysis project focused on WWE professional wrestling matches. Web scraping was used to build a custom dataset, followed by exploratory data analysis and visualisations to uncover trends.",
+        role: [
+          "Built a web scraping pipeline to collect match data",
+          "Cleaned and structured the raw dataset",
+          "Created visualisations to analyse trends and patterns",
+        ],
+        impact: [
+          "Produced a unique, structured WWE dataset from scratch",
+          "Surfaced insights on match frequency, outcomes, and performer trends",
+        ],
+        objective: "Explore patterns in WWE match history through data, turning raw web content into meaningful insights.",
+        features: [
+          "Web scraping pipeline",
+          "Data cleaning and structuring",
+          "Exploratory data analysis",
+          "Data visualisations",
+          "Match and performer trend analysis",
+        ],
+      },
+    },
   },
   breastwise: {
     img: "./breastwise.jpg",
@@ -2146,6 +2241,48 @@ const PROJECTS = {
     descKey: "proj4_desc",
     altKey: "proj4_alt",
     chips: ["React Native", "Expo", "Supabase"],
+    details: {
+      fr: {
+        description: "Application mobile d'accompagnement pour les personnes atteintes d'un cancer du sein. Développée avec React Native et Expo, elle propose un onboarding guidé, un suivi du bien-être, une aide à la navigation et un backend Supabase pour la persistance des données.",
+        role: [
+          "Développement de l'application mobile cross-platform avec React Native & Expo",
+          "Intégration de Supabase pour l'authentification et la persistance des données",
+          "Conception de l'expérience utilisateur et du parcours d'onboarding",
+        ],
+        impact: [
+          "Apporte un soutien émotionnel et pratique pendant une période difficile",
+          "Offre une expérience digitale structurée et empathique sur iOS et Android",
+        ],
+        objective: "Créer un compagnon numérique qui accompagne les patientes tout au long de leur traitement, en combinant suivi du bien-être et orientation pratique.",
+        features: [
+          "Parcours d'onboarding guidé",
+          "Suivi quotidien du bien-être",
+          "Aide à la navigation et ressources pratiques",
+          "Backend Supabase (authentification + base de données)",
+          "Cross-platform iOS & Android",
+        ],
+      },
+      en: {
+        description: "A compassionate mobile companion application built for people navigating breast cancer treatment. Developed with React Native and Expo, it provides structured onboarding, daily wellbeing check-ins, navigation support, and a Supabase-powered backend.",
+        role: [
+          "Developed the full cross-platform mobile app with React Native & Expo",
+          "Integrated Supabase for user authentication and data persistence",
+          "Designed the user experience and onboarding flow",
+        ],
+        impact: [
+          "Provides emotional and practical support during a difficult personal journey",
+          "Delivers a structured, empathetic digital experience accessible on iOS and Android",
+        ],
+        objective: "Create a digital companion that supports breast cancer patients throughout their treatment journey, combining wellbeing features with practical guidance.",
+        features: [
+          "Guided onboarding flow",
+          "Daily wellbeing tracking",
+          "Navigation and resource guidance",
+          "Supabase backend (auth + database)",
+          "Cross-platform iOS & Android",
+        ],
+      },
+    },
   },
   checky: {
     img: "./checky.jpg",
@@ -2155,6 +2292,48 @@ const PROJECTS = {
     descKey: "proj5_desc",
     altKey: "proj5_alt",
     chips: ["Expo", "TypeScript", "Mobile"],
+    details: {
+      fr: {
+        description: "Application mobile pour ne rien oublier avant de partir de chez soi. Développée avec Expo et TypeScript, elle propose des checklists personnalisables et des rappels intelligents pour simplifier le quotidien.",
+        role: [
+          "Conception et développement complet de l'application mobile avec Expo",
+          "Mise en place du système de checklists avec items et catégories personnalisables",
+          "Structuration du code en TypeScript pour la fiabilité et la maintenabilité",
+        ],
+        impact: [
+          "Réduit le stress lié à l'oubli d'objets essentiels avant de sortir",
+          "Améliore l'organisation quotidienne grâce à une interface simple et intuitive",
+        ],
+        objective: "Développer une application mobile légère et pratique qui accompagne les utilisateurs au quotidien pour rester organisés.",
+        features: [
+          "Checklists personnalisables",
+          "Système de rappels intelligent",
+          "Interface claire et intuitive",
+          "Cross-platform iOS & Android",
+          "TypeScript pour la fiabilité du code",
+        ],
+      },
+      en: {
+        description: "A mobile application that helps users avoid forgetting items when leaving home. Built with Expo and TypeScript, it offers fully customizable checklists and smart reminders to simplify daily routines.",
+        role: [
+          "Designed and developed the full mobile application with Expo",
+          "Implemented the checklist system with customizable items and categories",
+          "Structured the codebase with TypeScript for reliability and maintainability",
+        ],
+        impact: [
+          "Reduces the stress of forgetting essential items before leaving home",
+          "Improves day-to-day organisation through a simple, intuitive interface",
+        ],
+        objective: "Build a lightweight, practical mobile app that acts as a daily companion to keep users organised and stress-free.",
+        features: [
+          "Customizable checklists",
+          "Smart reminder system",
+          "Clean and intuitive UI",
+          "Cross-platform iOS & Android",
+          "TypeScript for code reliability",
+        ],
+      },
+    },
   },
   battleship: {
     img: "./bataille-navale.jpg",
@@ -2164,6 +2343,48 @@ const PROJECTS = {
     descKey: "proj6_desc",
     altKey: "proj6_alt",
     chips: ["Python", { key: "chip_game" }],
+    details: {
+      fr: {
+        description: "Le jeu classique de bataille navale développé en Python. Le joueur affronte un adversaire informatique avec placement des navires et gameplay au tour par tour via la ligne de commande.",
+        role: [
+          "Conception de la logique de jeu et du système de grille",
+          "Implémentation du placement des navires et de la détection touché/manqué",
+          "Construction de l'interface interactive en ligne de commande",
+        ],
+        impact: [
+          "Démonstration fun de la programmation orientée objet en Python",
+          "Illustre la pensée algorithmique à travers la conception de jeu",
+        ],
+        objective: "Recréer le jeu classique de bataille navale en Python pour pratiquer la logique de jeu et les concepts de la POO.",
+        features: [
+          "Grille de jeu interactive",
+          "Placement aléatoire des navires",
+          "Détection touché / manqué",
+          "Suivi du score",
+          "Interface en ligne de commande",
+        ],
+      },
+      en: {
+        description: "A classic battleship game built in Python. The player faces off against a computer opponent, with ship placement and turn-based gameplay all handled through the command line.",
+        role: [
+          "Designed the game logic and grid system",
+          "Implemented ship placement and hit/miss detection",
+          "Built the interactive command-line interface",
+        ],
+        impact: [
+          "A fun demonstration of Python object-oriented programming",
+          "Showcases algorithmic thinking through game design",
+        ],
+        objective: "Recreate the classic Battleship board game in Python to practice game logic and OOP concepts.",
+        features: [
+          "Grid-based game board",
+          "Randomized ship placement",
+          "Hit & miss detection",
+          "Score tracking",
+          "Interactive command-line interface",
+        ],
+      },
+    },
   },
   rps: {
     img: "./pierre-papier-ciseaux.jpg",
@@ -2173,6 +2394,48 @@ const PROJECTS = {
     descKey: "proj7_desc",
     altKey: "proj7_alt",
     chips: ["Python", "Streamlit"],
+    details: {
+      fr: {
+        description: "Un jeu de pierre, papier, ciseaux interactif développé en Python et déployé comme application web Streamlit. Jouez directement dans le navigateur avec une interface soignée et un suivi des scores en temps réel.",
+        role: [
+          "Implémentation de la logique de jeu en Python",
+          "Construction de l'interface web interactive avec Streamlit",
+          "Déploiement de l'application pour jouer dans le navigateur",
+        ],
+        impact: [
+          "Démontre comment transformer un script Python en application web interactive",
+          "Illustration rapide et accessible des capacités de Streamlit",
+        ],
+        objective: "Créer un jeu de pierre, papier, ciseaux jouable dans le navigateur avec Python et Streamlit.",
+        features: [
+          "Gameplay dans le navigateur",
+          "Suivi des scores en temps réel",
+          "Interface Streamlit soignée",
+          "Logique de jeu en Python",
+          "Déploiement web instantané",
+        ],
+      },
+      en: {
+        description: "An interactive rock, paper, scissors game built with Python and deployed as a Streamlit web app. Play directly in the browser with a clean interface and live score tracking.",
+        role: [
+          "Implemented the game logic in Python",
+          "Built the interactive web interface with Streamlit",
+          "Deployed the app for browser-based play",
+        ],
+        impact: [
+          "Demonstrates how Python scripts can be turned into interactive web experiences",
+          "A quick and accessible showcase of Streamlit's capabilities",
+        ],
+        objective: "Build a fun, browser-playable rock, paper, scissors game using Python and Streamlit.",
+        features: [
+          "Browser-based gameplay",
+          "Real-time score tracking",
+          "Clean Streamlit UI",
+          "Python game logic",
+          "Instant web deployment",
+        ],
+      },
+    },
   },
 };
 
@@ -2401,21 +2664,67 @@ function renderProject(id) {
   if (title) title.textContent = titleText || "";
   if (desc) desc.textContent = descText || "";
 
-  if (status) {
-    status.hidden = false;
-    status.textContent = t("project_loading");
-  }
   if (ghMeta) {
     ghMeta.hidden = true;
     ghMeta.innerHTML = "";
   }
-  if (detailsWrap) detailsWrap.hidden = true;
-  if (detailDescription) detailDescription.textContent = "";
-  if (detailRole) detailRole.innerHTML = "";
-  if (detailImpact) detailImpact.innerHTML = "";
-  if (detailTools) detailTools.innerHTML = "";
-  if (detailObjective) detailObjective.textContent = "";
-  if (detailFeatures) detailFeatures.innerHTML = "";
+
+  const curated = p.details?.[currentLang] || p.details?.en;
+
+  if (curated) {
+    if (status) status.hidden = true;
+    if (detailsWrap) {
+      detailsWrap.hidden = false;
+      if (detailDescription) detailDescription.textContent = curated.description || descText || "";
+      if (detailRole) {
+        detailRole.innerHTML = "";
+        for (const b of curated.role || []) {
+          const li = document.createElement("li");
+          li.textContent = b;
+          detailRole.appendChild(li);
+        }
+      }
+      if (detailImpact) {
+        detailImpact.innerHTML = "";
+        for (const b of curated.impact || []) {
+          const li = document.createElement("li");
+          li.textContent = b;
+          detailImpact.appendChild(li);
+        }
+      }
+      if (detailObjective) detailObjective.textContent = curated.objective || "";
+      if (detailFeatures) {
+        detailFeatures.innerHTML = "";
+        for (const f of curated.features || []) {
+          const li = document.createElement("li");
+          li.textContent = f;
+          detailFeatures.appendChild(li);
+        }
+      }
+      if (detailTools) {
+        detailTools.innerHTML = "";
+        for (const c of p.chips) {
+          const s = document.createElement("span");
+          s.className = "chip";
+          if (typeof c === "string") s.textContent = c;
+          else s.textContent = t(c.key);
+          detailTools.appendChild(s);
+        }
+      }
+    }
+  } else {
+    if (status) {
+      status.hidden = false;
+      status.textContent = t("project_loading");
+    }
+    if (detailsWrap) detailsWrap.hidden = true;
+    if (detailDescription) detailDescription.textContent = "";
+    if (detailRole) detailRole.innerHTML = "";
+    if (detailImpact) detailImpact.innerHTML = "";
+    if (detailTools) detailTools.innerHTML = "";
+    if (detailObjective) detailObjective.textContent = "";
+    if (detailFeatures) detailFeatures.innerHTML = "";
+  }
 
   if (chips) {
     chips.innerHTML = "";
@@ -2439,14 +2748,12 @@ function renderProject(id) {
     actions.appendChild(a);
   }
 
-  // Enrich with GitHub data (repo + README). Non-blocking; falls back silently.
+  // Optionally enrich with GitHub metadata (stars, forks). Non-blocking.
   loadGitHubProject(p.repo)
     .then((gh) => {
-      if (!gh) throw new Error("No repo");
+      if (!gh) return;
       const stillOpen = getProjectIdFromHash() === id;
       if (!stillOpen) return;
-
-      if (status) status.hidden = true;
 
       if (ghMeta) {
         const parts = [];
@@ -2464,114 +2771,10 @@ function renderProject(id) {
         `;
       }
 
-      const info = extractReadmeInfo(gh.readmeText || "");
-
-      const curated = p.details?.[currentLang];
-      const professionalDesc =
-        curated?.description ||
-        buildProfessionalDescription({
-          repoDescription: gh.description,
-          readmeSummary: info.summary,
-          projectTitle: titleText,
-        });
-
-      const roleBullets = curated?.role?.length
-        ? curated.role
-        : currentLang === "fr"
-          ? inferRoleBullets(p.chips).map((x) =>
-              x
-                .replace("Designed and implemented the data collection pipeline (web scraping).", "Conception et mise en place de la collecte de données (web scraping).")
-                .replace("Built exploratory analyses and visualisations to communicate insights.", "Réalisation d’analyses exploratoires et de visualisations pour communiquer les insights.")
-                .replace("Prototyped and documented the work in notebooks for reproducibility.", "Prototypage et documentation en notebooks pour assurer la reproductibilité.")
-                .replace("Implemented backend integration and data persistence (Supabase).", "Intégration backend et persistance des données (Supabase).")
-                .replace("Developed a mobile experience with React Native / Expo.", "Développement d’une expérience mobile avec React Native / Expo.")
-                .replace("Built an interactive interface using Streamlit.", "Création d’une interface interactive avec Streamlit.")
-                .replace("Structured the codebase with TypeScript for maintainability.", "Structuration du code en TypeScript pour la maintenabilité.")
-                .replace("Owned the end-to-end implementation: scoping, build, and documentation.", "Prise en charge de bout en bout : cadrage, réalisation et documentation.")
-            )
-          : inferRoleBullets(p.chips);
-
-      const impactBullets = curated?.impact?.length
-        ? curated.impact
-        : currentLang === "fr"
-          ? inferImpactBullets(info.bullets).map((x) =>
-              x
-                .replace("Clarifies the problem through a structured dataset and analysis.", "Clarifie le sujet grâce à un dataset structuré et une analyse.")
-                .replace("Improves decision-making by turning raw data into actionable insights.", "Facilite la prise de décision en transformant la donnée brute en insights actionnables.")
-            )
-          : inferImpactBullets(info.bullets);
-
-      const tools = buildToolsChips(p.chips, gh);
-      const objectiveText = curated?.objective || "";
-      const featuresList = curated?.features || [];
-
-      if (detailsWrap) {
-        detailsWrap.hidden = false;
-        if (detailDescription) detailDescription.textContent = professionalDesc || descText || "";
-
-        if (detailRole) {
-          detailRole.innerHTML = "";
-          for (const b of roleBullets) {
-            const li = document.createElement("li");
-            li.textContent = b;
-            detailRole.appendChild(li);
-          }
-        }
-
-        if (detailImpact) {
-          detailImpact.innerHTML = "";
-          for (const b of impactBullets) {
-            const li = document.createElement("li");
-            li.textContent = b;
-            detailImpact.appendChild(li);
-          }
-        }
-
-        if (detailObjective) detailObjective.textContent = objectiveText;
-
-        if (detailFeatures) {
-          detailFeatures.innerHTML = "";
-          for (const f of featuresList) {
-            const li = document.createElement("li");
-            li.textContent = f;
-            detailFeatures.appendChild(li);
-          }
-        }
-
-        if (detailTools) {
-          detailTools.innerHTML = "";
-          for (const tool of tools) {
-            const s = document.createElement("span");
-            s.className = "chip";
-            s.textContent = tool;
-            detailTools.appendChild(s);
-          }
-        }
-      }
+      if (status) status.hidden = true;
     })
     .catch(() => {
-      const stillOpen = getProjectIdFromHash() === id;
-      if (!stillOpen) return;
-      if (status) {
-        status.hidden = false;
-        status.textContent = t("project_github_fallback");
-      }
-      if (detailsWrap) {
-        detailsWrap.hidden = false;
-        if (detailDescription) detailDescription.textContent = descText || "";
-        if (detailRole) detailRole.innerHTML = "";
-        if (detailImpact) detailImpact.innerHTML = "";
-        if (detailTools) {
-          detailTools.innerHTML = "";
-          for (const c of p.chips) {
-            const s = document.createElement("span");
-            s.className = "chip";
-            if (typeof c === "string") s.textContent = c;
-            else s.textContent = t(c.key);
-            detailTools.appendChild(s);
-          }
-        }
-      }
+      if (status) status.hidden = true;
     });
 }
 

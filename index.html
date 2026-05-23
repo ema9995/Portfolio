@@ -1110,16 +1110,13 @@ button.social:focus-visible{
   flex-shrink:0;
 }
 .chat-header__dot{
-  width:36px;height:36px;
+  width:38px;height:38px;
   border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  display:grid;place-items:center;
-  font-size:16px;
+  border:2px solid rgba(139,92,246,.4);
+  object-fit:contain;
   flex-shrink:0;
+  background:transparent;
 }
-.chat-header__info{flex:1;min-width:0}
-.chat-header__name{margin:0;font-size:14px;font-weight:700;color:rgba(233,233,242,.95)}
-.chat-header__sub{margin:0;font-size:11px;color:var(--muted)}
 .chat-header__close{
   width:32px;height:32px;
   border:none;
@@ -1945,11 +1942,7 @@ button.social:focus-visible{
     </button>
     <div class="chat-panel" id="chatPanel" aria-hidden="true" role="dialog" aria-label="Portfolio AI assistant">
       <div class="chat-header">
-        <div class="chat-header__dot" aria-hidden="true">🤖</div>
-        <div class="chat-header__info">
-          <p class="chat-header__name" data-i18n="chat_name">Ema's Assistant</p>
-          <p class="chat-header__sub" data-i18n="chat_sub">Ask me about Ema's portfolio</p>
-        </div>
+        <img class="chat-header__dot" src="./cat.png" alt="" aria-hidden="true" />
         <button class="chat-header__close" id="chatClose" aria-label="Close chat">✕</button>
       </div>
       <div class="chat-messages" id="chatMessages"></div>
@@ -3295,7 +3288,7 @@ function setupChat() {
     history.push({ role: "user", content: text });
     const typing = addTyping();
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch("https://portfolio-ema9995s-projects.vercel.app/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: history, lang: currentLang }),

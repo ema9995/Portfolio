@@ -85,7 +85,11 @@ export default async function handler(req, res) {
     return res.status(503).json({ content: "Assistant not configured. Missing API key." });
   }
 
-  const { messages = [], lang = "en" } = req.body || {};
+  let parsed = {};
+  try {
+    parsed = typeof req.body === "string" ? JSON.parse(req.body) : (req.body || {});
+  } catch { parsed = {}; }
+  const { messages = [], lang = "en" } = parsed;
   const systemPrompt = lang === "fr" ? SYSTEM_FR : SYSTEM_EN;
 
   try {

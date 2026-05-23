@@ -1382,6 +1382,38 @@ button.social:focus-visible{
                 </div>
               </div>
             </article>
+
+            <article class="projectCard">
+              <a class="projectCard__tap" href="#project-mirakl" aria-label="Open project: Mirakl">
+                <div class="projectCard__media">
+                  <img
+                    class="projectCard__img"
+                    src="./mirakl.jpg"
+                    alt=""
+                    data-i18n-alt="proj8_alt"
+                    loading="lazy"
+                  />
+                </div>
+              </a>
+              <div class="projectCard__body">
+                <h3 class="projectCard__title"><a class="projectCard__titleLink" href="#project-mirakl" data-i18n="proj8_title">Mirakl — Marketplace project</a></h3>
+                <p class="muted" data-i18n="proj8_desc">Marketplace project built around the Mirakl platform: API integration, seller management and order flow automation.</p>
+                <div class="projectCard__chips">
+                  <span class="chip">Mirakl</span>
+                  <span class="chip">API</span>
+                  <span class="chip">Marketplace</span>
+                </div>
+                <div class="projectCard__actions">
+                  <a class="btn btn--small btn--ghost" href="#project-mirakl" data-i18n="btn_details">Details</a>
+                  <a
+                    class="btn btn--small btn--primary"
+                    href="https://github.com/ema9995/Projet-Mirakle.git"
+                    target="_blank"
+                    rel="noreferrer"
+                  >GitHub</a>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1891,6 +1923,9 @@ const STRINGS = {
     form_copied:
       "Message copied to clipboard. Paste it into your email client.",
     form_copy_fail: "Could not copy. Please copy manually.",
+    proj8_alt: "Project preview: Mirakl marketplace",
+    proj8_title: "Mirakl — Marketplace project",
+    proj8_desc: "Marketplace project built around the Mirakl platform: API integration, seller management and order flow automation.",
     btn_details: "Details",
   },
   fr: {
@@ -2012,6 +2047,9 @@ const STRINGS = {
     form_copied:
       "Message copié dans le presse-papiers. Collez-le dans votre client mail.",
     form_copy_fail: "Impossible de copier. Copiez manuellement.",
+    proj8_alt: "Aperçu du projet Mirakl : marketplace",
+    proj8_title: "Mirakl — Projet marketplace",
+    proj8_desc: "Projet marketplace développé autour de la plateforme Mirakl : intégration API, gestion des vendeurs et automatisation des flux de commandes.",
     btn_details: "Détails",
   },
 };
@@ -2441,6 +2479,62 @@ const PROJECTS = {
           "Instant web deployment",
         ],
       },
+    },
+  },
+};
+
+PROJECTS.mirakl = {
+  img: "./mirakl.jpg",
+  github: "https://github.com/ema9995/Projet-Mirakle.git",
+  repo: "ema9995/Projet-Mirakle",
+  titleKey: "proj8_title",
+  descKey: "proj8_desc",
+  altKey: "proj8_alt",
+  chips: ["Mirakl", "API", "Marketplace"],
+  details: {
+    fr: {
+      description: "Projet développé autour de la plateforme Mirakl, solution SaaS de référence pour la création et la gestion de marketplaces. Ce projet couvre l'intégration des API Mirakl, la gestion des catalogues vendeurs, le traitement des flux de commandes et l'automatisation des processus marketplace de bout en bout.",
+      role: [
+        "Intégration et exploitation des API Mirakl",
+        "Gestion des flux vendeurs (onboarding, catalogue, commandes)",
+        "Automatisation des processus marketplace",
+        "Analyse et structuration des données de la plateforme",
+      ],
+      impact: [
+        "Automatise les flux répétitifs et réduit les erreurs de traitement",
+        "Améliore la visibilité sur les performances vendeurs et les commandes",
+        "Accélère l'onboarding et la mise en ligne des offres vendeurs",
+      ],
+      objective: "Exploiter la plateforme Mirakl pour automatiser et optimiser les opérations d'une marketplace : gestion des vendeurs, traitement des commandes et pilotage des performances.",
+      features: [
+        "Intégration des API Mirakl (produits, commandes, vendeurs)",
+        "Gestion automatisée du catalogue produits",
+        "Traitement et suivi des flux de commandes",
+        "Onboarding vendeurs",
+        "Analyse des performances marketplace",
+      ],
+    },
+    en: {
+      description: "A project built around the Mirakl platform, the leading SaaS solution for creating and managing marketplaces. It covers Mirakl API integration, seller catalogue management, order flow processing, and end-to-end marketplace process automation.",
+      role: [
+        "Integrated and leveraged Mirakl APIs",
+        "Managed seller flows (onboarding, catalogue, orders)",
+        "Automated marketplace processes",
+        "Analysed and structured platform data",
+      ],
+      impact: [
+        "Automates repetitive flows and reduces processing errors",
+        "Improves visibility on seller performance and orders",
+        "Speeds up seller onboarding and offer publication",
+      ],
+      objective: "Leverage the Mirakl platform to automate and optimise marketplace operations: seller management, order processing, and performance monitoring.",
+      features: [
+        "Mirakl API integration (products, orders, sellers)",
+        "Automated product catalogue management",
+        "Order flow processing and tracking",
+        "Seller onboarding",
+        "Marketplace performance analytics",
+      ],
     },
   },
 };

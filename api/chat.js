@@ -80,7 +80,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(503).json({ content: "Assistant not configured. Missing API key." });
   }
@@ -89,21 +89,24 @@ export default async function handler(req, res) {
   const systemPrompt = lang === "fr" ? SYSTEM_FR : SYSTEM_EN;
 
   try {
-    const upstream = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        max_tokens: 400,
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...messages.slice(-10),
-        ],
-      }),
-    });
+    const upstream = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: "gemini-1.5-flash",
+          max_tokens: 400,
+          messages: [
+            { role: "system", content: systemPrompt },
+            ...messages.slice(-10),
+          ],
+        }),
+      }
+    );
 
     if (!upstream.ok) {
       const err = await upstream.text();

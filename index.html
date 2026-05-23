@@ -3294,15 +3294,18 @@ function setupChat() {
         body: JSON.stringify({ messages: history, lang: currentLang }),
       });
       typing.remove();
-      if (!res.ok) throw new Error(res.status);
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(res.status + " — " + errText.slice(0, 120));
+      }
       const data = await res.json();
       const reply = data.content || data.message || t("chat_error");
       addMsg("bot", reply);
       history.push({ role: "assistant", content: reply });
-    } catch {
+    } catch (err) {
       typing.remove();
       history.pop();
-      addMsg("bot", t("chat_error"));
+      addMsg("bot", "Erreur: " + err.message);
     }
   }
 }

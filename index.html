@@ -3228,23 +3228,68 @@ function setupChat() {
   const sendBtn = $("#chatSend");
   if (!fab || !panel || !msgs || !input || !sendBtn) return;
 
+  const DB = {
+    fr: [
+      { k: ["projet","spa","animaux","scraping"], r: "Le projet SPA consiste à scraper le site de la SPA française, nettoyer et analyser les données pour comprendre les causes d'abandon et guider vers une adoption plus responsable. Stack : Python, Scraping." },
+      { k: ["signe","langage","sign","détection","vision"], r: "Le projet Détection langage des signes utilise la vision par ordinateur (deep learning) pour classifier les gestes de la langue des signes. Stack : Python, IA, Notebook Jupyter." },
+      { k: ["mirakl","marketplace","api"], r: "Le projet Mirakl couvre l'intégration des API Mirakl, la gestion des vendeurs et l'automatisation des flux de commandes sur une marketplace." },
+      { k: ["wwe","catch","wrestling"], r: "Le projet WWE consiste à collecter et analyser des données de matchs WWE via scraping. Stack : Python, Scraping, Data viz." },
+      { k: ["breastwise","cancer","mobile","react"], r: "Breastwise est une application mobile d'accompagnement pour les personnes atteintes d'un cancer du sein. Stack : React Native, Expo, Supabase." },
+      { k: ["checky","check","oublier","liste"], r: "Checky est une app mobile pour ne rien oublier avant de sortir : checklists personnalisables et rappels. Stack : Expo, TypeScript." },
+      { k: ["bataille","navale","battleship"], r: "Mini jeu de bataille navale développé en Python avec une interface en ligne de commande." },
+      { k: ["pierre","papier","ciseaux","streamlit"], r: "Mini jeu Pierre-feuille-ciseaux jouable dans le navigateur, développé avec Python et Streamlit." },
+      { k: ["projet","projets"], r: "Ema a 8 projets : SPA (scraping), Détection langage des signes (IA), Mirakl (marketplace), WWE (data), Breastwise (mobile santé), Checky (mobile), Bataille navale (Python) et Pierre-feuille-ciseaux (Streamlit). Tu veux des détails sur l'un d'eux ?" },
+      { k: ["diplôme","diplomes","formation","études","master","simplon","sorbonne","école"], r: "Formations d'Ema :\n• Master Data & IA — Eugenia School (2025–2026)\n• Data analyst — Simplon (juin–août 2025)\n• CMS/Web — Simplon (mars–mai 2025)\n• Master 2 Communication Digitale — Sorbonne (2022–2023)" },
+      { k: ["certif","certification","azure","microsoft","dataiku"], r: "Certifications :\n• Microsoft Azure AI Fundamentals\n• Microsoft Azure AI Engineer Associate\n• Microsoft Azure Fundamentals\n• Dataiku Core Designer Certificate" },
+      { k: ["compétence","skill","sql","python","tableau","power bi","excel","canva","figma"], r: "Compétences d'Ema :\n• Data : SQL (80%), Tableau (80%), Excel (80%), Power BI, Databricks\n• IA : Dataiku (80%), Dust (85%), Make (80%)\n• Dev : Python (70%), WordPress (70%), Git (60%)\n• Design : Canva (95%), Figma (85%), Adobe (85%)" },
+      { k: ["langue","langues","anglais","français","portugais","espagnol"], r: "Ema parle 4 langues :\n• Français — C2 (natif)\n• Portugais — C1\n• Espagnol — C1\n• Anglais — B2" },
+      { k: ["contact","email","mail","linkedin","github"], r: "Pour contacter Ema :\n• Email : fernandesema99@gmail.com\n• LinkedIn : linkedin.com/in/ema-fernandes\n• GitHub : github.com/ema9995" },
+      { k: ["qui","ema","profil","parcours","présentation"], r: "Ema Fernandes est une professionnelle Data & Marketing, passionnée par l'analyse de données et les problématiques business. Elle combine une formation en Data & IA avec une expérience en communication digitale, et travaille à l'interface entre data, marketing et stratégie." },
+      { k: ["disponible","emploi","recrutement","opportunité","job"], r: "Oui, Ema est ouverte à de nouvelles opportunités ! Contactez-la via fernandesema99@gmail.com ou LinkedIn." },
+    ],
+    en: [
+      { k: ["project","spa","animal","scraping"], r: "The SPA project involves scraping the French animal shelter website, cleaning and analysing data to understand surrender reasons and support responsible adoption. Stack: Python, Scraping." },
+      { k: ["sign","language","detection","vision"], r: "The Sign language detection project uses computer vision (deep learning) to classify sign language gestures. Stack: Python, AI, Jupyter Notebook." },
+      { k: ["mirakl","marketplace","api"], r: "The Mirakl project covers Mirakl API integration, seller management and order flow automation on a marketplace platform." },
+      { k: ["wwe","wrestling","catch"], r: "The WWE project collects and analyses wrestling match data via scraping. Stack: Python, Scraping, Data viz." },
+      { k: ["breastwise","cancer","mobile","react"], r: "Breastwise is a mobile companion app for people with breast cancer. Stack: React Native, Expo, Supabase." },
+      { k: ["checky","check","forget","list"], r: "Checky is a mobile app to avoid forgetting items when leaving home: customizable checklists and reminders. Stack: Expo, TypeScript." },
+      { k: ["battleship","battle"], r: "A classic Battleship game built in Python with a command-line interface." },
+      { k: ["rock","paper","scissors","streamlit"], r: "A browser-playable Rock Paper Scissors game built with Python and Streamlit." },
+      { k: ["project","projects"], r: "Ema has 8 projects: SPA (scraping), Sign language detection (AI), Mirakl (marketplace), WWE (data), Breastwise (mobile health), Checky (mobile), Battleship (Python) and Rock Paper Scissors (Streamlit). Want details on any?" },
+      { k: ["degree","diploma","education","master","school","training"], r: "Ema's education:\n• Master Data & AI — Eugenia School (2025–2026)\n• Data analyst — Simplon (Jun–Aug 2025)\n• CMS/Web — Simplon (Mar–May 2025)\n• Master 2 Digital Communication — Sorbonne (2022–2023)" },
+      { k: ["certif","certification","azure","microsoft","dataiku"], r: "Certifications:\n• Microsoft Azure AI Fundamentals\n• Microsoft Azure AI Engineer Associate\n• Microsoft Azure Fundamentals\n• Dataiku Core Designer Certificate" },
+      { k: ["skill","competence","sql","python","tableau","power bi","excel","canva","figma"], r: "Ema's skills:\n• Data: SQL (80%), Tableau (80%), Excel (80%), Power BI, Databricks\n• AI: Dataiku (80%), Dust (85%), Make (80%)\n• Dev: Python (70%), WordPress (70%), Git (60%)\n• Design: Canva (95%), Figma (85%), Adobe (85%)" },
+      { k: ["language","languages","english","french","portuguese","spanish"], r: "Ema speaks 4 languages:\n• French — C2 (native)\n• Portuguese — C1\n• Spanish — C1\n• English — B2" },
+      { k: ["contact","email","mail","linkedin","github"], r: "To contact Ema:\n• Email: fernandesema99@gmail.com\n• LinkedIn: linkedin.com/in/ema-fernandes\n• GitHub: github.com/ema9995" },
+      { k: ["who","ema","profile","background","about"], r: "Ema Fernandes is a Data & Marketing professional, passionate about data analysis and business challenges. She combines training in Data & AI with hands-on experience in digital communications, working at the intersection of data, marketing and strategy." },
+      { k: ["available","job","hiring","opportunity","recruit"], r: "Yes, Ema is open to new opportunities! Reach out via fernandesema99@gmail.com or LinkedIn." },
+    ]
+  };
+
+  function findAnswer(text) {
+    const lang = currentLang === "fr" ? "fr" : "en";
+    const db = DB[lang];
+    const low = text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    let best = null, bestScore = 0;
+    for (const entry of db) {
+      const score = entry.k.filter(k => low.includes(k)).length;
+      if (score > bestScore) { bestScore = score; best = entry.r; }
+    }
+    if (best) return best;
+    return lang === "fr"
+      ? "Je peux répondre à des questions sur les projets, compétences, formations, certifications, langues ou contact d'Ema. Qu'est-ce que vous souhaitez savoir ?"
+      : "I can answer questions about Ema's projects, skills, education, certifications, languages or contact. What would you like to know?";
+  }
+
   const history = [];
   let isOpen = false;
 
   function addMsg(role, text) {
     const div = document.createElement("div");
     div.className = role === "user" ? "chat-msg chat-msg--user" : "chat-msg chat-msg--bot";
+    div.style.whiteSpace = "pre-line";
     div.textContent = text;
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-    return div;
-  }
-
-  function addTyping() {
-    const div = document.createElement("div");
-    div.className = "chat-msg chat-msg--typing";
-    div.id = "chatTyping";
-    div.textContent = "…";
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
     return div;
@@ -3254,10 +3299,8 @@ function setupChat() {
     isOpen = !isOpen;
     panel.classList.toggle("is-open", isOpen);
     panel.setAttribute("aria-hidden", String(!isOpen));
-    if (isOpen) {
-      if (msgs.children.length === 0) addMsg("bot", t("chat_welcome"));
-      input.focus();
-    }
+    if (isOpen && msgs.children.length === 0) addMsg("bot", t("chat_welcome"));
+    if (isOpen) input.focus();
   }
 
   fab.addEventListener("click", togglePanel);
@@ -3278,32 +3321,16 @@ function setupChat() {
 
   sendBtn.addEventListener("click", sendMessage);
 
-  async function sendMessage() {
+  function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
     input.value = "";
     input.style.height = "auto";
     sendBtn.disabled = true;
     addMsg("user", text);
-    history.push({ role: "user", content: text });
-    const typing = addTyping();
-    try {
-      const res = await fetch("https://portfolio-ema9995s-projects.vercel.app/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history, lang: currentLang }),
-      });
-      typing.remove();
-      if (!res.ok) throw new Error(res.status);
-      const data = await res.json();
-      const reply = data.content || data.message || t("chat_error");
-      addMsg("bot", reply);
-      history.push({ role: "assistant", content: reply });
-    } catch {
-      typing.remove();
-      history.pop();
-      addMsg("bot", t("chat_error"));
-    }
+    setTimeout(() => {
+      addMsg("bot", findAnswer(text));
+    }, 320);
   }
 }
 

@@ -84,16 +84,25 @@ LANGUAGES: French (C2), English (B2), Portuguese (C1), Spanish (C1)
 
 Reply in English. Be concise, professional and warm. Only answer from the information above.`;
 
+const CORS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
 export default async function handler(req) {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: CORS });
+  }
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+    return new Response("Method not allowed", { status: 405, headers: CORS });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return new Response(JSON.stringify({ content: "Assistant not configured." }), {
       status: 503,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...CORS },
     });
   }
 
@@ -101,7 +110,7 @@ export default async function handler(req) {
   try {
     body = await req.json();
   } catch {
-    return new Response("Bad request", { status: 400 });
+    return new Response("Bad request", { status: 400, headers: CORS });
   }
 
   const { messages = [], lang = "en" } = body;
@@ -130,7 +139,7 @@ export default async function handler(req) {
     console.error("OpenAI error:", err);
     return new Response(JSON.stringify({ content: "Assistant unavailable." }), {
       status: 502,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...CORS },
     });
   }
 
@@ -139,9 +148,6 @@ export default async function handler(req) {
 
   return new Response(JSON.stringify({ content }), {
     status: 200,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
+    headers: { "Content-Type": "application/json", ...CORS },
   });
 }

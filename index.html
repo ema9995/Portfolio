@@ -611,8 +611,9 @@ button.social:focus-visible{
   font-family:"Space Grotesk", Inter, system-ui, sans-serif;
   letter-spacing:-.02em;
   font-size: clamp(22px, 2.6vw, 30px);
+  text-align: left;
 }
-.projectDetail__meta{margin:0; color: rgba(233,233,242,.74); line-height:1.7}
+.projectDetail__meta{margin:0; color: rgba(233,233,242,.74); line-height:1.7; text-align:left}
 .projectDetail__subhead{
   margin: 10px 0 0;
   font-size: 14px;
@@ -653,31 +654,36 @@ button.social:focus-visible{
   word-break: break-word;
 }
 .projectDetail__sections{
-  display:grid;
-  gap: 12px;
+  display:flex;
+  flex-direction:column;
+  gap: 24px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.02);
   border-radius: var(--radius);
-  padding: 14px 14px;
+  padding: 20px 18px;
+  text-align: left;
 }
 .projectDetail__sectionTitle{
-  margin:0;
+  margin:0 0 8px;
   font-size: 13px;
   font-weight: 800;
-  letter-spacing: -.01em;
-  color: rgba(233,233,242,.92);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(192,132,252,.9);
 }
 .projectDetail__sectionText{
-  margin: 6px 0 0;
-  color: rgba(233,233,242,.80);
-  line-height: 1.7;
+  margin: 0;
+  color: rgba(233,233,242,.82);
+  line-height: 1.75;
+  text-align: left;
 }
 .projectDetail__list{
-  margin: 6px 0 0;
-  padding-left: 18px;
+  margin: 0;
+  padding-left: 20px;
   color: rgba(233,233,242,.86);
+  text-align: left;
 }
-.projectDetail__list li{margin:6px 0}
+.projectDetail__list li{margin:8px 0; line-height:1.6}
 .projectDetail__status{
   margin:0;
   color: rgba(233,233,242,.72);

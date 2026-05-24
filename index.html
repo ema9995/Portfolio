@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio | Ema Fernandes</title>
+    <link rel="icon" type="image/png" href="./cat.png" />
     <meta
       name="description"
       content="Single-page portfolio — data & marketing professional."
@@ -1066,21 +1067,19 @@ button.social:focus-visible{
 /* ── Chat Widget ─────────────────────────────── */
 .chat-fab{
   position:fixed;
-  bottom:24px;
-  right:24px;
+  bottom:20px;
+  right:20px;
   z-index:9000;
-  width:60px;height:60px;
-  border-radius:50%;
-  background:transparent;
+  width:72px;height:72px;
+  background:none;
   border:none;
+  padding:0;
   cursor:pointer;
-  display:grid;
-  place-items:center;
-  filter:drop-shadow(0 8px 20px rgba(139,92,246,.45));
+  filter:drop-shadow(0 6px 18px rgba(139,92,246,.5));
   transition:transform .2s ease,filter .2s ease;
 }
-.chat-fab:hover{transform:translateY(-3px) scale(1.06);filter:drop-shadow(0 12px 28px rgba(139,92,246,.6))}
-.chat-fab__img{width:60px;height:60px;object-fit:contain;display:block}
+.chat-fab:hover{transform:translateY(-3px) scale(1.08);filter:drop-shadow(0 10px 26px rgba(139,92,246,.65))}
+.chat-fab__img{width:72px;height:72px;object-fit:contain;display:block;background:none}
 .chat-panel{
   position:fixed;
   bottom:92px;
@@ -1110,11 +1109,12 @@ button.social:focus-visible{
   flex-shrink:0;
 }
 .chat-header__dot{
-  width:44px;height:44px;
+  width:52px;height:52px;
   object-fit:contain;
   flex-shrink:0;
-  background:transparent;
+  background:none;
   border:none;
+  padding:0;
 }
 .chat-header__close{
   width:32px;height:32px;
